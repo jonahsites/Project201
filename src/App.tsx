@@ -122,10 +122,13 @@ export default function App() {
                 </div>
 
                 {/* Integration of Bento Pricing as Selection Tiers */}
-                <div className="mt-12 space-y-8">
-                   <h3 className="font-display text-2xl font-bold text-brand-blue uppercase tracking-widest border-l-4 border-brand-light-blue pl-4">
-                    CHOOSE YOUR <span className="opacity-40">IMPACT LEVEL</span>
-                  </h3>
+                <div className="mt-16 space-y-12">
+                   <div className="flex flex-col gap-3">
+                     <span className="text-brand-light-blue font-bold uppercase tracking-[0.3em] text-[10px]">Support Strategy</span>
+                     <h3 className="font-display text-4xl font-light text-brand-blue uppercase tracking-tight">
+                      CHOOSE YOUR <span className="text-slate-300">IMPACT LEVEL</span>
+                    </h3>
+                   </div>
                    <BentoPricing />
                 </div>
               </div>

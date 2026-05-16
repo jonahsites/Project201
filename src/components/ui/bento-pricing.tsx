@@ -4,7 +4,7 @@ import React from 'react';
 import { cn } from '@/src/lib/utils';
 import { Button } from '@/src/components/ui/button';
 import { Badge } from '@/src/components/ui/badge';
-import { CheckIcon, SparklesIcon } from 'lucide-react';
+import { CheckIcon, SparklesIcon, Zap, Heart, Target, Shield, Crown, Globe } from 'lucide-react';
 
 type PricingCardProps = {
 	titleBadge: string;
@@ -13,12 +13,13 @@ type PricingCardProps = {
 	features: string[];
 	cta?: string;
 	className?: string;
+	icon?: React.ElementType;
 };
 
 function FilledCheck() {
 	return (
-		<div className="bg-brand-light-blue text-brand-blue rounded-full p-0.5">
-			<CheckIcon className="size-3" strokeWidth={3} />
+		<div className="text-brand-light-blue">
+			<CheckIcon className="size-4" strokeWidth={1.5} />
 		</div>
 	);
 }
@@ -30,38 +31,47 @@ function PricingCard({
 	features,
 	cta = 'Donate',
 	className,
+	icon: Icon = Heart,
 }: PricingCardProps) {
 	return (
 		<div
 			className={cn(
-				'bg-white border-slate-200 relative overflow-hidden rounded-[2rem] border transition-all hover:shadow-xl group',
+				'bg-white border-slate-100 relative overflow-hidden rounded-[2.5rem] border transition-all hover:shadow-2xl hover:-translate-y-1 group p-8',
 				className,
 			)}
 		>
-			<div className="flex items-center gap-3 p-6">
-				<Badge variant="secondary" className="font-display uppercase tracking-widest">{titleBadge}</Badge>
-				<div className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">
-					<Button variant="outline" size="sm" className="rounded-full font-display uppercase text-[10px] tracking-widest">{cta}</Button>
+			<div className="flex items-center justify-between mb-8">
+				<div className={cn("inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-slate-200 font-display font-medium uppercase tracking-[0.2em] text-[10px] px-3 py-1")}>
+					{titleBadge}
+				</div>
+				<div className="w-10 h-10 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-400 group-hover:text-brand-light-blue group-hover:bg-brand-light-blue/10 transition-colors">
+					<Icon className="w-5 h-5" strokeWidth={1.5} />
 				</div>
 			</div>
 
-			<div className="flex items-end gap-2 px-6 py-2">
-				<span className="font-display text-5xl font-bold tracking-tighter text-brand-blue uppercase">
+			<div className="flex items-end gap-1 mb-8">
+				<span className="font-display text-4xl font-light text-brand-blue tracking-tight">
 					{priceLabel}
 				</span>
 				{priceLabel.toLowerCase() !== 'free' && (
-					<span className="text-slate-400 text-xs font-bold uppercase tracking-widest mb-2">{priceSuffix}</span>
+					<span className="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-1.5 ml-1">{priceSuffix}</span>
 				)}
 			</div>
 
-			<ul className="text-slate-600 grid gap-4 p-6 text-sm">
+			<ul className="text-slate-500 grid gap-4 text-sm font-light leading-relaxed">
 				{features.map((f, i) => (
-					<li key={i} className="flex items-center gap-3">
+					<li key={i} className="flex items-start gap-3">
 						<FilledCheck />
-						<span className="font-medium">{f}</span>
+						<span>{f}</span>
 					</li>
 				))}
 			</ul>
+
+			<div className="mt-8 pt-8 border-t border-slate-50">
+				<Button variant="outline" className="w-full rounded-2xl font-display font-bold uppercase text-[10px] tracking-[0.2em] h-12 border-slate-200 hover:bg-brand-blue hover:text-white hover:border-brand-blue transition-all">
+					{cta}
+				</Button>
+			</div>
 		</div>
 	);
 }
@@ -71,69 +81,88 @@ export function BentoPricing() {
 		<div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-8">
 			<div
 				className={cn(
-					'bg-brand-blue relative w-full overflow-hidden rounded-[3rem] border border-white/10 lg:col-span-8 text-white',
+					'bg-brand-blue relative w-full overflow-hidden rounded-[3rem] border border-white/5 lg:col-span-8 text-white p-10 md:p-14',
 				)}
 			>
-				<div className="pointer-events-none absolute top-0 left-1/2 -mt-2 -ml-20 h-full w-full opacity-20">
-					<div className="absolute inset-0 bg-[radial-gradient(circle_at_center,white,transparent)]" />
+				<div className="pointer-events-none absolute inset-0 opacity-10">
+					<div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,white,transparent)]" />
+					<div className="absolute -bottom-24 -left-24 w-96 h-96 bg-brand-light-blue rounded-full blur-[120px]" />
 				</div>
-				<div className="flex items-center gap-3 p-8 relative z-10">
-					<Badge variant="secondary" className="bg-white text-brand-blue font-display font-bold">COMMUNITY VISIONARY</Badge>
-					<Badge variant="outline" className="hidden lg:flex border-white/20 text-white font-display">
-						<SparklesIcon className="me-1 size-3 text-brand-light-blue" /> Highest Impact
-					</Badge>
-					<div className="ml-auto">
-						<Button className="bg-white text-brand-blue hover:bg-brand-light-blue rounded-full font-display font-bold">SUPPORT NOW</Button>
+
+				<div className="relative z-10 flex flex-col lg:flex-row gap-12 items-start h-full">
+					<div className="lg:w-1/2 space-y-8">
+						<div className="flex flex-wrap items-center gap-4">
+							<div className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 bg-white/10 hover:bg-white/20 text-brand-light-blue border-white/10 font-display font-medium uppercase tracking-[0.2em] text-[10px] px-4 py-1.5">
+								STRATEGIC IMPACT
+							</div>
+							<div className="flex items-center gap-2 text-white/40 text-[10px] font-bold uppercase tracking-[0.2em]">
+								<Crown className="w-3 h-3 text-brand-light-blue" />
+								Highest Tier
+							</div>
+						</div>
+
+						<div>
+							<span className="font-display text-8xl font-light tracking-tight text-white">
+								$3,750
+							</span>
+							<p className="text-brand-light-blue text-xs font-bold uppercase tracking-[0.3em] mt-4">Visionary Level Catalyst</p>
+						</div>
+
+						<p className="text-white/60 font-light text-lg leading-relaxed max-w-md">
+							Supports large-scale mentorship impact across the entire community, ensuring long-term sustainability.
+						</p>
+
+						<Button className="bg-white text-brand-blue hover:bg-brand-light-blue rounded-2xl px-10 py-6 font-display font-bold uppercase text-[10px] tracking-[0.2em] shadow-2xl shadow-brand-blue/50 transition-all hover:scale-105 active:scale-95">
+							FUND THIS VISION
+						</Button>
 					</div>
-				</div>
-				<div className="flex flex-col p-8 lg:flex-row relative z-10">
-					<div className="pb-4 lg:w-[40%]">
-						<span className="font-display text-7xl font-bold tracking-tighter uppercase text-brand-light-blue">
-							$3,750
-						</span>
-						<p className="text-white/60 text-xs font-bold uppercase tracking-[0.2em] mt-2">Visionary Level Impact</p>
+
+					<div className="lg:w-1/2">
+						<ul className="grid gap-6">
+							{[
+								'Supports large-scale mentorship impact across the community.',
+								'Funds multiple structured programming tracks.',
+								'Expands reach to youth facing behavioral challenges.',
+								'Ensures long-term sustainability of Project 201.'
+							].map((f, i) => (
+								<li key={i} className="flex items-start gap-4 group">
+									<div className="shrink-0 w-8 h-8 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-brand-light-blue group-hover:bg-brand-light-blue group-hover:text-brand-blue transition-all duration-500">
+										<CheckIcon className="size-4" strokeWidth={2} />
+									</div>
+									<span className="text-white/80 font-light text-base leading-relaxed">{f}</span>
+								</li>
+							))}
+						</ul>
 					</div>
-					<ul className="text-white/80 grid gap-6 text-sm lg:w-[60%] py-4">
-						{[
-							'Supports large-scale mentorship impact across the community.',
-							'Funds multiple structured programming tracks.',
-							'Expands reach to youth facing behavioral challenges.',
-							'Ensures long-term sustainability of Project 201.'
-						].map((f, i) => (
-							<li key={i} className="flex items-start gap-4">
-								<div className="bg-brand-light-blue text-brand-blue rounded-full p-1 mt-0.5">
-									<CheckIcon className="size-3" strokeWidth={4} />
-								</div>
-								<span className="leading-relaxed font-medium text-base">{f}</span>
-							</li>
-						))}
-					</ul>
 				</div>
 			</div>
 
 			<PricingCard
 				titleBadge="GRASSROOTS"
 				priceLabel="$25"
+				icon={Heart}
 				features={[
 					'Helps provide equipment and resources for youth training.',
 					'Youth training essentials',
 				]}
-				className="lg:col-span-4 bg-slate-50"
+				className="lg:col-span-4"
 			/>
 
 			<PricingCard
 				titleBadge="SESSION"
 				priceLabel="$50"
+				icon={Zap}
 				features={[
 					'Contributes to a full session of mentorship and training.',
 					'Personalized guidance',
 				]}
-				className="lg:col-span-4 bg-white"
+				className="lg:col-span-4"
 			/>
 
 			<PricingCard
 				titleBadge="MENTOR"
 				priceLabel="$150"
+				icon={Target}
 				features={[
 					'Helps fund structured mentorship and sports programming.',
 					'Guidance and accountability',
@@ -144,21 +173,23 @@ export function BentoPricing() {
       <PricingCard
 				titleBadge="ADVOCATE"
 				priceLabel="$375"
+				icon={Shield}
 				features={[
 					'Funds mentorship and structured programming for one youth.',
 					'Consistent role models',
 				]}
-				className="lg:col-span-3 border-brand-light-blue/30"
+				className="lg:col-span-3 border-brand-light-blue/20"
 			/>
 
 			<PricingCard
 				titleBadge="SPONSOR"
 				priceLabel="$1,500"
+				icon={Globe}
 				features={[
 					'Helps support multiple youth and expand programming.',
 					'Direct community impact',
 				]}
-				className="lg:col-span-2 bg-brand-light-blue/20 border-brand-light-blue/30"
+				className="lg:col-span-2 bg-brand-light-blue/5 border-brand-light-blue/10"
 			/>
 		</div>
 	);
