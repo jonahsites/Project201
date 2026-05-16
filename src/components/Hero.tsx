@@ -1,0 +1,79 @@
+import { motion } from 'motion/react';
+import { ChevronDown } from 'lucide-react';
+
+export default function Hero() {
+  const logos = [
+    { name: 'Hudson Gives', logo: 'HUDSON GIVES' },
+    { name: 'Bonterra', logo: 'BONTERRA' },
+    { name: 'Alliance', logo: 'ALLIANCE' },
+    { name: 'Coach Fischer', logo: 'FISCHER' },
+    { name: 'Project 201', logo: '201 SPORTS' },
+    { name: 'Jersey City', logo: 'JERSEY CITY' },
+  ];
+
+  return (
+    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-slate-900 pt-20">
+      {/* Background Image / Overlay */}
+      <div className="absolute inset-0 z-0">
+        <img 
+          src="https://static.wixstatic.com/media/867f79_27ff568d948a4725aa197597025472a6~mv2.jpg/v1/fill/w_1474,h_602,al_t,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/867f79_27ff568d948a4725aa197597025472a6~mv2.jpg" 
+          alt="Youth sports training" 
+          className="w-full h-full object-cover opacity-60"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent" />
+      </div>
+
+      <div className="relative z-10 container mx-auto px-6 max-w-7xl">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-4xl"
+        >
+          <h1 className="font-display text-[12vw] md:text-8xl lg:text-9xl font-bold text-white mb-8 tracking-tighter leading-[0.85]">
+            Empowering youth.<br />
+            <span className="opacity-90">Building leaders.</span>
+          </h1>
+          
+          <div className="w-24 h-1 bg-white/20 mb-8" />
+
+          <p className="max-w-xl text-xl md:text-2xl text-slate-200 mb-10 font-medium leading-tight tracking-tight opacity-80">
+            For dedicated student-athletes, ambitious youth, and the communities that support them.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4">
+            <a 
+              href="#donations" 
+              className="bg-white hover:bg-slate-100 text-slate-900 px-10 py-4 rounded-full font-bold text-lg transition-all shadow-2xl"
+            >
+              Get started
+            </a>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Logo Strip - following the 11x image design */}
+      <div className="absolute bottom-12 left-0 right-0 z-10 overflow-hidden py-4">
+        <div className="container mx-auto px-6 max-w-7xl">
+          <div className="flex flex-wrap items-center justify-between gap-8 opacity-40 grayscale transition-all hover:grayscale-0 hover:opacity-100">
+            {logos.map((logo) => (
+              <span key={logo.name} className="font-display font-bold text-white text-xl md:text-2xl tracking-tighter">
+                {logo.logo}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5 }}
+        className="absolute bottom-6 right-6 text-white/30 hidden lg:flex items-center gap-4"
+      >
+        <span className="text-xs font-bold uppercase tracking-widest font-display">Scroll to explore</span>
+        <div className="w-px h-12 bg-white/20" />
+      </motion.div>
+    </section>
+  );
+}

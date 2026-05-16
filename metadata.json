@@ -1,0 +1,6 @@
+{
+  "name": "Project 201 Sports & Mentorship",
+  "description": "Empowering youth through mentorship and sports excellence. Support our mission to build a movement focused on leadership and community.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
