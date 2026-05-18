@@ -8,27 +8,55 @@ import Footer from './components/Footer';
 import { Skiper19 } from './components/ui/svg-follow-scroll';
 import { BentoPricing } from './components/ui/bento-pricing';
 import { SoftGlowBackground } from './components/ui/SoftGlowBackground';
-import { motion } from 'framer-motion';
-import { SparklesIcon, User } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import { SparklesIcon, User, Heart } from 'lucide-react';
 import { HudsonGivesTicker } from './components/HudsonGivesTicker';
 import { HudsonGivesDetail } from './components/HudsonGivesDetail';
+import { DonationCheckout } from './components/DonationCheckout';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<'home' | 'hudson-gives'>('home');
+  const [showCheckout, setShowCheckout] = useState(false);
+  const [selectedAmount, setSelectedAmount] = useState("25");
+
+  const handleDonate = (amount?: string) => {
+    if (amount) setSelectedAmount(amount);
+    setShowCheckout(true);
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentPage]);
 
+  useEffect(() => {
+    if (showCheckout) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [showCheckout]);
+
   if (currentPage === 'hudson-gives') {
-    return <HudsonGivesDetail onBack={() => setCurrentPage('home')} />;
+    return (
+      <>
+        <HudsonGivesDetail 
+          onBack={() => setCurrentPage('home')} 
+          onDonate={handleDonate}
+        />
+        <DonationCheckout 
+          isOpen={showCheckout} 
+          onClose={() => setShowCheckout(false)} 
+          initialAmount={selectedAmount}
+        />
+      </>
+    );
   }
 
   return (
     <div className="min-h-screen bg-white">
       <Navbar onHudsonGivesClick={() => setCurrentPage('hudson-gives')} />
       <main>
-        <Hero />
+        <Hero onDonate={() => handleDonate()} />
         <HudsonGivesTicker onClick={() => setCurrentPage('hudson-gives')} />
         
         <SoftGlowBackground>
@@ -57,7 +85,7 @@ export default function App() {
                   <div className="aspect-square bg-slate-100 rounded-[4rem] flex items-center justify-center p-8 group">
                     <div className="w-full h-full border-2 border-brand-blue/10 rounded-[3rem] p-4 group-hover:border-brand-light-blue transition-colors">
                        <img 
-                        src="https://static.wixstatic.com/media/867f79_c1cfa4d8f7b54801991bfea63eb5a16c~mv2.jpg/v1/fill/w_1200,h_800,al_c,q_85,enc_auto/867f79_c1cfa4d8f7b54801991bfea63eb5a16c~mv2.jpg" 
+                        src="https://lh3.googleusercontent.com/d/1ZdDx1k4tWuT_DZ6R2QrmBnbNwGIC9ywx" 
                         alt="Project 201 Group Training" 
                         className="w-full h-full object-cover rounded-[2rem] shadow-2xl"
                       />
@@ -84,7 +112,7 @@ export default function App() {
                 <div className="space-y-6">
                   <div className="aspect-[4/3] rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white">
                     <img 
-                      src="https://static.wixstatic.com/media/11062b_92a8690cb5b94d15a83956747803eb10~mv2.jpg/v1/fill/w_1448,h_965,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/11062b_92a8690cb5b94d15a83956747803eb10~mv2.jpg" 
+                      src="https://lh3.googleusercontent.com/d/1fZM9VMinL-zEooGvoSWp1kS7sgpuhMgT" 
                       alt="Project 201 Youth Training" 
                       className="w-full h-full object-cover"
                     />
@@ -93,12 +121,12 @@ export default function App() {
                   {/* Thumbnail Gallery */}
                   <div className="grid grid-cols-4 md:grid-cols-6 gap-4">
                     {[
-                      "https://static.wixstatic.com/media/867f79_27ff568d948a4725aa197597025472a6~mv2.jpg/v1/fill/w_1474,h_602,al_t,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/867f79_27ff568d948a4725aa197597025472a6~mv2.jpg",
-                      "https://static.wixstatic.com/media/nsplsh_b9adcd81b16640d5819bce16a8acb66c~mv2.jpg/v1/fill/w_1196,h_1796,fp_0.50_0.50,q_90,enc_avif,quality_auto/nsplsh_b9adcd81b16640d5819bce16a8acb66c~mv2.jpg",
-                      "https://static.wixstatic.com/media/11062b_92a8690cb5b94d15a83956747803eb10~mv2.jpg/v1/fill/w_1448,h_965,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/11062b_92a8690cb5b94d15a83956747803eb10~mv2.jpg",
-                      "https://static.wixstatic.com/media/11062b_e31e7af5f57e45deabe91d4c2b0e697b~mv2.jpg/v1/fill/w_1448,h_965,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/11062b_e31e7af5f57e45deabe91d4c2b0e697b~mv2.jpg",
-                      "https://static.wixstatic.com/media/867f79_c1cfa4d8f7b54801991bfea63eb5a16c~mv2.jpg/v1/fill/w_1200,h_800,al_c,q_85,enc_auto/867f79_c1cfa4d8f7b54801991bfea63eb5a16c~mv2.jpg",
-                      "https://static.wixstatic.com/media/11062b_92a8690cb5b94d15a83956747803eb10~mv2.jpg/v1/fill/w_1448,h_965,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/11062b_92a8690cb5b94d15a83956747803eb10~mv2.jpg"
+                      "https://lh3.googleusercontent.com/d/14hMdGg2T_KhM39RFkARigPoNOlhZAt6h",
+                      "https://lh3.googleusercontent.com/d/1EWVVBgaSPHDlZH43LUxcZyCzdB2YFDbh",
+                      "https://lh3.googleusercontent.com/d/1LoZ5o-SsUKjPM82EkM_H286zxdRoOYi0",
+                      "https://lh3.googleusercontent.com/d/1O8rXfrSdLVQDNaLq9UphQcS3wNbLjdXP",
+                      "https://lh3.googleusercontent.com/d/1OJSszuwK2nd64braXEWTLuH4MsF6Ap9B",
+                      "https://lh3.googleusercontent.com/d/1h2SdU22OyfnHHxVlUAV6TxEdVfQfUl6C"
                     ].map((img, i) => (
                       <div key={i} className="aspect-square rounded-2xl overflow-hidden border-2 border-white shadow-md hover:scale-105 transition-transform cursor-pointer">
                         <img src={img} className="w-full h-full object-cover" alt="Gallery" />
@@ -129,7 +157,7 @@ export default function App() {
                       CHOOSE YOUR <span className="text-slate-300">IMPACT LEVEL</span>
                     </h3>
                    </div>
-                   <BentoPricing />
+                   <BentoPricing onSelect={handleDonate} />
                 </div>
               </div>
 
@@ -145,27 +173,27 @@ export default function App() {
 
                     <div className="mb-6">
                       <div className="flex items-end gap-2 mb-2">
-                        <span className="text-4xl font-bold text-brand-blue font-display">$700</span>
+                        <span className="text-4xl font-bold text-brand-blue font-display">$825</span>
                         <span className="text-slate-400 text-sm font-medium mb-1">USD raised of $15,000 goal</span>
                       </div>
                       <div className="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
                         <motion.div 
                           className="h-full bg-brand-light-blue"
                           initial={{ width: 0 }}
-                          whileInView={{ width: "5%" }}
+                          whileInView={{ width: "6%" }}
                           transition={{ duration: 1, delay: 0.5 }}
                         />
                       </div>
                     </div>
 
-                    <p className="text-slate-400 text-sm font-bold uppercase tracking-widest mb-8">5 donations</p>
+                    <p className="text-slate-400 text-sm font-bold uppercase tracking-widest mb-8">7 donations</p>
 
                     <div className="grid grid-cols-2 gap-4 mb-10">
                       <button className="py-4 rounded-2xl border-2 border-brand-blue text-brand-blue font-bold text-sm tracking-widest uppercase hover:bg-slate-50 transition-colors">
                         Share
                       </button>
                       <button 
-                        onClick={() => setCurrentPage('hudson-gives')}
+                        onClick={() => handleDonate()}
                         className="py-4 rounded-2xl bg-brand-blue text-white font-bold text-sm tracking-widest uppercase hover:bg-brand-blue/90 shadow-xl shadow-brand-blue/20 transition-all w-full md:w-auto px-10"
                       >
                         Donate now!
@@ -234,7 +262,22 @@ export default function App() {
         </SoftGlowBackground>
       </main>
       <Footer />
+      
+      <DonationCheckout 
+        isOpen={showCheckout} 
+        onClose={() => setShowCheckout(false)} 
+        initialAmount={selectedAmount}
+      />
+
+      <motion.button 
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        onClick={() => handleDonate()}
+        className="fixed bottom-8 right-8 z-50 bg-brand-blue text-white px-8 py-4 rounded-2xl font-bold uppercase tracking-widest text-[10px] shadow-2xl shadow-brand-blue/40 flex items-center gap-3 border border-white/10 group"
+      >
+        <Heart className="w-4 h-4 text-brand-light-blue group-hover:fill-brand-light-blue transition-all" />
+        Donate Now
+      </motion.button>
     </div>
   );
 }
-

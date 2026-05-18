@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { ChevronDown } from 'lucide-react';
 
-export default function Hero() {
+export default function Hero({ onDonate }: { onDonate?: () => void }) {
   const logos = [
     { name: 'Hudson Gives', logo: 'HUDSON GIVES' },
     { name: 'Bonterra', logo: 'BONTERRA' },
@@ -16,7 +16,7 @@ export default function Hero() {
       {/* Background Image / Overlay */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="https://static.wixstatic.com/media/867f79_27ff568d948a4725aa197597025472a6~mv2.jpg/v1/fill/w_1474,h_602,al_t,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/867f79_27ff568d948a4725aa197597025472a6~mv2.jpg" 
+          src="https://lh3.googleusercontent.com/d/1_wWCoskagS7gXofuguJYWOebpUeHiBSV" 
           alt="Youth sports training" 
           className="w-full h-full object-cover opacity-60"
         />
@@ -42,11 +42,17 @@ export default function Hero() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
+            <button 
+              onClick={() => onDonate?.()}
+              className="bg-brand-light-blue hover:bg-white text-brand-blue px-10 py-4 rounded-2xl font-bold text-lg transition-all shadow-2xl hover:scale-105 active:scale-95"
+            >
+              Donate Now
+            </button>
             <a 
               href="#donations" 
-              className="bg-white hover:bg-slate-100 text-slate-900 px-10 py-4 rounded-full font-bold text-lg transition-all shadow-2xl"
+              className="bg-white/10 hover:bg-white/20 text-white backdrop-blur-md px-10 py-4 rounded-2xl font-bold text-lg transition-all border border-white/20 text-center"
             >
-              Get started
+              Learn More
             </a>
           </div>
         </motion.div>

@@ -1,13 +1,14 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { ArrowLeft, CheckCircle2, Trophy, Clock, Users, Target } from 'lucide-react';
 import { BentoPricing } from './ui/bento-pricing';
 
 interface HudsonGivesDetailProps {
   onBack: () => void;
+  onDonate?: (amount?: string) => void;
 }
 
-export const HudsonGivesDetail = ({ onBack }: HudsonGivesDetailProps) => {
+export const HudsonGivesDetail = ({ onBack, onDonate }: HudsonGivesDetailProps) => {
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Header */}
@@ -26,7 +27,12 @@ export const HudsonGivesDetail = ({ onBack }: HudsonGivesDetailProps) => {
             className="h-10"
           />
           <div className="hidden md:block">
-            <span className="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Jersey City Foundation</span>
+            <button 
+              onClick={() => onDonate?.()}
+              className="px-6 py-2 bg-[#f97316] text-white font-bold uppercase tracking-widest text-[10px] rounded-xl hover:bg-[#ea580c] transition-colors shadow-lg shadow-orange-500/20"
+            >
+              Donate Now
+            </button>
           </div>
         </div>
       </header>
@@ -43,7 +49,7 @@ export const HudsonGivesDetail = ({ onBack }: HudsonGivesDetailProps) => {
             </p>
             
             <div className="bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/20">
-              <div className="grid md:grid-cols-3 gap-8 items-center">
+              <div className="grid md:grid-cols-3 gap-8 items-center cursor-pointer hover:bg-white/20 transition-all" onClick={() => onDonate?.()}>
                 <div className="space-y-2">
                   <span className="block text-5xl font-bold">$825</span>
                   <span className="text-sm font-bold uppercase tracking-widest opacity-60">Raised of $15,000</span>
@@ -76,7 +82,7 @@ export const HudsonGivesDetail = ({ onBack }: HudsonGivesDetailProps) => {
               <div className="space-y-6">
                 <div className="aspect-[4/3] rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white">
                   <img 
-                    src="https://static.wixstatic.com/media/11062b_e31e7af5f57e45deabe91d4c2b0e697b~mv2.jpg/v1/fill/w_1448,h_965,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/11062b_e31e7af5f57e45deabe91d4c2b0e697b~mv2.jpg" 
+                    src="https://lh3.googleusercontent.com/d/1lbP930zRdCQzjdChwW7QG8Dr_sulYcma" 
                     alt="Project 201 Team Huddle" 
                     className="w-full h-full object-cover"
                   />
@@ -143,7 +149,7 @@ export const HudsonGivesDetail = ({ onBack }: HudsonGivesDetailProps) => {
               {/* Pricing Grid */}
               <div className="space-y-12">
                  <h2 className="text-3xl font-bold text-brand-blue uppercase tracking-tight text-center">Support the Mission</h2>
-                 <BentoPricing />
+                 <BentoPricing onSelect={(amt) => onDonate?.(amt)} />
               </div>
             </div>
 

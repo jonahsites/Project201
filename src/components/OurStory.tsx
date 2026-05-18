@@ -23,7 +23,7 @@ export default function OurStory() {
           <div className="relative">
             <div className="aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl relative z-10">
               <img 
-                src="https://static.wixstatic.com/media/nsplsh_b9adcd81b16640d5819bce16a8acb66c~mv2.jpg/v1/fill/w_1196,h_1796,fp_0.50_0.50,q_90,enc_avif,quality_auto/nsplsh_b9adcd81b16640d5819bce16a8acb66c~mv2.jpg" 
+                src="https://lh3.googleusercontent.com/d/1ij0c6x2te4sYxY4gRI63zH84EmKJ2TzA" 
                 alt="Youth athlete portrait" 
                 className="w-full h-full object-cover"
               />

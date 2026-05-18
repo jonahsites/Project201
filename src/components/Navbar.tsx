@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, Instagram, Facebook, Youtube } from 'lucide-react';
 
-export default function Navbar({ onHudsonGivesClick }: { onHudsonGivesClick?: () => void }) {
+export default function Navbar({ onHudsonGivesClick, onDonate }: { onHudsonGivesClick?: () => void, onDonate?: () => void }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -61,12 +61,12 @@ export default function Navbar({ onHudsonGivesClick }: { onHudsonGivesClick?: ()
               <a href="#" className={isScrolled ? 'text-slate-600' : 'text-white'}><Instagram size={18} /></a>
               <a href="#" className={isScrolled ? 'text-slate-600' : 'text-white'}><Facebook size={18} /></a>
             </div>
-            <a
-              href="#donations"
+            <button
+              onClick={() => onDonate?.()}
               className="bg-brand-light-blue hover:bg-white hover:text-brand-blue text-brand-blue px-6 py-2 rounded-full font-bold text-sm transition-all transform hover:scale-105 active:scale-95 shadow-lg"
             >
-              BOOK NOW
-            </a>
+              DONATE NOW
+            </button>
           </div>
 
           {/* Mobile menu button */}
@@ -107,13 +107,15 @@ export default function Navbar({ onHudsonGivesClick }: { onHudsonGivesClick?: ()
                   <a href="#" className="text-slate-600"><Facebook size={24} /></a>
                   <a href="#" className="text-slate-600"><Youtube size={24} /></a>
                 </div>
-                <a
-                  href="#donations"
-                  onClick={() => setIsOpen(false)}
+                <button
+                  onClick={() => {
+                    setIsOpen(false);
+                    onDonate?.();
+                  }}
                   className="bg-brand-light-blue text-brand-blue px-6 py-2 rounded-full font-bold text-sm"
                 >
-                  BOOK NOW
-                </a>
+                  DONATE NOW
+                </button>
               </div>
             </div>
           </motion.div>
