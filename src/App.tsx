@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import OurStory from './components/OurStory';
+import ProgramsAndLeadership from './components/ProgramsAndLeadership';
 import FeatureCarousel from './components/ui/feature-carousel';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
@@ -101,6 +102,7 @@ export default function App() {
 
         <Skiper19 />
         <OurStory />
+        <ProgramsAndLeadership />
         
         {/* Refined Donation Section - Based on Image Design */}
         <section id="donations" className="py-24 relative overflow-hidden">
