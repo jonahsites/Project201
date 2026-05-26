@@ -1,12 +1,17 @@
+import React from 'react';
 import { Facebook, Instagram, Youtube, Mail, Phone, MapPin } from 'lucide-react';
 
-export default function Footer() {
+interface FooterProps {
+  onPageChange?: (page: 'home' | 'about' | 'programs' | 'youth-support' | 'partnerships' | 'events' | 'donate' | 'contact') => void;
+}
+
+export default function Footer({ onPageChange }: FooterProps) {
   return (
     <footer className="bg-slate-950 text-white pt-24 pb-12 border-t border-white/5">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 max-w-6xl">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-          <div className="lg:col-span-1">
-            <div className="flex items-center gap-2 mb-8">
+          <div className="lg:col-span-1 space-y-6">
+            <div className="flex items-center gap-2">
               <img 
                 src="https://lh3.googleusercontent.com/d/1O9W1-AkWLdXANr6KOYuVfeSMT1Zf2zbf" 
                 alt="Project 201 Logo" 
@@ -16,61 +21,60 @@ export default function Footer() {
                 PROJECT 201
               </span>
             </div>
-            <p className="text-slate-400 font-light leading-relaxed mb-8">
-              Empowering youth through mentorship and sports excellence. Shaping well-rounded individuals who are prepared to excel both on and off the field.
+            <p className="text-slate-400 font-light leading-relaxed text-xs">
+              Project 201 is a professional statewide youth organization. We combine structured athletic development and mental health gatekeeper frameworks to guide the next generation of NJ leaders.
             </p>
-            <div className="flex space-x-5">
-              <a href="#" className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-brand-light-blue transition-colors">
-                <Facebook size={20} />
+            <div className="flex space-x-4">
+              <a href="https://www.instagram.com/skelly201sports" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-brand-light-blue transition-colors">
+                <Instagram size={18} />
               </a>
               <a href="#" className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-brand-light-blue transition-colors">
-                <Instagram size={20} />
-              </a>
-              <a href="#" className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-brand-light-blue transition-colors">
-                <Youtube size={20} />
+                <Facebook size={18} />
               </a>
             </div>
           </div>
 
           <div>
-            <h4 className="font-display font-bold text-lg mb-8 uppercase text-brand-light-blue tracking-widest">Quick Links</h4>
-            <ul className="space-y-4">
-              <li><a href="#" className="text-slate-400 hover:text-white transition-colors">Home</a></li>
-              <li><a href="#about" className="text-slate-400 hover:text-white transition-colors">About Us</a></li>
-              <li><a href="#services" className="text-slate-400 hover:text-white transition-colors">Services</a></li>
-              <li><a href="#donations" className="text-slate-400 hover:text-white transition-colors">Donate</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-display font-bold text-lg mb-8 uppercase text-brand-light-blue tracking-widest">Hours</h4>
-            <div className="bg-white/5 p-6 rounded-2xl border border-white/10">
-              <span className="block text-xl font-bold font-display uppercase tracking-widest mb-1">All Day</span>
-              <span className="text-brand-light-blue font-bold uppercase tracking-[0.2em] text-xs">Every Single Day</span>
+            <h4 className="font-display font-bold text-sm mb-8 uppercase text-brand-light-blue tracking-widest">Navigation</h4>
+            <div className="flex flex-col space-y-4 text-left items-start">
+              <button onClick={() => onPageChange?.('home')} className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left">Home</button>
+              <button onClick={() => onPageChange?.('about')} className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left">About Us</button>
+              <button onClick={() => onPageChange?.('programs')} className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left">Our Branches</button>
+              <button onClick={() => onPageChange?.('youth-support')} className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left">Get Support</button>
             </div>
           </div>
 
           <div>
-            <h4 className="font-display font-bold text-lg mb-8 uppercase text-brand-light-blue tracking-widest">Get In Touch</h4>
+            <h4 className="font-display font-bold text-sm mb-8 uppercase text-brand-light-blue tracking-widest">Connect</h4>
+            <div className="flex flex-col space-y-4 text-left items-start">
+              <button onClick={() => onPageChange?.('partnerships')} className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left">Schools &amp; CMOs</button>
+              <button onClick={() => onPageChange?.('events')} className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left">Events Outings</button>
+              <button onClick={() => onPageChange?.('donate')} className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left">Sponsorships</button>
+              <button onClick={() => onPageChange?.('contact')} className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left">Contact Direct</button>
+            </div>
+          </div>
+
+          <div>
+            <h4 className="font-display font-bold text-sm mb-8 uppercase text-brand-light-blue tracking-widest">Coordinated by</h4>
             <div className="space-y-6">
               <div className="flex gap-4">
                 <div className="w-10 h-10 shrink-0 bg-brand-light-blue/10 rounded-xl flex items-center justify-center text-brand-light-blue">
                    <User className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="block font-bold">Shawn Kelly</span>
-                  <span className="text-slate-500 text-sm">Founder & Coach</span>
+                  <span className="block font-bold text-sm">Shawn Kelly</span>
+                  <span className="text-slate-500 text-[10px] font-bold tracking-wider uppercase">Executive Director</span>
                 </div>
               </div>
-              <a href="mailto:skelly201sports@yahoo.com" className="flex items-center gap-4 text-slate-400 hover:text-white transition-colors">
+              <a href="mailto:skelly201sports@yahoo.com" className="flex items-center gap-4 text-slate-400 hover:text-white transition-colors text-xs">
                 <div className="w-10 h-10 shrink-0 bg-white/5 rounded-xl flex items-center justify-center">
-                   <Mail className="w-5 h-5" />
+                   <Mail className="w-4 h-4" />
                 </div>
                 skelly201sports@yahoo.com
               </a>
-              <a href="tel:2017255062" className="flex items-center gap-4 text-slate-400 hover:text-white transition-colors">
+              <a href="tel:2017255062" className="flex items-center gap-4 text-slate-400 hover:text-white transition-colors text-xs">
                 <div className="w-10 h-10 shrink-0 bg-white/5 rounded-xl flex items-center justify-center">
-                   <Phone className="w-5 h-5" />
+                   <Phone className="w-4 h-4" />
                 </div>
                 201-725-5062
               </a>
@@ -78,13 +82,20 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-slate-500 text-sm font-light">
-            © 2026 Project 201 Sports. All Rights Reserved.
+        {/* Disclaimer Area */}
+        <div className="py-8 my-8 border-t border-b border-white/5 text-center">
+          <p className="text-slate-450 text-xs font-light max-w-3xl mx-auto leading-relaxed">
+            Project 201 is a youth mentorship and development organization. We do not provide licensed clinical therapy, psychiatric treatment, or medical services.
+          </p>
+        </div>
+
+        <div className="pt-12 flex flex-col md:flex-row justify-between items-center gap-6 border-t border-white/5">
+          <p className="text-slate-500 text-xs font-light">
+            © 2026 Project 201. All Rights Reserved.
           </p>
           <div className="flex items-center gap-2">
-            <span className="text-slate-600 text-xs font-bold uppercase tracking-widest">Powered by</span>
-            <span className="text-brand-light-blue font-bold tracking-tight">BONTERRA</span>
+            <span className="text-slate-650 text-[10px] font-bold uppercase tracking-widest">Powered by</span>
+            <span className="text-brand-light-blue font-bold tracking-tight text-xs uppercase">Project 201 Network</span>
           </div>
         </div>
       </div>
@@ -109,5 +120,5 @@ function User({ className }: { className?: string }) {
       <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
       <circle cx="12" cy="7" r="4" />
     </svg>
-  )
+  );
 }

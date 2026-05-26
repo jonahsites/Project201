@@ -1,14 +1,14 @@
 import { motion } from 'motion/react';
 import { ChevronDown } from 'lucide-react';
 
-export default function Hero({ onDonate }: { onDonate?: () => void }) {
+export default function Hero({ onDonate, onLearnMore }: { onDonate?: () => void, onLearnMore?: () => void }) {
   const logos = [
-    { name: 'Hudson Gives', logo: 'HUDSON GIVES' },
-    { name: 'Bonterra', logo: 'BONTERRA' },
-    { name: 'Alliance', logo: 'ALLIANCE' },
-    { name: 'Coach Fischer', logo: 'FISCHER' },
-    { name: 'Project 201', logo: '201 SPORTS' },
-    { name: 'Jersey City', logo: 'JERSEY CITY' },
+    { name: '201 Sports', logo: '201 SPORTS' },
+    { name: '201 Boxing', logo: '201 BOXING' },
+    { name: 'Mentorship', logo: 'MENTORSHIP' },
+    { name: 'Schools', logo: 'SCHOOLS' },
+    { name: 'Summer Acad', logo: 'SUMMER ACAD' },
+    { name: 'NJ Dev', logo: 'NJ STATEWIDE' },
   ];
 
   return (
@@ -30,7 +30,7 @@ export default function Hero({ onDonate }: { onDonate?: () => void }) {
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-4xl"
         >
-          <h1 className="font-display text-[12vw] md:text-8xl lg:text-9xl font-bold text-white mb-8 tracking-tighter leading-[0.85]">
+          <h1 className="font-display text-[11vw] md:text-8xl lg:text-9xl font-bold text-white mb-8 tracking-tighter leading-[0.85] uppercase">
             Empowering youth.<br />
             <span className="opacity-90">Building leaders.</span>
           </h1>
@@ -44,16 +44,16 @@ export default function Hero({ onDonate }: { onDonate?: () => void }) {
           <div className="flex flex-col sm:flex-row gap-4">
             <button 
               onClick={() => onDonate?.()}
-              className="bg-brand-light-blue hover:bg-white text-brand-blue px-10 py-4 rounded-2xl font-bold text-lg transition-all shadow-2xl hover:scale-105 active:scale-95"
+              className="bg-brand-light-blue hover:bg-white text-brand-blue px-10 py-4 rounded-2xl font-bold text-lg transition-all shadow-2xl hover:scale-105 active:scale-95 cursor-pointer font-display uppercase tracking-wider"
             >
               Donate Now
             </button>
-            <a 
-              href="#donations" 
-              className="bg-white/10 hover:bg-white/20 text-white backdrop-blur-md px-10 py-4 rounded-2xl font-bold text-lg transition-all border border-white/20 text-center"
+            <button 
+              onClick={() => onLearnMore?.()}
+              className="bg-white/10 hover:bg-white/20 text-white backdrop-blur-md px-10 py-4 rounded-2xl font-bold text-lg transition-all border border-white/20 text-center cursor-pointer font-display uppercase tracking-wider"
             >
-              Learn More
-            </a>
+              Our Programs
+            </button>
           </div>
         </motion.div>
       </div>

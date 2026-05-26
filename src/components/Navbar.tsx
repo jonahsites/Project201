@@ -2,7 +2,12 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, Instagram, Facebook, Youtube } from 'lucide-react';
 
-export default function Navbar({ onHudsonGivesClick, onDonate }: { onHudsonGivesClick?: () => void, onDonate?: () => void }) {
+interface NavbarProps {
+  activePage: string;
+  onPageChange: (page: 'home' | 'about' | 'programs' | 'youth-support' | 'partnerships' | 'events' | 'donate' | 'contact') => void;
+}
+
+export default function Navbar({ activePage, onPageChange }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -15,65 +20,74 @@ export default function Navbar({ onHudsonGivesClick, onDonate }: { onHudsonGives
   }, []);
 
   const navLinks = [
-    { name: 'Home', href: '#' },
-    { name: 'About Us', href: '#about' },
-    { name: 'Services', href: '#services' },
-    { name: 'Donations', href: '#donations' },
-    { name: 'Blog', href: '#' },
-    { name: 'Shop', href: '#' },
+    { name: 'Home', id: 'home' as const },
+    { name: 'About', id: 'about' as const },
+    { name: 'Programs', id: 'programs' as const },
+    { name: 'Youth Support', id: 'youth-support' as const },
+    { name: 'Schools & Partnerships', id: 'partnerships' as const },
+    { name: 'Events', id: 'events' as const },
+    { name: 'Donate', id: 'donate' as const },
+    { name: 'Contact', id: 'contact' as const },
   ];
+
+  const showSolidNavBar = isScrolled || activePage !== 'home';
 
   return (
     <nav 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/90 backdrop-blur-md shadow-md py-3' : 'bg-transparent py-5'
+        showSolidNavBar ? 'bg-white/95 backdrop-blur-md shadow-md py-3' : 'bg-transparent py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           <div className="flex items-center">
-            <a href="#" className="flex items-center gap-2 group">
+            <button 
+              onClick={() => onPageChange('home')} 
+              className="flex items-center gap-2 group bg-transparent border-0 text-left focus:outline-none p-0 cursor-pointer"
+            >
               <img 
                 src="https://lh3.googleusercontent.com/d/1O9W1-AkWLdXANr6KOYuVfeSMT1Zf2zbf" 
                 alt="Project 201 Logo" 
                 className="h-10 w-auto transition-transform group-hover:scale-110"
               />
-              <span className={`font-display font-bold text-xl tracking-tight ${isScrolled ? 'text-brand-blue' : 'text-white'}`}>
+              <span className={`font-display font-bold text-xl tracking-tight ${showSolidNavBar ? 'text-brand-blue' : 'text-white'}`}>
                 PROJECT 201
               </span>
-            </a>
+            </button>
           </div>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-6">
             {navLinks.map((link) => (
-              <a
+              <button
                 key={link.name}
-                href={link.href}
-                className={`text-sm font-medium transition-colors hover:text-brand-light-blue ${
-                  isScrolled ? 'text-slate-700' : 'text-white'
+                onClick={() => onPageChange(link.id)}
+                className={`text-[10px] uppercase font-bold tracking-widest transition-all hover:text-brand-light-blue cursor-pointer focus:outline-none p-1 ${
+                  activePage === link.id
+                    ? 'text-brand-light-blue border-b-2 border-brand-light-blue'
+                    : showSolidNavBar ? 'text-slate-700' : 'text-white'
                 }`}
               >
                 {link.name}
-              </a>
+              </button>
             ))}
-            <div className="flex items-center space-x-4 border-l border-slate-300 ml-4 pl-4">
-              <a href="#" className={isScrolled ? 'text-slate-600' : 'text-white'}><Instagram size={18} /></a>
-              <a href="#" className={isScrolled ? 'text-slate-600' : 'text-white'}><Facebook size={18} /></a>
+            <div className={`flex items-center space-x-3 border-l ml-2 pl-4 ${showSolidNavBar ? 'border-slate-350' : 'border-white/20'}`}>
+              <a href="https://www.instagram.com/skelly201sports" target="_blank" rel="noopener noreferrer" className={showSolidNavBar ? 'text-slate-600 hover:text-brand-blue' : 'text-white hover:text-brand-light-blue'}><Instagram size={16} /></a>
+              <a href="#" className={showSolidNavBar ? 'text-slate-600 hover:text-brand-blue' : 'text-white hover:text-brand-light-blue'}><Facebook size={16} /></a>
             </div>
             <button
-              onClick={() => onDonate?.()}
-              className="bg-brand-light-blue hover:bg-white hover:text-brand-blue text-brand-blue px-6 py-2 rounded-full font-bold text-sm transition-all transform hover:scale-105 active:scale-95 shadow-lg"
+              onClick={() => onPageChange('donate')}
+              className="bg-brand-light-blue hover:bg-brand-blue hover:text-white text-brand-blue px-5 py-2.5 rounded-xl font-bold text-[10px] transition-all transform hover:scale-105 active:scale-95 shadow font-display uppercase tracking-wider cursor-pointer"
             >
-              DONATE NOW
+              DONATE
             </button>
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden flex items-center">
+          <div className="lg:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={`${isScrolled ? 'text-slate-900' : 'text-white'} p-2`}
+              className={`${showSolidNavBar ? 'text-slate-900' : 'text-white'} p-2 cursor-pointer focus:outline-none`}
             >
               {isOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
@@ -88,31 +102,36 @@ export default function Navbar({ onHudsonGivesClick, onDonate }: { onHudsonGives
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-b border-slate-100 overflow-hidden"
+            className="lg:hidden bg-white border-b border-slate-100 overflow-hidden shadow-xl"
           >
             <div className="px-4 pt-2 pb-6 space-y-1">
               {navLinks.map((link) => (
-                <a
+                <button
                   key={link.name}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className="block px-3 py-4 text-base font-medium text-slate-700 hover:text-brand-blue hover:bg-slate-50 rounded-lg"
+                  onClick={() => {
+                    setIsOpen(false);
+                    onPageChange(link.id);
+                  }}
+                  className={`block w-full text-left px-4 py-3 text-xs font-bold uppercase tracking-widest rounded-xl transition-all focus:outline-none ${
+                    activePage === link.id
+                      ? 'bg-brand-blue/5 text-brand-light-blue'
+                      : 'text-slate-700 hover:text-brand-blue hover:bg-slate-50'
+                  }`}
                 >
                   {link.name}
-                </a>
+                </button>
               ))}
-              <div className="pt-4 flex justify-between items-center px-3">
+              <div className="pt-4 flex justify-between items-center px-4 border-t border-slate-100 mt-4">
                  <div className="flex space-x-4">
-                  <a href="#" className="text-slate-600"><Instagram size={24} /></a>
-                  <a href="#" className="text-slate-600"><Facebook size={24} /></a>
-                  <a href="#" className="text-slate-600"><Youtube size={24} /></a>
+                  <a href="https://www.instagram.com/skelly201sports" target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-brand-blue"><Instagram size={20} /></a>
+                  <a href="#" className="text-slate-600 hover:text-brand-blue"><Facebook size={20} /></a>
                 </div>
                 <button
                   onClick={() => {
                     setIsOpen(false);
-                    onDonate?.();
+                    onPageChange('donate');
                   }}
-                  className="bg-brand-light-blue text-brand-blue px-6 py-2 rounded-full font-bold text-sm"
+                  className="bg-brand-light-blue text-brand-blue px-5 py-2.5 rounded-xl font-bold text-[10px] font-display uppercase tracking-widest"
                 >
                   DONATE NOW
                 </button>
