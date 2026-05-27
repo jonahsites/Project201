@@ -93,9 +93,16 @@ export default function Footer({ onPageChange }: FooterProps) {
           <p className="text-slate-500 text-xs font-light">
             © 2026 Project 201. All Rights Reserved.
           </p>
-          <div className="flex items-center gap-2">
-            <span className="text-slate-650 text-[10px] font-bold uppercase tracking-widest">Powered by</span>
-            <span className="text-brand-light-blue font-bold tracking-tight text-xs uppercase">Project 201 Network</span>
+          <div className="flex items-center gap-3">
+            <span className="text-slate-650 text-[10px] font-bold uppercase tracking-widest">Apparel Powered by</span>
+            <a 
+              href="https://www.instagram.com/201customsllc?utm_source=qr" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-brand-light-blue hover:text-white transition-colors font-bold tracking-tight text-xs uppercase border border-brand-light-blue/20 bg-brand-light-blue/5 px-2.5 py-1 rounded-lg"
+            >
+              201 Customs LLC
+            </a>
           </div>
         </div>
       </div>

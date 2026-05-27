@@ -12,7 +12,8 @@ import {
   Phone,
   MapPin,
   Sparkles,
-  DollarSign
+  DollarSign,
+  Instagram
 } from 'lucide-react';
 
 export default function SponsorsPartnersPage() {
@@ -30,6 +31,15 @@ export default function SponsorsPartnersPage() {
   const [submitting, setSubmitting] = useState(false);
 
   const sponsors = [
+    {
+      name: "201 Customs LLC",
+      location: "Jersey-Based (DM to Order)",
+      description: "Custom Tees & Streetwear for a Cause. Centered around community, culture, and confidence, this official embroidery and custom print company is powered directly by founders Shawn Kelly & Ana Gleny to supply Premium youth hoodies, workout gear, and custom tees.",
+      tier: "Foundry Apparel Sponsor",
+      badgeColor: "bg-brand-blue/10 text-brand-blue border-brand-blue/20",
+      image: "https://scontent-lga3-3.cdninstagram.com/v/t51.82787-19/681508650_18045094292774238_8785697878069374056_n.jpg?cb=8438d1d6-89aba764&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=scontent-lga3-3.cdninstagram.com&_nc_cat=106&_nc_oc=Q6cZ2gGKnA5YH567ZVF6HC7FJRPTDfohlvK6JSz3P3_T1rMIwzNcCg0HgQKhoykQTgPAZJk&_nc_ohc=xFFPaCSAS5MQ7kNvwEzmOyo&_nc_gid=Yq8NqPHgi363dolvypXAFg&edm=AP4sbd4BAAAA&ccb=7-5&oh=00_Af62GPB-BMoOpIGTr4Lc-BJua9FhOrFIN9BFMD-O_K-itQ&oe=6A1CC3CB&_nc_sid=7a9f4b",
+      instagramLink: "https://www.instagram.com/201customsllc?utm_source=qr"
+    },
     {
       name: "Dawn’s Auto Body",
       location: "Keyport, NJ",
@@ -119,11 +129,22 @@ export default function SponsorsPartnersPage() {
                       className="bg-white rounded-3xl p-8 border border-slate-100 shadow-sm hover:border-brand-blue/15 transition-all relative overflow-hidden group"
                     >
                       <div className="absolute top-0 right-0 w-32 h-32 bg-brand-light-blue/5 rounded-full blur-2xl group-hover:bg-brand-light-blue/10 transition-colors" />
-                      <div className="flex flex-col sm:flex-row gap-6 relative z-10">
-                        <div className="w-16 h-16 rounded-2xl bg-brand-blue text-white flex items-center justify-center font-display font-black text-xl shrink-0">
-                          {sp.name[0]}
-                        </div>
-                        <div className="space-y-3">
+                      <div className="flex flex-col sm:flex-row gap-6 relative z-10 items-start">
+                        {sp.image ? (
+                          <div className="w-20 h-20 rounded-2xl overflow-hidden shrink-0 border border-slate-100 shadow-sm">
+                            <img 
+                              src={sp.image} 
+                              alt={sp.name} 
+                              className="w-full h-full object-cover"
+                              referrerPolicy="no-referrer"
+                            />
+                          </div>
+                        ) : (
+                          <div className="w-16 h-16 rounded-2xl bg-brand-blue text-white flex items-center justify-center font-display font-black text-xl shrink-0">
+                            {sp.name[0]}
+                          </div>
+                        )}
+                        <div className="space-y-3 flex-1">
                           <div className="flex flex-wrap items-center gap-3">
                             <h3 className="font-display font-extrabold text-slate-900 text-lg uppercase tracking-tight">
                               {sp.name}
@@ -141,6 +162,20 @@ export default function SponsorsPartnersPage() {
                           <p className="text-slate-500 font-light text-xs leading-relaxed">
                             {sp.description}
                           </p>
+
+                          {sp.instagramLink && (
+                            <div className="pt-2">
+                              <a 
+                                href={sp.instagramLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 bg-slate-900 text-white hover:bg-slate-800 transition-colors px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider font-display"
+                              >
+                                <Instagram className="w-3.5 h-3.5 text-brand-light-blue" />
+                                Custom Streetwear Instagram
+                              </a>
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
