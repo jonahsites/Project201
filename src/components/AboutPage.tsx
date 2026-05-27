@@ -245,9 +245,14 @@ export default function AboutPage() {
                   </p>
                 </div>
 
-                <p className="text-slate-600 font-light text-sm leading-relaxed">
-                  Shawn Kelly leads operational design, caseworker integration, and youth athletic performance setups. Leveraging a professional curriculum of physical fitness and safety council compliance, Shawn guarantees that youth find clear physical conditioning outlets and stable lines of daily developmental guidance.
-                </p>
+                <div className="space-y-4 text-slate-600 font-light text-sm leading-relaxed text-left">
+                  <p>
+                    Shawn's lifelong relationship with sports and performance athletics includes competing in high-profile NFL-caliber combines, playing professional rugby, and logging years of elite athletic training design. But his fundamental shift in purpose emerged during his career as a state correctional officer. Working on the frontlines, he saw firsthand how a lack of structure, support systems, and proactive mentorship early in life too often funneled promising young people into the justice system.
+                  </p>
+                  <p>
+                    Project 201 was founded directly as an antidote to that cycle. Combining his coaching pedigree with a realistic, high-accountability philosophy, Shawn designed a youth development system where athletic discipline serves as the ultimate gateway. Through sports conditioning and boxing mentorship, youth build the structure, emotional resilience, and communication skills necessary to succeed as leaders in their own communities.
+                  </p>
+                </div>
 
                 <div>
                   <h4 className="font-display text-[10px] font-bold text-slate-850 uppercase tracking-widest mb-4 flex items-center gap-2 justify-center md:justify-start">

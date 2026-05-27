@@ -214,19 +214,22 @@ export default function App() {
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center bg-white/5 p-8 rounded-3xl border border-white/10 backdrop-blur-md">
                       <div className="space-y-1">
                         <span className="block font-display text-4xl lg:text-5xl font-black text-brand-light-blue">250+</span>
-                        <span className="block text-[10px] text-slate-400 font-bold uppercase tracking-widest">YOUTH MENTORED</span>
+                        <span className="block text-[10px] text-slate-400 font-bold uppercase tracking-widest">Youth Mentored</span>
                       </div>
                       <div className="space-y-1">
-                        <span className="block font-display text-4xl lg:text-5xl font-black text-brand-light-blue">98%</span>
-                        <span className="block text-[10px] text-slate-400 font-bold uppercase tracking-widest">BEHAVIOR PROGRESS</span>
+                        <span className="block font-display text-4xl lg:text-5xl font-black text-brand-light-blue">8</span>
+                        <span className="block text-[10px] text-slate-450 font-bold uppercase tracking-widest">Off Home Monitoring</span>
+                        <span className="block text-[9px] text-slate-500 font-semibold leading-tight">Youth Successfully Transitioned</span>
                       </div>
                       <div className="space-y-1">
                         <span className="block font-display text-4xl lg:text-5xl font-black text-brand-light-blue">1,500+</span>
-                        <span className="block text-[10px] text-slate-400 font-bold uppercase tracking-widest">ATHLETIC HOURS</span>
+                        <span className="block text-[10px] text-slate-450 font-bold uppercase tracking-widest">Programming Hours</span>
+                        <span className="block text-[9px] text-slate-500 font-semibold leading-tight">Sports &amp; Mentorship Services</span>
                       </div>
                       <div className="space-y-1">
                         <span className="block font-display text-4xl lg:text-5xl font-black text-brand-light-blue">100%</span>
-                        <span className="block text-[10px] text-slate-400 font-bold uppercase tracking-widest">COACHES VETTED</span>
+                        <span className="block text-[10px] text-slate-450 font-bold uppercase tracking-widest">Vetted &amp; Screened</span>
+                        <span className="block text-[9px] text-slate-500 font-semibold leading-tight">Coaches &amp; Mentors Vetted</span>
                       </div>
                     </div>
 
@@ -244,10 +247,22 @@ export default function App() {
                           Project 201 does not rely on simple athletic drills. We operate structured mentorship frameworks that hold students accountable to teachers, parents, and community trainers on a daily tracking coordinate.
                         </p>
                         
+                        {/* High-Impact Real Life Story Snippet */}
+                        <div className="bg-brand-blue/15 border border-brand-light-blue/20 rounded-3xl p-5 space-y-2.5 relative overflow-hidden">
+                          <div className="absolute top-0 right-0 w-16 h-16 bg-brand-light-blue/5 rounded-full blur-xl" />
+                          <span className="text-[9px] font-bold uppercase tracking-widest text-brand-light-blue font-display flex items-center gap-1.5 select-none">
+                            <Sparkles className="w-3 w-3 animate-pulse text-brand-light-blue" />
+                            Real Impact Highlight
+                          </span>
+                          <p className="text-slate-200 text-xs italic font-light leading-relaxed">
+                            "One youth facing removal from their home became Student of the Month within one month of structured mentorship and support."
+                          </p>
+                        </div>
+
                         <div className="pt-2">
                           <button 
                             onClick={() => setCurrentPage('about')}
-                            className="bg-white/10 hover:bg-white/20 border border-white/15 px-6 py-3 rounded-xl font-bold font-display text-[10px] tracking-widest uppercase text-white transition-all"
+                            className="bg-white/10 hover:bg-white/20 border border-white/15 px-6 py-3 rounded-xl font-bold font-display text-[10px] tracking-widest uppercase text-white transition-all cursor-pointer"
                           >
                             Read Founder Story
                           </button>
