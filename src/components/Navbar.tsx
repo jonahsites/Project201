@@ -4,7 +4,7 @@ import { Menu, X, Instagram, Facebook, Youtube } from 'lucide-react';
 
 interface NavbarProps {
   activePage: string;
-  onPageChange: (page: 'home' | 'about' | 'programs' | 'youth-support' | 'partnerships' | 'events' | 'donate' | 'contact') => void;
+  onPageChange: (page: 'home' | 'about' | 'programs' | 'youth-support' | 'partnerships' | 'sponsors' | 'events' | 'donate' | 'contact') => void;
 }
 
 export default function Navbar({ activePage, onPageChange }: NavbarProps) {
@@ -25,6 +25,7 @@ export default function Navbar({ activePage, onPageChange }: NavbarProps) {
     { name: 'Programs', id: 'programs' as const },
     { name: 'Youth Support', id: 'youth-support' as const },
     { name: 'Schools & Partnerships', id: 'partnerships' as const },
+    { name: 'Sponsors & Partners', id: 'sponsors' as const },
     { name: 'Events', id: 'events' as const },
     { name: 'Donate', id: 'donate' as const },
     { name: 'Contact', id: 'contact' as const },
@@ -58,7 +59,7 @@ export default function Navbar({ activePage, onPageChange }: NavbarProps) {
 
           {/* Desktop Nav */}
           <div className="hidden lg:flex items-center space-x-6">
-            {navLinks.map((link) => (
+            {navLinks.filter(link => link.id !== 'donate').map((link) => (
               <button
                 key={link.name}
                 onClick={() => onPageChange(link.id)}
@@ -75,12 +76,15 @@ export default function Navbar({ activePage, onPageChange }: NavbarProps) {
               <a href="https://www.instagram.com/skelly201sports" target="_blank" rel="noopener noreferrer" className={showSolidNavBar ? 'text-slate-600 hover:text-brand-blue' : 'text-white hover:text-brand-light-blue'}><Instagram size={16} /></a>
               <a href="#" className={showSolidNavBar ? 'text-slate-600 hover:text-brand-blue' : 'text-white hover:text-brand-light-blue'}><Facebook size={16} /></a>
             </div>
-            <button
-              onClick={() => onPageChange('donate')}
-              className="bg-brand-light-blue hover:bg-brand-blue hover:text-white text-brand-blue px-5 py-2.5 rounded-xl font-bold text-[10px] transition-all transform hover:scale-105 active:scale-95 shadow font-display uppercase tracking-wider cursor-pointer"
-            >
-              DONATE
-            </button>
+            {/* Donate button kept on site but hidden for now per user request */}
+            {false && (
+              <button
+                onClick={() => onPageChange('donate')}
+                className="bg-brand-light-blue hover:bg-brand-blue hover:text-white text-brand-blue px-5 py-2.5 rounded-xl font-bold text-[10px] transition-all transform hover:scale-105 active:scale-95 shadow font-display uppercase tracking-wider cursor-pointer"
+              >
+                DONATE
+              </button>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -105,7 +109,7 @@ export default function Navbar({ activePage, onPageChange }: NavbarProps) {
             className="lg:hidden bg-white border-b border-slate-100 overflow-hidden shadow-xl"
           >
             <div className="px-4 pt-2 pb-6 space-y-1">
-              {navLinks.map((link) => (
+              {navLinks.filter(link => link.id !== 'donate').map((link) => (
                 <button
                   key={link.name}
                   onClick={() => {
@@ -126,15 +130,18 @@ export default function Navbar({ activePage, onPageChange }: NavbarProps) {
                   <a href="https://www.instagram.com/skelly201sports" target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-brand-blue"><Instagram size={20} /></a>
                   <a href="#" className="text-slate-600 hover:text-brand-blue"><Facebook size={20} /></a>
                 </div>
-                <button
-                  onClick={() => {
-                    setIsOpen(false);
-                    onPageChange('donate');
-                  }}
-                  className="bg-brand-light-blue text-brand-blue px-5 py-2.5 rounded-xl font-bold text-[10px] font-display uppercase tracking-widest"
-                >
-                  DONATE NOW
-                </button>
+                {/* Mobile Donate Button hidden for now */}
+                {false && (
+                  <button
+                    onClick={() => {
+                      setIsOpen(false);
+                      onPageChange('donate');
+                    }}
+                    className="bg-brand-light-blue text-brand-blue px-5 py-2.5 rounded-xl font-bold text-[10px] font-display uppercase tracking-widest"
+                  >
+                    DONATE NOW
+                  </button>
+                )}
               </div>
             </div>
           </motion.div>

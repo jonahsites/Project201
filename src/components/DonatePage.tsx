@@ -36,12 +36,11 @@ export default function DonatePage({ onDonate }: DonatePageProps) {
           <span className="text-brand-light-blue font-bold uppercase tracking-[0.25em] text-[10px] block mb-3 font-display">
             Invest in Statewide Growth
           </span>
-          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-white uppercase mb-6 leading-tight">
-            SUPPORT PROJECT 201 <br />
-            <span className="font-bold text-brand-light-blue">&amp; SHAPE LIVES</span>
+          <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-extrabold text-white uppercase mb-6 leading-tight max-w-4xl mx-auto tracking-tight">
+            Help us provide <span className="text-brand-light-blue font-light">mentorship, sports programs, leadership development, meals, and safe spaces</span> for youth across New Jersey.
           </h1>
-          <p className="max-w-2xl mx-auto text-slate-300 font-light text-sm md:text-base leading-relaxed">
-            Your generous tax-deductible sponsorship directly guarantees structured movement, 1-on-1 counselor coordinate mentorship, and safe sports environments for NJ youth.
+          <p className="max-w-2xl mx-auto text-slate-350 font-light text-xs md:text-sm leading-relaxed">
+            Every sponsorship directly funds active 1-on-1 accountability coaching, USA boxing-certified safe sports routines, nutritional guidance, and structured community outings. At Project 201, your contribution fuels real, lasting outcomes.
           </p>
         </div>
       </section>

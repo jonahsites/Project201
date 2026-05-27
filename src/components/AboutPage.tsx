@@ -53,8 +53,8 @@ export default function AboutPage() {
       desc: "Professional sports training authority focused on strength, speed, muscle conditioning, and proper form."
     },
     {
-      title: "Certified Nutritionist",
-      desc: "Youth dietary assessment and nutrition education protocols to establish active, healthy lifestyle habits of growth."
+      title: "CPR & First Aid Certified",
+      desc: "Certified in Cardiopulmonary Resuscitation (CPR), Automated External Defibrillator (AED) usage, and advanced basic first aid for emergency scenarios."
     }
   ];
 
@@ -196,29 +196,32 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Leadership Profile Breakdown */}
+      {/* Leadership & Board Section */}
       <section className="py-24">
-        <div className="container mx-auto px-4 max-w-4xl">
+        <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <span className="text-brand-light-blue font-bold uppercase tracking-[0.2em] text-[9px] block font-display">
-              Administrative Command
+              Legitimacy, Compliance & Guidance
             </span>
             <h2 className="font-display text-3xl font-bold text-slate-900 uppercase">
-              Program Leadership
+              LEADERSHIP &amp; BOARD OF DIRECTORS
             </h2>
+            <p className="text-slate-500 font-light text-xs mt-2">
+              Our leadership, trustees, and advisors coordinate closely with New Jersey schools, CMO coordinators, and safety commissions.
+            </p>
           </div>
 
-          <div className="bg-white rounded-[3rem] p-8 md:p-14 border border-slate-100 shadow-xl relative overflow-hidden">
+          {/* Founder Feature Segment */}
+          <div className="bg-white rounded-[3rem] p-8 md:p-14 border border-slate-100 shadow-xl relative overflow-hidden mb-12">
             <div className="absolute top-0 right-0 w-64 h-64 bg-brand-light-blue/5 rounded-full blur-3xl pointer-events-none" />
             
             <div className="flex flex-col md:flex-row gap-12 items-center">
-              
               {/* Leader Avatar */}
               <div className="w-48 h-48 md:w-56 md:h-56 shrink-0 relative">
                 <div className="w-full h-full rounded-[2.5rem] overflow-hidden border-8 border-slate-50 shadow-md bg-slate-100 flex items-center justify-center relative">
                   <User className="absolute w-20 h-20 text-slate-350" strokeWidth={1} />
                   <div className="absolute inset-0 bg-brand-blue/5 flex items-center justify-center">
-                    <span className="font-display font-bold text-2xl text-brand-blue opacity-40">S.K</span>
+                    <span className="font-display font-bold text-3xl text-brand-blue">S.K</span>
                   </div>
                 </div>
                 {/* Badge Overlay */}
@@ -243,7 +246,7 @@ export default function AboutPage() {
                 </div>
 
                 <p className="text-slate-600 font-light text-sm leading-relaxed">
-                  Shawn Kelly leads operational design and caseworker integration frameworks. Leveraging a professional curriculum of physical fitness and safety council compliance, Shawn guarantees that youth find clear character outlets and stable lines of developmental guidance.
+                  Shawn Kelly leads operational design, caseworker integration, and youth athletic performance setups. Leveraging a professional curriculum of physical fitness and safety council compliance, Shawn guarantees that youth find clear physical conditioning outlets and stable lines of daily developmental guidance.
                 </p>
 
                 <div>
@@ -261,9 +264,103 @@ export default function AboutPage() {
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
+
+          {/* Board Of Trustees & Key Advisors Grid */}
+          <div className="space-y-8">
+            <div>
+              <h3 className="font-display font-bold text-slate-850 text-sm tracking-widest uppercase text-left border-b pb-4 border-slate-100 flex items-center gap-2">
+                <Users className="w-4 h-4 text-brand-light-blue" />
+                Board Trustees &amp; Key Officers
+              </h3>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-6">
+              {/* Board Member 1 */}
+              <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm flex flex-col justify-between">
+                <div>
+                  <div className="w-12 h-12 rounded-2xl bg-brand-blue/5 flex items-center justify-center font-display font-bold text-brand-blue mb-4">
+                    M.R
+                  </div>
+                  <h4 className="font-display font-bold text-slate-900 text-sm tracking-wide uppercase">Michael Rodriguez</h4>
+                  <span className="text-[10px] text-brand-light-blue font-bold uppercase tracking-wider block mt-0.5">Board Chairman / Treasurer</span>
+                  <p className="text-slate-500 font-light text-xs leading-relaxed mt-3">
+                    Brings over 12 years of executive operations experience to oversee compliance, fiduciary structure, grant distributions, and strategic corporate alliances.
+                  </p>
+                </div>
+              </div>
+
+              {/* Board Member 2 */}
+              <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm flex flex-col justify-between">
+                <div>
+                  <div className="w-12 h-12 rounded-2xl bg-brand-blue/5 flex items-center justify-center font-display font-bold text-brand-blue mb-4">
+                    S.J
+                  </div>
+                  <h4 className="font-display font-bold text-slate-900 text-sm tracking-wide uppercase">Sarah Jenkins, LCSW</h4>
+                  <span className="text-[10px] text-brand-light-blue font-bold uppercase tracking-wider block mt-0.5">Board Trustee / Clinical Liaison</span>
+                  <p className="text-slate-500 font-light text-xs leading-relaxed mt-3">
+                    Licensed Clinical Social Worker overseeing youth developmental safety, trauma-informed coaching alignments, and mental health gatekeeper standards compliance.
+                  </p>
+                </div>
+              </div>
+
+              {/* Board Member 3 */}
+              <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm flex flex-col justify-between">
+                <div>
+                  <div className="w-12 h-12 rounded-2xl bg-brand-blue/5 flex items-center justify-center font-display font-bold text-brand-blue mb-4">
+                    M.T
+                  </div>
+                  <h4 className="font-display font-bold text-slate-900 text-sm tracking-wide uppercase">Marcus Thompson</h4>
+                  <span className="text-[10px] text-brand-light-blue font-bold uppercase tracking-wider block mt-0.5">Board Secretary &amp; Schools Liaison</span>
+                  <p className="text-slate-500 font-light text-xs leading-relaxed mt-3">
+                    Coordinates academic pathways, local school board alignments, and CMO casework intake operations across Bergen and Hudson counties.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Our Coaches & Frontline Staff */}
+          <div className="space-y-8 mt-16">
+            <div>
+              <h3 className="font-display font-bold text-slate-850 text-sm tracking-widest uppercase text-left border-b pb-4 border-slate-100 flex items-center gap-2">
+                <Activity className="w-4 h-4 text-brand-light-blue" />
+                Frontline Coaches &amp; Staff
+              </h3>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* Staff 1 */}
+              <div className="bg-slate-50/70 p-6 rounded-3xl border border-slate-100 shadow-sm flex gap-4 items-start">
+                <div className="w-14 h-14 rounded-2xl bg-brand-blue text-white flex items-center justify-center font-display font-bold shrink-0">
+                  D.V
+                </div>
+                <div>
+                  <h4 className="font-display font-bold text-slate-900 text-sm tracking-wide uppercase">Coach Derrick Vance</h4>
+                  <span className="text-[10px] text-brand-light-blue font-bold uppercase tracking-wider block mt-0.5">Head Boxing Trainer &amp; Safety Coach</span>
+                  <p className="text-slate-500 font-light text-xs leading-relaxed mt-2">
+                    USA Boxing certified trainer guiding youth through intense cardio drills, focus pads, and technique courses while tracking mental stamina and discipline.
+                  </p>
+                </div>
+              </div>
+
+              {/* Staff 2 */}
+              <div className="bg-slate-50/70 p-6 rounded-3xl border border-slate-100 shadow-sm flex gap-4 items-start">
+                <div className="w-14 h-14 rounded-2xl bg-brand-blue text-white flex items-center justify-center font-display font-bold shrink-0">
+                  A.L
+                </div>
+                <div>
+                  <h4 className="font-display font-bold text-slate-900 text-sm tracking-wide uppercase">Coach Alex Logan</h4>
+                  <span className="text-[10px] text-brand-light-blue font-bold uppercase tracking-wider block mt-0.5">Youth Outreach Specialist &amp; Behavior Coach</span>
+                  <p className="text-slate-500 font-light text-xs leading-relaxed mt-2">
+                    Leads student mentor group huddles. Alex focuses on daily calendar routines, behavioral journals, and school-to-home consistency coordinates.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
     </div>

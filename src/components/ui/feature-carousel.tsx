@@ -34,7 +34,7 @@ const FEATURES = [
     id: "d1",
     label: "D1 Training (1on1)",
     icon: SmartPhone01Icon,
-    image: "https://lh3.googleusercontent.com/d/1qL3Dv8nhCpLmS2js2ba-yMUULYJ2YhF8",
+    image: "https://lh3.googleusercontent.com/d/1ROHQVD1Y3HSF7tsmNQHt5cX_t3zaM6G3",
     description: "Intensive 1-on-1 coaching designed to prep athletes for collegiate-level play.",
   },
   {

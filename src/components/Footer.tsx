@@ -2,7 +2,7 @@ import React from 'react';
 import { Facebook, Instagram, Youtube, Mail, Phone, MapPin } from 'lucide-react';
 
 interface FooterProps {
-  onPageChange?: (page: 'home' | 'about' | 'programs' | 'youth-support' | 'partnerships' | 'events' | 'donate' | 'contact') => void;
+  onPageChange?: (page: 'home' | 'about' | 'programs' | 'youth-support' | 'partnerships' | 'sponsors' | 'events' | 'donate' | 'contact') => void;
 }
 
 export default function Footer({ onPageChange }: FooterProps) {
@@ -48,8 +48,8 @@ export default function Footer({ onPageChange }: FooterProps) {
             <h4 className="font-display font-bold text-sm mb-8 uppercase text-brand-light-blue tracking-widest">Connect</h4>
             <div className="flex flex-col space-y-4 text-left items-start">
               <button onClick={() => onPageChange?.('partnerships')} className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left">Schools &amp; CMOs</button>
+              <button onClick={() => onPageChange?.('sponsors')} className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left">Sponsors &amp; Partners</button>
               <button onClick={() => onPageChange?.('events')} className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left">Events Outings</button>
-              <button onClick={() => onPageChange?.('donate')} className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left">Sponsorships</button>
               <button onClick={() => onPageChange?.('contact')} className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left">Contact Direct</button>
             </div>
           </div>

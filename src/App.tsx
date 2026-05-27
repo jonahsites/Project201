@@ -9,6 +9,7 @@ import AboutPage from './components/AboutPage';
 import ProgramsPage from './components/ProgramsPage';
 import YouthSupportPage from './components/YouthSupportPage';
 import SchoolsPartnershipsPage from './components/SchoolsPartnershipsPage';
+import SponsorsPartnersPage from './components/SponsorsPartnersPage';
 import EventsPage from './components/EventsPage';
 import DonatePage from './components/DonatePage';
 import ContactPage from './components/ContactPage';
@@ -30,7 +31,7 @@ import {
 } from 'lucide-react';
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'about' | 'programs' | 'youth-support' | 'partnerships' | 'events' | 'donate' | 'contact'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'about' | 'programs' | 'youth-support' | 'partnerships' | 'sponsors' | 'events' | 'donate' | 'contact'>('home');
   const [showCheckout, setShowCheckout] = useState(false);
   const [selectedAmount, setSelectedAmount] = useState("50");
 
@@ -54,11 +55,11 @@ export default function App() {
   // Certifications list for the bottom of Home / Sections
   const certificationChips = [
     "USA Boxing Certified",
-    "Rutgers Youth Sports Safety Council Certified",
+    "Rutgers Youth Sports Safety Certified",
     "Mental Health First Aid",
-    "QPR Suicide Prevention Instructor",
-    "Certified Personal Trainer (CPT)",
-    "Certified Nutritionist"
+    "QPR Suicide Prevention",
+    "Certified Personal Trainer",
+    "CPR/First Aid"
   ];
 
   // Specific community photos from Drive requested by the user
@@ -95,7 +96,7 @@ export default function App() {
           {currentPage === 'home' && (
             <main>
               {/* Hero Banner */}
-              <Hero onDonate={() => handleDonate()} onLearnMore={() => setCurrentPage('programs')} />
+              <Hero onDonate={() => handleDonate()} onLearnMore={() => setCurrentPage('programs')} onSupportClick={() => setCurrentPage('youth-support')} />
 
               <SoftGlowBackground>
                 {/* The Umbrella Framework Section (Requested by user: 201 Sports, 201 Boxing, Mentorship, Schools, Summer) */}
@@ -342,6 +343,7 @@ export default function App() {
           )}
           {currentPage === 'youth-support' && <YouthSupportPage />}
           {currentPage === 'partnerships' && <SchoolsPartnershipsPage />}
+          {currentPage === 'sponsors' && <SponsorsPartnersPage />}
           {currentPage === 'events' && <EventsPage />}
           {currentPage === 'donate' && (
             <DonatePage onDonate={(amt) => handleDonate(amt)} />
@@ -360,16 +362,18 @@ export default function App() {
         initialAmount={selectedAmount}
       />
 
-      {/* Floating Donate Assist button */}
-      <motion.button 
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        onClick={() => handleDonate()}
-        className="fixed bottom-8 right-8 z-40 bg-brand-blue text-white px-6 py-3.5 rounded-2xl font-bold uppercase tracking-widest text-[9px] shadow-2xl shadow-brand-blue/30 flex items-center gap-2 border border-white/10 group cursor-pointer font-display"
-      >
-        <Heart className="w-3.5 h-3.5 text-brand-light-blue group-hover:fill-brand-light-blue transition-all" />
-        Donate Now
-      </motion.button>
+      {/* Floating Donate Assist button (kept in code but hidden for now) */}
+      {false && (
+        <motion.button 
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => handleDonate()}
+          className="fixed bottom-8 right-8 z-40 bg-brand-blue text-white px-6 py-3.5 rounded-2xl font-bold uppercase tracking-widest text-[9px] shadow-2xl shadow-brand-blue/30 flex items-center gap-2 border border-white/10 group cursor-pointer font-display"
+        >
+          <Heart className="w-3.5 h-3.5 text-brand-light-blue group-hover:fill-brand-light-blue transition-all" />
+          Donate Now
+        </motion.button>
+      )}
     </div>
   );
 }

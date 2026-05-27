@@ -47,27 +47,27 @@ export default function YouthSupportPage() {
   const services = [
     {
       title: "One-on-One Mentorship",
-      desc: "Individual specialized pairing focusing directly on goals, boundaries, emotional regulation, and reliable growth."
-    },
-    {
-      title: "Group Mentorship",
-      desc: "Peer circles structured around character building, open forum discussions, accountability, and leadership challenges."
-    },
-    {
-      title: "Boxing & Fitness Mentorship",
-      desc: "Using the discipline, self-control, and resilience of boxing training of Project 201 as a tool for personal focus and confidence."
-    },
-    {
-      title: "Sports Leadership Development",
-      desc: "Taking athletic skills and translating them into global citizenship, team leadership, and mentorship of younger athletes."
+      desc: "Individual pairing focusing closely on personal goals, daily routines, boundaries, emotional regulation, and reliable growth."
     },
     {
       title: "Accountability Coaching",
-      desc: "Active academic, behavioral, and sports performance tracking to build consistency, routine adherence, and self-respect."
+      desc: "Active academic, behavioral, and sports performance tracking to help youth build consistency, routine adherence, and self-respect."
     },
     {
-      title: "Parent Support & Direct Feedback",
-      desc: "Full circle communication, coaching, and collaboration with parents or clinical care teams to reinforce lessons back home."
+      title: "Sports Mentorship",
+      desc: "Bringing athletic skills to life, shaping discipline, teamwork, character, and mental clarity through active sports guidance."
+    },
+    {
+      title: "Boxing Mentorship",
+      desc: "Using the discipline, self-control, and physical stamina of boxing training as a powerful tool for confidence and anger outlet coaching."
+    },
+    {
+      title: "Leadership Development",
+      desc: "Translating athletic skills into proactive leadership choices, peer support circles, and local community contribution opportunities."
+    },
+    {
+      title: "Parent Support",
+      desc: "Comprehensive coordination and direct assistance loops for parents to reinforce routine accountability and healthy habits at home."
     }
   ];
 

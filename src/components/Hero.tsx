@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { ChevronDown } from 'lucide-react';
 
-export default function Hero({ onDonate, onLearnMore }: { onDonate?: () => void, onLearnMore?: () => void }) {
+export default function Hero({ onDonate, onLearnMore, onSupportClick }: { onDonate?: () => void, onLearnMore?: () => void, onSupportClick?: () => void }) {
   const logos = [
     { name: '201 Sports', logo: '201 SPORTS' },
     { name: '201 Boxing', logo: '201 BOXING' },
@@ -37,22 +37,31 @@ export default function Hero({ onDonate, onLearnMore }: { onDonate?: () => void,
           
           <div className="w-24 h-1 bg-white/20 mb-8" />
 
-          <p className="max-w-xl text-xl md:text-2xl text-slate-200 mb-10 font-medium leading-tight tracking-tight opacity-80">
-            For dedicated student-athletes, ambitious youth, and the communities that support them.
+          <p className="max-w-3xl text-lg md:text-xl lg:text-2xl text-slate-200 mb-10 font-normal leading-relaxed opacity-95">
+            Project 201 is a New Jersey-based youth mentorship and development organization using mentorship, sports, leadership, and community support to empower the next generation.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            <button 
-              onClick={() => onDonate?.()}
-              className="bg-brand-light-blue hover:bg-white text-brand-blue px-10 py-4 rounded-2xl font-bold text-lg transition-all shadow-2xl hover:scale-105 active:scale-95 cursor-pointer font-display uppercase tracking-wider"
-            >
-              Donate Now
-            </button>
+            {/* Donate Now kept on the site but hidden for now per user request */}
+            {false && (
+              <button 
+                onClick={() => onDonate?.()}
+                className="bg-brand-light-blue hover:bg-white text-brand-blue px-10 py-4 rounded-2xl font-bold text-lg transition-all shadow-2xl hover:scale-105 active:scale-95 cursor-pointer font-display uppercase tracking-wider"
+              >
+                Donate Now
+              </button>
+            )}
             <button 
               onClick={() => onLearnMore?.()}
+              className="bg-brand-light-blue hover:bg-white text-brand-blue px-10 py-4 rounded-2xl font-bold text-lg transition-all shadow-2xl hover:scale-105 active:scale-95 cursor-pointer font-display uppercase tracking-wider"
+            >
+              Our Branches
+            </button>
+            <button 
+              onClick={() => onSupportClick?.()}
               className="bg-white/10 hover:bg-white/20 text-white backdrop-blur-md px-10 py-4 rounded-2xl font-bold text-lg transition-all border border-white/20 text-center cursor-pointer font-display uppercase tracking-wider"
             >
-              Our Programs
+              Get Support
             </button>
           </div>
         </motion.div>

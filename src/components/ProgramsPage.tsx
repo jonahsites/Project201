@@ -9,7 +9,9 @@ import {
   Zap, 
   Target, 
   Sparkles, 
-  Award 
+  Award,
+  MapPin,
+  ArrowRight
 } from 'lucide-react';
 
 export default function ProgramsPage({ onDonate }: { onDonate?: () => void }) {
@@ -33,7 +35,7 @@ export default function ProgramsPage({ onDonate }: { onDonate?: () => void }) {
       title: "201 Boxing",
       sub: "Discipline, Endurance & Respect",
       icon: Target,
-      image: "https://lh3.googleusercontent.com/d/1qL3Dv8nhCpLmS2js2ba-yMUULYJ2YhF8",
+      image: "https://lh3.googleusercontent.com/d/1ROHQVD1Y3HSF7tsmNQHt5cX_t3zaM6G3",
       bannerText: "COMBAT SPORTS",
       color: "from-amber-600 to-orange-850",
       description: "Boxing fundamentals utilized specifically as a powerful tool for self-discipline, inner confidence, cardiovascular endurance, and physical control. Youth learn self-restraint alongside hard physical training.",
@@ -51,13 +53,21 @@ export default function ProgramsPage({ onDonate }: { onDonate?: () => void }) {
       image: "https://lh3.googleusercontent.com/d/1fZM9VMinL-zEooGvoSWp1kS7sgpuhMgT",
       bannerText: "MESSENGER CIRCLES",
       color: "from-emerald-750 to-teal-900",
-      description: "Safe, interactive Peer Messenger sessions and 1-on-1 counseling support focused on establishing accountability, daily structure, healthy routine tracking, and positive conflict resolution models.",
+      description: "A structured, high-energy Peer Mentor sequence focused on leadership and real emotional confidence. Our circles operate group-wide accountability, allowing teens to support and challenge each other to grow.",
       highlights: [
         "Individual mentor alignments (consistent role models)",
         "Weekly group development and progress journaling",
         "Cooperation on task completion and personal work responsibility",
         "Support with emotional processing & self-control patterns"
-      ]
+      ],
+      specialPanel: {
+        title: "Project 201 Mentorship Circle — Bayonne Chapter",
+        locationText: "Hosted in Bayonne at San Vito's — Partnered & Sponsored by San Vito’s Restaurant & Pizzeria",
+        stats: { current: 4, goal: 10 },
+        focus: ["Leadership", "Accountability", "Communication", "Confidence", "Positive Peer Support", "Mentorship and Life Skills"],
+        expansionText: "Project 201 is actively looking to partner with schools, restaurants, businesses, and community organizations to bring Mentorship Circles to additional cities and communities across New Jersey.",
+        ctaText: "Interested in bringing a Project 201 Mentorship Circle to your town or organization?"
+      }
     },
     {
       title: "School Programs",
@@ -76,17 +86,22 @@ export default function ProgramsPage({ onDonate }: { onDonate?: () => void }) {
     },
     {
       title: "Summer Programs",
-      sub: "High Impact Summer Camps",
+      sub: "High Impact Summer Camps & Activities",
       icon: Sun,
       image: "https://lh3.googleusercontent.com/d/1_wWCoskagS7gXofuguJYWOebpUeHiBSV",
       bannerText: "SUMMER ACADEMY",
       color: "from-rose-600 to-pink-900",
-      description: "Intense multi-week physical training and character huddles. Our summer operations combine specialized performance athletics with high-frequency mentorship to prevent summer regression.",
+      description: "Project 201 coordinates highly specialized athletic courses and leadership-building outings. Here are the core development programs we currently operate and the full suite of community-tailored activities we can introduce:",
       highlights: [
-        "Daily movement, agility camps, and multi-sport tournaments",
-        "Regular field trips & group community building outings",
-        "Structured daily routines with academic retention tracks",
-        "Nutrition and direct meals coordination"
+        "Boxing Fundamentals",
+        "Flag Football & Baseball",
+        "Basketball Development",
+        "Speed & Agility Instruction",
+        "Strategic Chess Coaching",
+        "Mentorship Circles & Life Skills",
+        "Youth Leadership Activities",
+        "Structured Team Building",
+        "Fitness & Body Conditioning"
       ]
     }
   ];
@@ -180,6 +195,53 @@ export default function ProgramsPage({ onDonate }: { onDonate?: () => void }) {
                       ))}
                     </div>
                   </div>
+
+                  {prog.specialPanel && (
+                    <div className="mt-8 p-6 bg-slate-900 border border-white/5 rounded-[2rem] space-y-5 text-white shadow-xl relative overflow-hidden">
+                      <div className="absolute top-0 right-0 w-24 h-24 bg-brand-light-blue/10 rounded-full blur-2xl pointer-events-none" />
+                      
+                      <div className="space-y-1.5 relative z-10">
+                        <span className="text-brand-light-blue font-bold uppercase tracking-[0.2em] text-[8px] block font-display">
+                          Active Community Initiative
+                        </span>
+                        <h4 className="font-display text-sm font-bold uppercase tracking-tight text-white leading-tight">
+                          {prog.specialPanel.title}
+                        </h4>
+                        <div className="flex gap-1.5 items-start text-[11px] text-slate-300 font-light">
+                          <MapPin className="w-3.5 h-3.5 text-brand-light-blue shrink-0 mt-0.5" />
+                          <span>{prog.specialPanel.locationText}</span>
+                        </div>
+                      </div>
+
+                      {/* Cohort tracker bar */}
+                      <div className="bg-white/5 border border-white/10 rounded-2xl p-4 space-y-2.5 relative z-10">
+                        <div className="flex justify-between items-center text-xs">
+                          <span className="text-slate-400 font-medium select-none">Active Cohort Recruitment:</span>
+                          <span className="text-white font-bold font-display">{prog.specialPanel.stats.current} / {prog.specialPanel.stats.goal} Youth Enrolled</span>
+                        </div>
+                        <div className="w-full bg-white/10 h-2.5 rounded-full overflow-hidden">
+                          <div 
+                            className="bg-brand-light-blue h-full rounded-full transition-all duration-1000" 
+                            style={{ width: `${(prog.specialPanel.stats.current / prog.specialPanel.stats.goal) * 100}%` }}
+                          />
+                        </div>
+                        <div className="flex justify-between text-[10px] text-slate-400 uppercase font-bold tracking-wider pt-0.5 select-none animate-pulse">
+                          <span>Current group: {prog.specialPanel.stats.current} youth</span>
+                          <span>Inquire for remaining slots: {prog.specialPanel.stats.goal - prog.specialPanel.stats.current} available</span>
+                        </div>
+                      </div>
+
+                      {/* Expansion appeal */}
+                      <div className="space-y-3 relative z-10">
+                        <p className="text-slate-400 font-light text-xs leading-relaxed">
+                          {prog.specialPanel.expansionText}
+                        </p>
+                        <p className="text-[11px] font-bold text-brand-light-blue tracking-wide">
+                          {prog.specialPanel.ctaText} Please contact us to coordinate.
+                        </p>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </motion.div>
             );
