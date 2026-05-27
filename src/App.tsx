@@ -27,7 +27,8 @@ import {
   Award, 
   Zap, 
   ArrowRight,
-  BookOpen
+  BookOpen,
+  Star
 } from 'lucide-react';
 
 export default function App() {
@@ -253,26 +254,163 @@ export default function App() {
                         </div>
                       </div>
 
-                      {/* Testimonial Board cards */}
+                      {/* Testimonial Board cards - High Craftsmanship Google Reviews Showcase */}
                       <div className="lg:col-span-7 space-y-6">
-                        {/* Card 1 */}
-                        <div className="bg-white/5 border border-white/10 rounded-2xl p-6 relative">
-                          <p className="text-slate-300 font-light text-xs md:text-sm italic leading-relaxed">
-                            "Project 201 gave my daughter a focus we thought was lost. The combination of intense athletics and patient, consistent mentors changed her view on academic discipline."
-                          </p>
-                          <span className="block mt-4 text-[10px] font-bold text-brand-light-blue tracking-widest uppercase font-display">
-                            — Elizabeth R., Parent, Jersey City
-                          </span>
+                        <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm font-bold text-white uppercase tracking-wider font-display select-none">Google Reviews</span>
+                            <span className="text-brand-light-blue text-xs font-bold bg-brand-blue/30 border border-brand-light-blue/20 px-2 py-0.5 rounded-full select-none">5.0 ★ Rating</span>
+                          </div>
+                          <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider select-none">Active Feedback</span>
                         </div>
 
-                        {/* Card 2 */}
-                        <div className="bg-white/5 border border-white/10 rounded-2xl p-6 relative">
-                          <p className="text-slate-300 font-light text-xs md:text-sm italic leading-relaxed">
-                            "As school social workers, we find referring to Project 201 a seamless experience. Their team knows performcare criteria, and the trauma-aware sports model works where other approaches fail."
-                          </p>
-                          <span className="block mt-4 text-[10px] font-bold text-brand-light-blue tracking-widest uppercase font-display">
-                            — Mr. Marcus T., CMO Care Coordinator
-                          </span>
+                        <div className="max-h-[500px] overflow-y-auto space-y-4 pr-3 scrollbar-thin scrollbar-thumb-brand-blue scrollbar-track-white/5">
+                          {/* Review 1 */}
+                          <div className="bg-white/5 border border-white/10 rounded-3xl p-6 relative hover:border-brand-light-blue/20 transition-all">
+                            <div className="flex items-center justify-between mb-4">
+                              <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 rounded-full bg-brand-blue text-white font-display font-bold flex items-center justify-center select-none shadow">
+                                  JF
+                                </div>
+                                <div>
+                                  <h4 className="text-white text-xs font-bold uppercase tracking-wide">Jeanne Flores</h4>
+                                  <span className="text-[9px] text-slate-400">Parent • 5 reviews</span>
+                                </div>
+                              </div>
+                              <div className="flex gap-0.5 text-amber-400">
+                                {[...Array(5)].map((_, i) => <Star key={i} size={11} fill="currentColor" />)}
+                              </div>
+                            </div>
+                            <p className="text-slate-300 font-light text-xs leading-relaxed italic">
+                              "I can’t thank Coach Kellz enough for the impact he has had on my son’s life. Since getting into boxing, I’ve watched my son grow into a more confident, determined, and happier version of himself, something I honestly hadn’t seen in a very long time."
+                            </p>
+                          </div>
+
+                          {/* Review 2 */}
+                          <div className="bg-white/5 border border-white/10 rounded-3xl p-6 relative hover:border-brand-light-blue/20 transition-all">
+                            <div className="flex items-center justify-between mb-4">
+                              <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 rounded-full bg-brand-light-blue/10 text-brand-light-blue border border-brand-light-blue/20 font-display font-bold flex items-center justify-center select-none shadow">
+                                  BN
+                                </div>
+                                <div>
+                                  <h4 className="text-white text-xs font-bold uppercase tracking-wide">Bishop Nichols</h4>
+                                  <span className="text-[9px] text-slate-400">Student Athlete • 1 review</span>
+                                </div>
+                              </div>
+                              <div className="flex gap-0.5 text-amber-400">
+                                {[...Array(5)].map((_, i) => <Star key={i} size={11} fill="currentColor" />)}
+                              </div>
+                            </div>
+                            <p className="text-slate-300 font-light text-xs leading-relaxed italic">
+                              "I met Coach Kellz in 2020 during my senior year of high school, right in the middle of COVID. While everything was shut down, I was still out on the field trying to get better, and he was the only person crazy enough like me to still be out there pushing me to my absolute limits, keeping me focused."
+                            </p>
+                          </div>
+
+                          {/* Review 3 */}
+                          <div className="bg-white/5 border border-white/10 rounded-3xl p-6 relative hover:border-brand-light-blue/20 transition-all">
+                            <div className="flex items-center justify-between mb-4">
+                              <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 rounded-full bg-brand-blue text-white font-display font-bold flex items-center justify-center select-none shadow">
+                                  AG
+                                </div>
+                                <div>
+                                  <h4 className="text-white text-xs font-bold uppercase tracking-wide">Ariel Galan</h4>
+                                  <span className="text-[9px] text-slate-400">Student Athlete • 1 review</span>
+                                </div>
+                              </div>
+                              <div className="flex gap-0.5 text-amber-400">
+                                {[...Array(5)].map((_, i) => <Star key={i} size={11} fill="currentColor" />)}
+                              </div>
+                            </div>
+                            <p className="text-slate-300 font-light text-xs leading-relaxed italic">
+                              "The best boxing project 201, it is amazing and fun to learn and do boxing. And I worked on my best and took time to complete the training of movement and power. I am happy to be in project 201 to do more boxing training!"
+                            </p>
+                          </div>
+
+                          {/* Review 4 */}
+                          <div className="bg-white/5 border border-white/10 rounded-3xl p-6 relative hover:border-brand-light-blue/20 transition-all">
+                            <div className="flex items-center justify-between mb-4">
+                              <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 rounded-full bg-brand-light-blue/10 text-brand-light-blue border border-brand-light-blue/20 font-display font-bold flex items-center justify-center select-none shadow">
+                                  NW
+                                </div>
+                                <div>
+                                  <h4 className="text-white text-xs font-bold uppercase tracking-wide">Natanya Wachtel</h4>
+                                  <span className="text-[9px] text-slate-400">Community Leader • 5 reviews</span>
+                                </div>
+                              </div>
+                              <div className="flex gap-0.5 text-amber-400">
+                                {[...Array(5)].map((_, i) => <Star key={i} size={11} fill="currentColor" />)}
+                              </div>
+                            </div>
+                            <p className="text-slate-300 font-light text-xs leading-relaxed italic">
+                              "Wonderful organization supporting youth through healthy participation in sports and community 💕 the mentorship is best in class…"
+                            </p>
+                          </div>
+
+                          {/* Review 5 */}
+                          <div className="bg-white/5 border border-white/10 rounded-3xl p-6 relative hover:border-brand-light-blue/20 transition-all">
+                            <div className="flex items-center justify-between mb-4">
+                              <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 rounded-full bg-brand-blue text-white font-display font-bold flex items-center justify-center select-none shadow">
+                                  IJ
+                                </div>
+                                <div>
+                                  <h4 className="text-white text-xs font-bold uppercase tracking-wide">Ian Jones</h4>
+                                  <span className="text-[9px] text-slate-400">Community Partner • 1 review</span>
+                                </div>
+                              </div>
+                              <div className="flex gap-0.5 text-amber-400">
+                                {[...Array(5)].map((_, i) => <Star key={i} size={11} fill="currentColor" />)}
+                              </div>
+                            </div>
+                            <p className="text-slate-300 font-light text-xs leading-relaxed italic">
+                              "Shawn and Ana have a genuine passion for serving the kids of the community, providing structured activities to help them thrive."
+                            </p>
+                          </div>
+
+                          {/* Review 6 */}
+                          <div className="bg-white/5 border border-white/10 rounded-3xl p-6 relative hover:border-brand-light-blue/20 transition-all">
+                            <div className="flex items-center justify-between mb-4">
+                              <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 rounded-full bg-brand-light-blue/10 text-brand-light-blue border border-brand-light-blue/20 font-display font-bold flex items-center justify-center select-none shadow">
+                                  SO
+                                </div>
+                                <div>
+                                  <h4 className="text-white text-xs font-bold uppercase tracking-wide">Sarah Obaid</h4>
+                                  <span className="text-[9px] text-slate-400">Local Guide • 23 reviews</span>
+                                </div>
+                              </div>
+                              <div className="flex gap-0.5 text-amber-400">
+                                {[...Array(5)].map((_, i) => <Star key={i} size={11} fill="currentColor" />)}
+                              </div>
+                            </div>
+                            <p className="text-slate-300 font-light text-xs leading-relaxed italic">
+                              "A much needed program for the youth 🙏🏼 …"
+                            </p>
+                          </div>
+
+                          {/* Review 7 */}
+                          <div className="bg-white/5 border border-white/10 rounded-3xl p-6 relative hover:border-brand-light-blue/20 transition-all">
+                            <div className="flex items-center justify-between mb-4">
+                              <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 rounded-full bg-brand-blue text-white font-display font-bold flex items-center justify-center select-none shadow">
+                                  AF
+                                </div>
+                                <div>
+                                  <h4 className="text-white text-xs font-bold uppercase tracking-wide">Arian Flores</h4>
+                                  <span className="text-[9px] text-slate-400">Student • Youth Participant</span>
+                                </div>
+                              </div>
+                              <div className="flex gap-0.5 text-amber-400">
+                                {[...Array(5)].map((_, i) => <Star key={i} size={11} fill="currentColor" />)}
+                              </div>
+                            </div>
+                            <p className="text-slate-300 font-light text-xs leading-relaxed italic">
+                              "10/10 I have a lot of fun at boxing"
+                            </p>
+                          </div>
                         </div>
                       </div>
                     </div>
