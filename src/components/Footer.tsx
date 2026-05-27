@@ -66,11 +66,11 @@ export default function Footer({ onPageChange }: FooterProps) {
                   <span className="text-slate-500 text-[10px] font-bold tracking-wider uppercase">Executive Director</span>
                 </div>
               </div>
-              <a href="mailto:skelly201sports@yahoo.com" className="flex items-center gap-4 text-slate-400 hover:text-white transition-colors text-xs">
+              <a href="mailto:info@project201.org" className="flex items-center gap-4 text-slate-400 hover:text-white transition-colors text-xs">
                 <div className="w-10 h-10 shrink-0 bg-white/5 rounded-xl flex items-center justify-center">
                    <Mail className="w-4 h-4" />
                 </div>
-                skelly201sports@yahoo.com
+                info@project201.org
               </a>
               <a href="tel:2017255062" className="flex items-center gap-4 text-slate-400 hover:text-white transition-colors text-xs">
                 <div className="w-10 h-10 shrink-0 bg-white/5 rounded-xl flex items-center justify-center">

@@ -107,7 +107,7 @@ export default function EventsPage() {
 
                   <div className="shrink-0 w-full md:w-auto self-stretch flex items-end md:items-center md:justify-end">
                     <a 
-                      href="mailto:skelly201sports@yahoo.com?subject=Project%20201%20Event%20Inquiry"
+                      href="mailto:info@project201.org?subject=Project%20201%20Event%20Inquiry"
                       className="w-full md:w-auto px-6 py-3 bg-brand-blue hover:bg-brand-blue/95 text-white font-bold font-display text-[10px] tracking-widest uppercase rounded-xl flex items-center justify-center gap-2 transition-all shadow"
                     >
                       RSVP / Join
