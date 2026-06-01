@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 // Dynamic sub-page loads
 import AboutPage from './components/AboutPage';
 import ProgramsPage from './components/ProgramsPage';
+import HirePage from './components/HirePage';
 import YouthSupportPage from './components/YouthSupportPage';
 import SchoolsPartnershipsPage from './components/SchoolsPartnershipsPage';
 import SponsorsPartnersPage from './components/SponsorsPartnersPage';
@@ -32,7 +33,7 @@ import {
 } from 'lucide-react';
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'about' | 'programs' | 'youth-support' | 'partnerships' | 'sponsors' | 'events' | 'donate' | 'contact'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'about' | 'programs' | 'hire' | 'youth-support' | 'partnerships' | 'sponsors' | 'events' | 'donate' | 'contact'>('home');
   const [showCheckout, setShowCheckout] = useState(false);
   const [selectedAmount, setSelectedAmount] = useState("50");
 
@@ -494,6 +495,7 @@ export default function App() {
           {currentPage === 'programs' && (
             <ProgramsPage onDonate={() => handleDonate()} />
           )}
+          {currentPage === 'hire' && <HirePage />}
           {currentPage === 'youth-support' && <YouthSupportPage />}
           {currentPage === 'partnerships' && <SchoolsPartnershipsPage />}
           {currentPage === 'sponsors' && <SponsorsPartnersPage />}

@@ -4,7 +4,7 @@ import { Menu, X, Instagram, Facebook, Youtube } from 'lucide-react';
 
 interface NavbarProps {
   activePage: string;
-  onPageChange: (page: 'home' | 'about' | 'programs' | 'youth-support' | 'partnerships' | 'sponsors' | 'events' | 'donate' | 'contact') => void;
+  onPageChange: (page: 'home' | 'about' | 'programs' | 'hire' | 'youth-support' | 'partnerships' | 'sponsors' | 'events' | 'donate' | 'contact') => void;
 }
 
 export default function Navbar({ activePage, onPageChange }: NavbarProps) {
@@ -23,6 +23,7 @@ export default function Navbar({ activePage, onPageChange }: NavbarProps) {
     { name: 'Home', id: 'home' as const },
     { name: 'About', id: 'about' as const },
     { name: 'Programs', id: 'programs' as const },
+    { name: 'Hire Project 201', id: 'hire' as const },
     { name: 'Youth Support', id: 'youth-support' as const },
     { name: 'Schools & Partnerships', id: 'partnerships' as const },
     { name: 'Sponsors & Partners', id: 'sponsors' as const },
