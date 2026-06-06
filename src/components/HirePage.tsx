@@ -116,7 +116,7 @@ export default function HirePage() {
   const individualPrograms = [
     { id: 'boxing', name: "Boxing Programs & Mentorship Circle", price: 120, unit: "Monthly Routine", category: "Boxing" },
     { id: 'baseball', name: "Baseball Lessons & Athletic Acceleration", price: 75, unit: "Per Private Session", category: "Baseball" },
-    { id: 'swimming', name: "Youth Swimming Safety & Water Competence", price: 80, unit: "Per Private Session", category: "Swimming" },
+    { id: 'swimming', name: "201 Swim Academy (5 Private Lessons)", price: 125, unit: "Per 5-Session Program", category: "Swimming" },
     { id: 'basketball', name: "Basketball Skills & Position Conditioning", price: 65, unit: "Per Class", category: "Basketball" },
     { id: 'speed_agility', name: "Speed & Agility Performance Training", price: 70, unit: "Per Session", category: "Athletics" },
     { id: 'one_one_mentor', name: "One-on-One Intimate Youth Coaching & Mentoring", price: 95, unit: "Per Mentorship Hour", category: "Mentorship" },
@@ -342,13 +342,13 @@ export default function HirePage() {
                     <div className="relative z-10 space-y-4 max-w-xl text-left">
                       <span className="text-brand-light-blue font-bold uppercase tracking-widest text-[9px]">Are you a parent registering a child?</span>
                       <h3 className="font-display font-extrabold text-white text-xl uppercase tracking-wide leading-tight">
-                        Register Directly for Boxing, Swimming, Baseball &amp; Personal Training
+                        Register Directly for Boxing, Swim Academy, Baseball &amp; Personal Training
                       </h3>
                       <p className="text-slate-300 font-light text-xs leading-relaxed">
                         Rather than requesting a customized corporate consultation, sign your children up instantly online! Fill out medical info, sign digital safety waivers, and receive an active invoice statement details for billing schedules immediately.
                       </p>
                       <button 
-                        onClick={() => handleStartDirectRegistration("Youth Swimming Safety & Water Competence")}
+                        onClick={() => handleStartDirectRegistration("201 Swim Academy (5 Private Lessons)")}
                         className="bg-brand-light-blue hover:bg-brand-light-blue/90 text-brand-blue font-bold text-[10px] uppercase tracking-widest px-6 py-3 rounded-xl transition-all cursor-pointer inline-flex items-center gap-1.5"
                       >
                         Launch Direct Registration Portal

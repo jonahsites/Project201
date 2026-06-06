@@ -493,7 +493,7 @@ export default function App() {
 
           {currentPage === 'about' && <AboutPage />}
           {currentPage === 'programs' && (
-            <ProgramsPage onDonate={() => handleDonate()} />
+            <ProgramsPage onDonate={() => handleDonate()} onNavigate={(page) => setCurrentPage(page)} />
           )}
           {currentPage === 'hire' && <HirePage />}
           {currentPage === 'youth-support' && <YouthSupportPage />}
