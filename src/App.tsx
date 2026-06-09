@@ -38,8 +38,7 @@ export default function App() {
   const [selectedAmount, setSelectedAmount] = useState("50");
 
   const handleDonate = (amount?: string) => {
-    if (amount) setSelectedAmount(amount);
-    setShowCheckout(true);
+    window.open("https://www.zeffy.com/en-US/donation-form/support-project--201", "_blank", "noopener,noreferrer");
   };
 
   useEffect(() => {

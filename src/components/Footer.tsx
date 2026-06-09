@@ -25,10 +25,10 @@ export default function Footer({ onPageChange }: FooterProps) {
               Project 201 is a professional statewide youth organization. We combine structured athletic development and mental health gatekeeper frameworks to guide the next generation of NJ leaders.
             </p>
             <div className="flex space-x-4">
-              <a href="https://www.instagram.com/skelly201sports" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-brand-light-blue transition-colors">
+              <a href="https://www.instagram.com/project201nj?utm_source=qr" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-brand-light-blue transition-colors">
                 <Instagram size={18} />
               </a>
-              <a href="#" className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-brand-light-blue transition-colors">
+              <a href="https://www.facebook.com/project201nj" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-brand-light-blue transition-colors">
                 <Facebook size={18} />
               </a>
             </div>

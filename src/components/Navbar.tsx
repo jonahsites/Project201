@@ -74,8 +74,8 @@ export default function Navbar({ activePage, onPageChange }: NavbarProps) {
               </button>
             ))}
             <div className={`flex items-center space-x-3 border-l ml-2 pl-4 ${showSolidNavBar ? 'border-slate-350' : 'border-white/20'}`}>
-              <a href="https://www.instagram.com/skelly201sports" target="_blank" rel="noopener noreferrer" className={showSolidNavBar ? 'text-slate-600 hover:text-brand-blue' : 'text-white hover:text-brand-light-blue'}><Instagram size={16} /></a>
-              <a href="#" className={showSolidNavBar ? 'text-slate-600 hover:text-brand-blue' : 'text-white hover:text-brand-light-blue'}><Facebook size={16} /></a>
+              <a href="https://www.instagram.com/project201nj?utm_source=qr" target="_blank" rel="noopener noreferrer" className={showSolidNavBar ? 'text-slate-600 hover:text-brand-blue' : 'text-white hover:text-brand-light-blue'}><Instagram size={16} /></a>
+              <a href="https://www.facebook.com/project201nj" target="_blank" rel="noopener noreferrer" className={showSolidNavBar ? 'text-slate-600 hover:text-brand-blue' : 'text-white hover:text-brand-light-blue'}><Facebook size={16} /></a>
             </div>
             {/* Donate button kept on site but hidden for now per user request */}
             {false && (
@@ -128,8 +128,8 @@ export default function Navbar({ activePage, onPageChange }: NavbarProps) {
               ))}
               <div className="pt-4 flex justify-between items-center px-4 border-t border-slate-100 mt-4">
                  <div className="flex space-x-4">
-                  <a href="https://www.instagram.com/skelly201sports" target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-brand-blue"><Instagram size={20} /></a>
-                  <a href="#" className="text-slate-600 hover:text-brand-blue"><Facebook size={20} /></a>
+                  <a href="https://www.instagram.com/project201nj?utm_source=qr" target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-brand-blue"><Instagram size={20} /></a>
+                  <a href="https://www.facebook.com/project201nj" target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-brand-blue"><Facebook size={20} /></a>
                 </div>
                 {/* Mobile Donate Button hidden for now */}
                 {false && (

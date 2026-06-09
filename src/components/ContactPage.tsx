@@ -132,10 +132,10 @@ export default function ContactPage() {
                 <h4 className="font-display font-medium text-brand-light-blue text-xs uppercase tracking-widest mb-6">Our Social Channels</h4>
                 
                 <div className="flex space-x-4">
-                  <a href="#" className="w-11 h-11 bg-white/5 rounded-xl flex items-center justify-center hover:bg-brand-light-blue hover:text-brand-blue transition-all">
+                  <a href="https://www.instagram.com/project201nj?utm_source=qr" target="_blank" rel="noopener noreferrer" className="w-11 h-11 bg-white/5 rounded-xl flex items-center justify-center hover:bg-brand-light-blue hover:text-brand-blue transition-all">
                     <Instagram size={20} />
                   </a>
-                  <a href="#" className="w-11 h-11 bg-white/5 rounded-xl flex items-center justify-center hover:bg-brand-light-blue hover:text-brand-blue transition-all">
+                  <a href="https://www.facebook.com/project201nj" target="_blank" rel="noopener noreferrer" className="w-11 h-11 bg-white/5 rounded-xl flex items-center justify-center hover:bg-brand-light-blue hover:text-brand-blue transition-all">
                     <Facebook size={20} />
                   </a>
                   <a href="#" className="w-11 h-11 bg-white/5 rounded-xl flex items-center justify-center hover:bg-brand-light-blue hover:text-brand-blue transition-all">
