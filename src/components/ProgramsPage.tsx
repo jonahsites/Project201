@@ -603,7 +603,7 @@ export default function ProgramsPage({ onDonate, onNavigate }: ProgramsPageProps
                               <Phone className="w-3 h-3 text-cyan-400" /> 201-725-5062 <span className="text-[9px] font-light text-slate-400">(Call/Text)</span>
                             </span>
                             <span className="flex items-center gap-1.5">
-                              <Mail className="w-3 h-3 text-cyan-400" /> 201sportsllc@gmail.com
+                              <Mail className="w-3 h-3 text-cyan-400" /> project201inc@gmail.com
                             </span>
                           </div>
                         </div>
@@ -910,7 +910,7 @@ export default function ProgramsPage({ onDonate, onNavigate }: ProgramsPageProps
 
                     <div className="pt-2 border-t border-white/5 flex justify-between items-center text-[8px] text-slate-400 font-sans">
                       <span>PROJECT201.ORG</span>
-                      <span>INFO@PROJECT201.ORG</span>
+                      <span>PROJECT201INC@GMAIL.COM</span>
                       <span>201-725-5062</span>
                     </div>
                   </div>
@@ -996,7 +996,7 @@ export default function ProgramsPage({ onDonate, onNavigate }: ProgramsPageProps
 
                     <div className="pt-2 border-t border-white/5 flex justify-between items-center text-[8px] text-slate-400 font-sans">
                       <span>PROJECT201.ORG</span>
-                      <span>INFO@PROJECT201.ORG</span>
+                      <span>PROJECT201INC@GMAIL.COM</span>
                       <span>201-725-5062</span>
                     </div>
                   </div>
