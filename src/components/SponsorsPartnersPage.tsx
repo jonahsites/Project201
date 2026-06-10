@@ -6,14 +6,15 @@ import {
   Users, 
   ShieldCheck, 
   Check, 
-  ArrowRight,
+  ArrowRight, 
   Heart,
   Mail,
   Phone,
   MapPin,
   Sparkles,
   DollarSign,
-  Instagram
+  Instagram,
+  Youtube
 } from 'lucide-react';
 
 export default function SponsorsPartnersPage() {
@@ -30,7 +31,30 @@ export default function SponsorsPartnersPage() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
-  const sponsors = [
+  interface SponsorItem {
+    name: string;
+    location: string;
+    description: string;
+    tier: string;
+    badgeColor: string;
+    image?: string;
+    instagramLink?: string;
+    youtubeLinks?: { label: string; url: string }[];
+  }
+
+  const sponsors: SponsorItem[] = [
+    {
+      name: "Organized Minds",
+      location: "Podcast & Mindset Coaching",
+      description: "Focused on mental wellness, self-organization, and coping structures. Organized Minds is a proud sponsor of Project 201's vision, amplifying mental health stories and athletic focus. Rachel and Project 201 teamed up to co-host deep conversations on the Organized Minds podcast.",
+      tier: "Official Media & Wellness Sponsor",
+      badgeColor: "bg-purple-500/10 text-purple-600 border-purple-500/20",
+      image: "https://lh3.googleusercontent.com/d/1m7hQKetvIt27_kz4Tf_UPR17htBcinAT",
+      youtubeLinks: [
+        { label: "Listen to Podcast Pt. 1", url: "https://youtu.be/ZpK2uFa8ytc" },
+        { label: "Listen to Podcast Pt. 2", url: "https://youtu.be/65ZBhKg1g88" }
+      ]
+    },
     {
       name: "201 Customs LLC",
       location: "Jersey-Based (DM to Order)",
@@ -174,6 +198,23 @@ export default function SponsorsPartnersPage() {
                                 <Instagram className="w-3.5 h-3.5 text-brand-light-blue" />
                                 Custom Streetwear Instagram
                               </a>
+                            </div>
+                          )}
+
+                          {sp.youtubeLinks && (
+                            <div className="pt-2 flex flex-wrap gap-2">
+                              {sp.youtubeLinks.map((link, lIdx) => (
+                                <a 
+                                  key={lIdx}
+                                  href={link.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white transition-colors px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider font-display shadow-sm shadow-red-600/15"
+                                >
+                                  <Youtube className="w-3.5 h-3.5 text-white animate-pulse" />
+                                  {link.label}
+                                </a>
+                              ))}
                             </div>
                           )}
                         </div>
