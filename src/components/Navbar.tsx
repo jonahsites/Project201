@@ -77,15 +77,13 @@ export default function Navbar({ activePage, onPageChange }: NavbarProps) {
               <a href="https://www.instagram.com/project201nj?utm_source=qr" target="_blank" rel="noopener noreferrer" className={showSolidNavBar ? 'text-slate-600 hover:text-brand-blue' : 'text-white hover:text-brand-light-blue'}><Instagram size={16} /></a>
               <a href="https://www.facebook.com/project201nj" target="_blank" rel="noopener noreferrer" className={showSolidNavBar ? 'text-slate-600 hover:text-brand-blue' : 'text-white hover:text-brand-light-blue'}><Facebook size={16} /></a>
             </div>
-            {/* Donate button kept on site but hidden for now per user request */}
-            {false && (
-              <button
-                onClick={() => onPageChange('donate')}
-                className="bg-brand-light-blue hover:bg-brand-blue hover:text-white text-brand-blue px-5 py-2.5 rounded-xl font-bold text-[10px] transition-all transform hover:scale-105 active:scale-95 shadow font-display uppercase tracking-wider cursor-pointer"
-              >
-                DONATE
-              </button>
-            )}
+            {/* Donate button */}
+            <button
+              onClick={() => onPageChange('donate')}
+              className="bg-brand-light-blue hover:bg-brand-blue hover:text-white text-brand-blue px-5 py-2.5 rounded-xl font-bold text-[10px] transition-all transform hover:scale-105 active:scale-95 shadow font-display uppercase tracking-wider cursor-pointer"
+            >
+              DONATE
+            </button>
           </div>
 
           {/* Mobile menu button */}
@@ -131,18 +129,16 @@ export default function Navbar({ activePage, onPageChange }: NavbarProps) {
                   <a href="https://www.instagram.com/project201nj?utm_source=qr" target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-brand-blue"><Instagram size={20} /></a>
                   <a href="https://www.facebook.com/project201nj" target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-brand-blue"><Facebook size={20} /></a>
                 </div>
-                {/* Mobile Donate Button hidden for now */}
-                {false && (
-                  <button
-                    onClick={() => {
-                      setIsOpen(false);
-                      onPageChange('donate');
-                    }}
-                    className="bg-brand-light-blue text-brand-blue px-5 py-2.5 rounded-xl font-bold text-[10px] font-display uppercase tracking-widest"
-                  >
-                    DONATE NOW
-                  </button>
-                )}
+                {/* Mobile Donate Button */}
+                <button
+                  onClick={() => {
+                    setIsOpen(false);
+                    onPageChange('donate');
+                  }}
+                  className="bg-brand-light-blue text-brand-blue px-5 py-2.5 rounded-xl font-bold text-[10px] font-display uppercase tracking-widest cursor-pointer"
+                >
+                  DONATE NOW
+                </button>
               </div>
             </div>
           </motion.div>

@@ -233,6 +233,23 @@ export default function App() {
                       </div>
                     </div>
 
+                    {/* Help Us Reach More Youth CTA */}
+                    <div className="bg-gradient-to-r from-brand-blue/30 via-slate-900 to-brand-blue/30 border border-brand-light-blue/20 rounded-3xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl relative overflow-hidden">
+                      <div className="absolute top-0 right-0 w-24 h-24 bg-brand-light-blue/5 rounded-full blur-xl pointer-events-none" />
+                      <div className="space-y-1.5 text-center md:text-left relative z-10">
+                        <h4 className="font-display font-bold text-white text-base md:text-lg uppercase tracking-tight">Help Us Reach More Youth</h4>
+                        <p className="text-slate-350 font-light text-xs max-w-xl leading-relaxed">
+                          Every contribution expands our reach—providing program supplies, wholesome meals, and athletic coaching slots for local teens across New Jersey.
+                        </p>
+                      </div>
+                      <button 
+                        onClick={() => handleDonate()}
+                        className="bg-brand-light-blue hover:bg-brand-light-blue/90 text-brand-blue px-6 py-3 rounded-xl font-bold font-display text-[11px] tracking-widest uppercase transition-all shadow-md shrink-0 cursor-pointer relative z-10 font-black border border-cyan-400/35"
+                      >
+                        SUPPORT OUR ATHLETES
+                      </button>
+                    </div>
+
                     {/* Headline and text */}
                     <div className="grid lg:grid-cols-12 gap-12 items-center">
                       <div className="lg:col-span-5 space-y-6">
@@ -427,6 +444,26 @@ export default function App() {
                             </p>
                           </div>
                         </div>
+                      </div>
+                    </div>
+
+                    {/* Testimonial Section Bottom CTA - Support Our Mission */}
+                    <div className="bg-white/5 border border-white/10 rounded-[2.5rem] p-8 md:p-10 text-center space-y-4 max-w-3xl mx-auto relative overflow-hidden backdrop-blur-md">
+                      <div className="absolute top-0 left-0 w-24 h-24 bg-brand-light-blue/5 rounded-full blur-xl" />
+                      <Heart className="w-8 h-8 text-brand-light-blue mx-auto animate-pulse" />
+                      <div className="space-y-2">
+                        <h4 className="font-display font-medium text-white text-lg uppercase tracking-wider">Support Our Mission</h4>
+                        <p className="text-slate-350 font-light text-xs max-w-md mx-auto leading-relaxed">
+                          Your sponsorships and direct donations buy safety gear, clean meals, and cover transport for our Keyport and Bayonne cohorts.
+                        </p>
+                      </div>
+                      <div className="pt-2">
+                        <button 
+                          onClick={() => handleDonate()}
+                          className="bg-brand-light-blue hover:bg-brand-blue hover:text-white text-brand-blue px-8 py-3.5 rounded-xl font-bold font-display text-[11px] tracking-widest uppercase transition-all shadow-md cursor-pointer inline-block font-black border border-cyan-400/40"
+                        >
+                          DONATE &amp; SPONSOR NOW
+                        </button>
                       </div>
                     </div>
 

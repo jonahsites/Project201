@@ -460,6 +460,32 @@ export default function ProgramsPage({ onDonate, onNavigate }: ProgramsPageProps
                         </div>
                       </div>
 
+                      {/* Help Sponsor A Youth CTA */}
+                      <div className="bg-slate-900 border border-brand-light-blue/20 rounded-[2.5rem] p-8 md:p-10 relative overflow-hidden transition-all duration-300 shadow-2xl text-left">
+                        <div className="absolute top-0 right-10 w-32 h-32 bg-brand-light-blue/5 rounded-full blur-2xl pointer-events-none" />
+                        <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                          <div className="space-y-3 max-w-xl">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-light-blue/15 border border-brand-light-blue/25 rounded-full select-none">
+                              <span className="w-1.5 h-1.5 rounded-full bg-brand-light-blue animate-pulse" />
+                              <span className="text-[9px] uppercase font-bold tracking-widest text-brand-light-blue font-display">Active Community Alignment</span>
+                            </div>
+                            <h3 className="font-display font-black text-white text-xl md:text-2xl uppercase tracking-tight leading-tight">
+                              Help Sponsor A Youth
+                            </h3>
+                            <p className="text-slate-350 font-light text-xs md:text-sm leading-relaxed">
+                              Donations help us provide direct mentorship, character training curriculums, healthy meals, and sports gears. Together we create long-term stability and accountability.
+                            </p>
+                          </div>
+                          
+                          <button
+                            onClick={() => onDonate?.()}
+                            className="bg-brand-light-blue hover:bg-white hover:text-brand-blue text-brand-blue font-display text-[10px] uppercase font-black tracking-widest px-8 py-4 px-6 md:px-8 py-4 rounded-xl transition-all shadow-md shrink-0 cursor-pointer border border-cyan-400/50"
+                          >
+                            Support Mentorship
+                          </button>
+                        </div>
+                      </div>
+
                       {/* Bring a Mentorship Circle to Your Community */}
                       <div className="bg-gradient-to-br from-indigo-950/40 via-slate-900 to-slate-950 border border-white/5 hover:border-brand-light-blue/20 rounded-[2.5rem] p-8 md:p-10 relative overflow-hidden transition-all duration-300 shadow-2xl text-left">
                         <div className="absolute top-0 right-0 w-36 h-36 bg-brand-light-blue/5 rounded-full blur-3xl pointer-events-none animate-pulse" />

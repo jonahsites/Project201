@@ -44,6 +44,20 @@ export default function SponsorsPartnersPage() {
 
   const sponsors: SponsorItem[] = [
     {
+      name: "Blue Magazine",
+      location: "Statewide, NJ",
+      description: "Featured Project 201 in its publication and continues to help amplify our mission, programs, and community impact throughout New Jersey.",
+      tier: "Official Media Partner",
+      badgeColor: "bg-blue-500/10 text-blue-600 border-blue-500/20"
+    },
+    {
+      name: "New Solutions Network",
+      location: "New Jersey",
+      description: "Provided podcast opportunities and a platform to share the Project 201 story, mission, and youth development efforts with a broader audience.",
+      tier: "Podcast & Media Partner",
+      badgeColor: "bg-cyan-500/10 text-cyan-500 border-cyan-500/20"
+    },
+    {
       name: "Organized Minds",
       location: "Podcast & Mindset Coaching",
       description: "Focused on mental wellness, self-organization, and coping structures. Organized Minds is a proud sponsor of Project 201's vision, amplifying mental health stories and athletic focus. Rachel and Project 201 teamed up to co-host deep conversations on the Organized Minds podcast.",
@@ -67,14 +81,14 @@ export default function SponsorsPartnersPage() {
     {
       name: "Dawn’s Auto Body",
       location: "Keyport, NJ",
-      description: "An outstanding local staple in auto collision repair, Dawn's Auto Body is dedicated to providing high-integrity community services and directly sponsoring active youth development pathways and leadership.",
+      description: "Community sponsor supporting youth mentorship and development initiatives. Locally renowned for automotive work, they fuel our pathways to active leadership.",
       tier: "Official Corporate Sponsor",
       badgeColor: "bg-amber-500/10 text-amber-500 border-amber-500/20"
     },
     {
       name: "San Vito’s Restaurant & Pizzeria",
       location: "Bayonne, NJ",
-      description: "Co-host and premiere partner of the Project 201 Mentorship Circle — Bayonne Chapter. San Vito's generously provides a safe meeting space, delicious meals, and peer support environments for our youth cohorts.",
+      description: "Community partner and host location for the Bayonne Mentorship Circle. San Vito’s generously provides a safe meeting space, warm meals, and positive peer group settings for our youth.",
       tier: "Community Core Partner",
       badgeColor: "bg-emerald-500/10 text-emerald-500 border-emerald-500/20"
     }
