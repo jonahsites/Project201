@@ -86,42 +86,53 @@ export default function DonatePage({ onDonate }: DonatePageProps) {
             {/* Campaign details & live progress tracker (4 Columns) */}
             <div className="lg:col-span-4 sticky top-28 space-y-6">
               
-              {/* Progress Card */}
+              {/* Direct Sponsor Card */}
               <div className="bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-xl relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-brand-light-blue/5 rounded-full blur-2xl pointer-events-none" />
                 
-                <h3 className="font-display text-2xl font-bold text-slate-900 mb-2 tracking-tight">
-                  PROJECT 201 SPONSORSHIP
+                <h3 className="font-display text-xl font-bold text-slate-900 mb-2 tracking-tight uppercase">
+                  Sponsor Project 201
                 </h3>
                 
-                <div className="flex gap-2 mb-6">
-                  <span className="px-3 py-1 bg-slate-100 text-slate-500 rounded-full text-[9px] font-bold uppercase tracking-widest font-display">Statewide</span>
-                  <span className="px-3 py-1 bg-slate-100 text-slate-500 rounded-full text-[9px] font-bold uppercase tracking-widest font-display">Charity</span>
+                <div className="flex gap-2 mb-5">
+                  <span className="px-3 py-1 bg-brand-blue/5 text-brand-blue rounded-full text-[9px] font-bold uppercase tracking-widest font-display">100% Direct</span>
+                  <span className="px-3 py-1 bg-emerald-50 text-emerald-600 rounded-full text-[9px] font-bold uppercase tracking-widest font-display">State-Vetted</span>
                 </div>
 
-                <div className="space-y-4 mb-6">
-                  <div className="flex items-end justify-between font-display">
-                    <div>
-                      <span className="block text-[10px] text-slate-400 font-bold uppercase tracking-wider">SUPPORT RAISED</span>
-                      <span className="text-3xl font-black text-brand-blue">$5,420</span>
-                    </div>
-                    <span className="text-slate-400 text-xs font-bold font-display">of $25,500 goal</span>
-                  </div>
-                  
-                  {/* Progress Line */}
-                  <div className="w-full h-3 bg-slate-100 rounded-full overflow-hidden">
-                    <div className="h-full bg-brand-light-blue rounded-full w-[21%]" />
-                  </div>
-                </div>
-
-                <p className="text-slate-450 text-xs font-bold uppercase tracking-widest mb-8 block font-display">
-                  21% Raised • 14 Donations
+                <p className="text-slate-600 font-light text-xs leading-relaxed mb-6">
+                  Your direct financial sponsorship funds active 1-on-1 accountability plans, meals, safety-qualified training, and group community outings.
                 </p>
+
+                <div className="space-y-3.5 mb-8">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-4 h-4 text-brand-light-blue shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="text-xs font-bold text-slate-800">Direct Delivery</h4>
+                      <p className="text-[10px] text-slate-550">Every dollar equips the Keyport and Bayonne programs directly.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-4 h-4 text-brand-light-blue shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="text-xs font-bold text-slate-800">Safety First</h4>
+                      <p className="text-[10px] text-slate-550">Coaches hold current Rutgers Safety &amp; CPR qualifications.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-4 h-4 text-brand-light-blue shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="text-xs font-bold text-slate-800">Reliable Stability</h4>
+                      <p className="text-[10px] text-slate-550">Constant check-ins create dependable structure for youth.</p>
+                    </div>
+                  </div>
+                </div>
 
                 <div className="space-y-4">
                   <button 
                     onClick={() => onDonate()}
-                    className="w-full py-4 rounded-xl bg-brand-blue hover:bg-brand-blue/95 text-white font-bold text-xs tracking-widest uppercase transition-all shadow-lg shadow-brand-blue/15"
+                    className="w-full py-4 rounded-xl bg-brand-blue hover:bg-brand-blue/95 text-white font-bold text-xs tracking-widest uppercase transition-all shadow-lg shadow-brand-blue/15 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
                   >
                     Sponsor via Custom Amount
                   </button>
