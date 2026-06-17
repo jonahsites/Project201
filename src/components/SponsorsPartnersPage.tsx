@@ -60,7 +60,7 @@ export default function SponsorsPartnersPage() {
     {
       name: "Organized Minds",
       location: "Podcast & Mindset Coaching",
-      description: "Focused on mental wellness, self-organization, and coping structures. Organized Minds is a proud sponsor of Project 201's vision, amplifying mental health stories and athletic focus. Rachel and Project 201 teamed up to co-host deep conversations on the Organized Minds podcast.",
+      description: "Focused on mental wellness, self-organization, and coping structures. Organized Minds is a proud sponsor of Project 201's vision, amplifying mental health stories and athletic focus. Natanya and Project 201 teamed up to co-host deep conversations on the Organized Minds podcast.",
       tier: "Official Media & Wellness Sponsor",
       badgeColor: "bg-purple-500/10 text-purple-600 border-purple-500/20",
       image: "https://lh3.googleusercontent.com/d/1m7hQKetvIt27_kz4Tf_UPR17htBcinAT",
@@ -72,7 +72,7 @@ export default function SponsorsPartnersPage() {
     {
       name: "201 Customs LLC",
       location: "Jersey-Based (DM to Order)",
-      description: "Custom Tees & Streetwear for a Cause. Centered around community, culture, and confidence, this official embroidery and custom print company is powered directly by founders Shawn Kelly & Ana Gleny to supply Premium youth hoodies, workout gear, and custom tees.",
+      description: "Custom Tees & Streetwear for a Cause. Centered around community, culture, and confidence, this official embroidery and custom print company is powered directly by founders Shawn Kelly & Ana Espinal to supply Premium youth hoodies, workout gear, and custom tees.",
       tier: "Foundry Apparel Sponsor",
       badgeColor: "bg-brand-blue/10 text-brand-blue border-brand-blue/20",
       image: "https://scontent-lga3-3.cdninstagram.com/v/t51.82787-19/681508650_18045094292774238_8785697878069374056_n.jpg?cb=8438d1d6-89aba764&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=scontent-lga3-3.cdninstagram.com&_nc_cat=106&_nc_oc=Q6cZ2gGKnA5YH567ZVF6HC7FJRPTDfohlvK6JSz3P3_T1rMIwzNcCg0HgQKhoykQTgPAZJk&_nc_ohc=xFFPaCSAS5MQ7kNvwEzmOyo&_nc_gid=Yq8NqPHgi363dolvypXAFg&edm=AP4sbd4BAAAA&ccb=7-5&oh=00_Af62GPB-BMoOpIGTr4Lc-BJua9FhOrFIN9BFMD-O_K-itQ&oe=6A1CC3CB&_nc_sid=7a9f4b",

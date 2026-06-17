@@ -521,7 +521,7 @@ export default function HirePage() {
                               Consultation Sent
                             </h4>
                             <p className="text-slate-500 font-light text-xs leading-relaxed max-w-sm mx-auto">
-                              Your school system/agency proposal has been received! Our director Ana Gleny and Shawn Kelly will coordinate response materials and reach out to **{formData.organization}** directly via **{formData.email}**.
+                              Your school system/agency proposal has been received! Our director Ana Espinal and Shawn Kelly will coordinate response materials and reach out to **{formData.organization}** directly via **{formData.email}**.
                             </p>
                           </div>
                         </motion.div>
@@ -872,7 +872,7 @@ export default function HirePage() {
                               As the parent/legal guardian of the youth participant name entered, I hereby authorize participation in structural programs hosted by Project 201 (including boxing training, swimming modules, baseball routines, physical conditioning, and mentor events). I recognize that physical athletic practices, non-contact/contact sports, and community travel involve minor and major physical risks.
                             </p>
                             <p>
-                              I agree that Project 201, Coach Shawn Kelly, Coach Ana Gleny, and partnering municipal community gyms, schools, and coaches are entirely indemnified against liabilities, medical expenses, accidental injuries, or physical damages stemming in any form from active lessons.
+                              I agree that Project 201, Coach Shawn Kelly, Coach Ana Espinal, and partnering municipal community gyms, schools, and coaches are entirely indemnified against liabilities, medical expenses, accidental injuries, or physical damages stemming in any form from active lessons.
                             </p>
                             <p className="font-bold text-slate-800 text-[11px] uppercase pt-2">
                               SECTION II — PUBLIC COMMUNITY MEDIA RELEASES
@@ -1059,7 +1059,7 @@ export default function HirePage() {
                         {/* Interactive Digital Invoice actions */}
                         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 py-6 border-t border-dashed border-slate-200">
                           <p className="text-slate-400 font-light text-[9px] max-w-sm text-center sm:text-left select-none leading-relaxed">
-                            Project 201 coordinator Ana Gleny has registered this electronic ledger entry. You will receive an identical billing email with secure bank options soon.
+                            Project 201 coordinator Ana Espinal has registered this electronic ledger entry. You will receive an identical billing email with secure bank options soon.
                           </p>
                           <div className="flex gap-2 w-full sm:w-auto">
                             <button
