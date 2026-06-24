@@ -2,7 +2,7 @@ import React from 'react';
 import { Facebook, Instagram, Youtube, Mail, Phone, MapPin } from 'lucide-react';
 
 interface FooterProps {
-  onPageChange?: (page: 'home' | 'about' | 'programs' | 'hire' | 'youth-support' | 'partnerships' | 'sponsors' | 'events' | 'donate' | 'contact') => void;
+  onPageChange?: (page: 'home' | 'about' | 'programs' | 'hire' | 'youth-support' | 'partnerships' | 'sponsors' | 'events' | 'donate' | 'contact' | 'merch') => void;
 }
 
 export default function Footer({ onPageChange }: FooterProps) {
@@ -40,6 +40,7 @@ export default function Footer({ onPageChange }: FooterProps) {
               <button onClick={() => onPageChange?.('home')} className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left">Home</button>
               <button onClick={() => onPageChange?.('about')} className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left">About Us</button>
               <button onClick={() => onPageChange?.('programs')} className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left">Our Branches</button>
+              <button onClick={() => onPageChange?.('merch')} className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left text-cyan-400 font-semibold">Save Our Youth Merch</button>
               <button onClick={() => onPageChange?.('hire')} className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left font-semibold text-brand-light-blue">Hire Project 201</button>
               <button onClick={() => onPageChange?.('youth-support')} className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left">Get Support</button>
             </div>

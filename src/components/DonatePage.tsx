@@ -37,10 +37,11 @@ export default function DonatePage({ onDonate }: DonatePageProps) {
             Invest in Statewide Growth
           </span>
           <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-extrabold text-white uppercase mb-6 leading-tight max-w-4xl mx-auto tracking-tight">
-            Help us provide <span className="text-brand-light-blue font-light">mentorship, sports programs, leadership development, meals, and safe spaces</span> for youth across New Jersey.
+            Help Us Build Stronger Youth, <br />
+            <span className="text-brand-light-blue font-light">Stronger Families, and Stronger Communities.</span>
           </h1>
           <p className="max-w-2xl mx-auto text-slate-350 font-light text-xs md:text-sm leading-relaxed">
-            Every sponsorship directly funds active 1-on-1 accountability coaching, USA boxing-certified safe sports routines, nutritional guidance, and structured community outings. At Project 201, your contribution fuels real, lasting outcomes.
+            Donations support mentorship, leadership development, sports programming, educational opportunities, and positive role models for youth across New Jersey, helping them make positive life decisions. At Project 201, we believe sports are just one of the tools we use to guide the next generation.
           </p>
         </div>
       </section>

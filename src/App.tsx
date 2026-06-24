@@ -14,6 +14,7 @@ import SponsorsPartnersPage from './components/SponsorsPartnersPage';
 import EventsPage from './components/EventsPage';
 import DonatePage from './components/DonatePage';
 import ContactPage from './components/ContactPage';
+import MerchPage from './components/MerchPage';
 
 import { DonationCheckout } from './components/DonationCheckout';
 import { SoftGlowBackground } from './components/ui/SoftGlowBackground';
@@ -33,7 +34,7 @@ import {
 } from 'lucide-react';
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'about' | 'programs' | 'hire' | 'youth-support' | 'partnerships' | 'sponsors' | 'events' | 'donate' | 'contact'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'about' | 'programs' | 'hire' | 'youth-support' | 'partnerships' | 'sponsors' | 'events' | 'donate' | 'contact' | 'merch'>('home');
   const [showCheckout, setShowCheckout] = useState(false);
   const [selectedAmount, setSelectedAmount] = useState("50");
 
@@ -214,17 +215,18 @@ export default function App() {
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center bg-white/5 p-8 rounded-3xl border border-white/10 backdrop-blur-md">
                       <div className="space-y-1">
                         <span className="block font-display text-4xl lg:text-5xl font-black text-brand-light-blue">250+</span>
-                        <span className="block text-[10px] text-slate-400 font-bold uppercase tracking-widest">Youth Mentored</span>
+                        <span className="block text-[10px] text-slate-450 font-bold uppercase tracking-widest">Overall Reached</span>
+                        <span className="block text-[9px] text-slate-500 font-semibold leading-tight">Youth Mentored &amp; Supported</span>
                       </div>
                       <div className="space-y-1">
-                        <span className="block font-display text-4xl lg:text-5xl font-black text-brand-light-blue">8</span>
+                        <span className="block font-display text-4xl lg:text-5xl font-black text-brand-light-blue">20+</span>
+                        <span className="block text-[10px] text-slate-450 font-bold uppercase tracking-widest">1-on-1 Mentorship</span>
+                        <span className="block text-[9px] text-slate-500 font-semibold leading-tight">Deep Personal Guidance</span>
+                      </div>
+                      <div className="space-y-1">
+                        <span className="block font-display text-4xl lg:text-5xl font-black text-brand-light-blue">Multiple</span>
                         <span className="block text-[10px] text-slate-450 font-bold uppercase tracking-widest">Off Home Monitoring</span>
-                        <span className="block text-[9px] text-slate-500 font-semibold leading-tight">Youth Successfully Transitioned</span>
-                      </div>
-                      <div className="space-y-1">
-                        <span className="block font-display text-4xl lg:text-5xl font-black text-brand-light-blue">1,500+</span>
-                        <span className="block text-[10px] text-slate-450 font-bold uppercase tracking-widest">Programming Hours</span>
-                        <span className="block text-[9px] text-slate-500 font-semibold leading-tight">Sports &amp; Mentorship Services</span>
+                        <span className="block text-[9px] text-slate-500 font-semibold leading-tight">Successfully Transitioned</span>
                       </div>
                       <div className="space-y-1">
                         <span className="block font-display text-4xl lg:text-5xl font-black text-brand-light-blue">100%</span>
@@ -314,7 +316,7 @@ export default function App() {
                               </div>
                             </div>
                             <p className="text-slate-300 font-light text-xs leading-relaxed italic">
-                              "I can’t thank Coach Kellz enough for the impact he has had on my son’s life. Since getting into boxing, I’ve watched my son grow into a more confident, determined, and happier version of himself, something I honestly hadn’t seen in a very long time."
+                              "I can’t thank Coach Kellz enough for the impact he has had on my son’s life. Since starting weekly mentorship, I’ve watched my son grow into a more confident, determined, and happier version of himself, taking real accountability for his decisions."
                             </p>
                           </div>
 
@@ -356,7 +358,7 @@ export default function App() {
                               </div>
                             </div>
                             <p className="text-slate-300 font-light text-xs leading-relaxed italic">
-                              "The best boxing project 201, it is amazing and fun to learn and do boxing. And I worked on my best and took time to complete the training of movement and power. I am happy to be in project 201 to do more boxing training!"
+                              "The best mentorship with Project 201, it is amazing and fun to learn and develop leadership skills. I worked on my goals and learned true structure and personal growth. I am happy to be guided by coaches who care about our future!"
                             </p>
                           </div>
 
@@ -440,7 +442,7 @@ export default function App() {
                               </div>
                             </div>
                             <p className="text-slate-300 font-light text-xs leading-relaxed italic">
-                              "10/10 I have a lot of fun at boxing"
+                              "10/10 I have a lot of fun, and the coaches really help me build discipline and stay focused on my education."
                             </p>
                           </div>
                         </div>
@@ -452,9 +454,9 @@ export default function App() {
                       <div className="absolute top-0 left-0 w-24 h-24 bg-brand-light-blue/5 rounded-full blur-xl" />
                       <Heart className="w-8 h-8 text-brand-light-blue mx-auto animate-pulse" />
                       <div className="space-y-2">
-                        <h4 className="font-display font-medium text-white text-lg uppercase tracking-wider">Support Our Mission</h4>
-                        <p className="text-slate-350 font-light text-xs max-w-md mx-auto leading-relaxed">
-                          Your sponsorships and direct donations buy safety gear, clean meals, and cover transport for our Keyport and Bayonne cohorts.
+                        <h4 className="font-display font-medium text-white text-lg uppercase tracking-wider">Help Us Build Stronger Youth, Stronger Families, and Stronger Communities</h4>
+                        <p className="text-slate-350 font-light text-xs max-w-xl mx-auto leading-relaxed">
+                          Your donations support direct 1-on-1 mentorship, leadership development, sports programming, educational opportunities, and positive role models for youth across New Jersey, helping them make positive life decisions.
                         </p>
                       </div>
                       <div className="pt-2">
@@ -539,6 +541,7 @@ export default function App() {
           {currentPage === 'donate' && (
             <DonatePage onDonate={(amt) => handleDonate(amt)} />
           )}
+          {currentPage === 'merch' && <MerchPage />}
           {currentPage === 'contact' && <ContactPage />}
         </motion.div>
       </AnimatePresence>
