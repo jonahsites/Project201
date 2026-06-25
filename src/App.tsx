@@ -34,7 +34,7 @@ import {
 } from 'lucide-react';
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'about' | 'programs' | 'hire' | 'youth-support' | 'partnerships' | 'sponsors' | 'events' | 'donate' | 'contact' | 'merch'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'about' | 'programs' | 'hire' | 'youth-support' | 'partnerships' | 'sponsors' | 'donate' | 'contact' | 'merch'>('home');
   const [showCheckout, setShowCheckout] = useState(false);
   const [selectedAmount, setSelectedAmount] = useState("50");
 
@@ -537,7 +537,6 @@ export default function App() {
           {currentPage === 'youth-support' && <YouthSupportPage />}
           {currentPage === 'partnerships' && <SchoolsPartnershipsPage />}
           {currentPage === 'sponsors' && <SponsorsPartnersPage />}
-          {currentPage === 'events' && <EventsPage />}
           {currentPage === 'donate' && (
             <DonatePage onDonate={(amt) => handleDonate(amt)} />
           )}

@@ -30,7 +30,7 @@ import {
 
 interface ProgramsPageProps {
   onDonate?: () => void;
-  onNavigate?: (page: 'home' | 'about' | 'programs' | 'hire' | 'youth-support' | 'partnerships' | 'sponsors' | 'events' | 'donate' | 'contact') => void;
+  onNavigate?: (page: 'home' | 'about' | 'programs' | 'hire' | 'youth-support' | 'partnerships' | 'sponsors' | 'donate' | 'contact') => void;
 }
 
 export default function ProgramsPage({ onDonate, onNavigate }: ProgramsPageProps) {
