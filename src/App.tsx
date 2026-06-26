@@ -33,10 +33,45 @@ import {
   Star
 } from 'lucide-react';
 
+const VALID_PAGES = ['home', 'about', 'programs', 'hire', 'youth-support', 'partnerships', 'sponsors', 'donate', 'contact', 'merch'] as const;
+type PageType = typeof VALID_PAGES[number];
+
+function getPageFromUrl(): PageType {
+  const path = window.location.pathname.replace(/^\/|\/$/g, '').toLowerCase();
+  if (path && VALID_PAGES.includes(path as any)) {
+    return path as PageType;
+  }
+  const hash = window.location.hash.replace(/^#\/?|\/$/g, '').toLowerCase();
+  if (hash && VALID_PAGES.includes(hash as any)) {
+    return hash as PageType;
+  }
+  return 'home';
+}
+
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'about' | 'programs' | 'hire' | 'youth-support' | 'partnerships' | 'sponsors' | 'donate' | 'contact' | 'merch'>('home');
+  const [currentPage, setCurrentPage] = useState<PageType>(() => getPageFromUrl());
   const [showCheckout, setShowCheckout] = useState(false);
   const [selectedAmount, setSelectedAmount] = useState("50");
+
+  // Sync state to URL pathname whenever currentPage updates
+  useEffect(() => {
+    const currentPath = window.location.pathname.replace(/^\/|\/$/g, '').toLowerCase();
+    const targetPath = currentPage === 'home' ? '' : currentPage;
+    
+    if (currentPath !== targetPath) {
+      const newUrl = currentPage === 'home' ? '/' : `/${currentPage}`;
+      window.history.pushState({ page: currentPage }, '', newUrl);
+    }
+  }, [currentPage]);
+
+  // Sync back from browser forward/back buttons
+  useEffect(() => {
+    const handlePopState = () => {
+      setCurrentPage(getPageFromUrl());
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   const handleDonate = (amount?: string) => {
     window.open("https://www.zeffy.com/en-US/donation-form/support-project--201", "_blank", "noopener,noreferrer");
