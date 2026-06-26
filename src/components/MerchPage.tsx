@@ -24,7 +24,7 @@ export default function MerchPage() {
       title: "Save Our Youth Design Mockup"
     },
     {
-      url: "https://scontent-bos5-1.xx.fbcdn.net/v/t1.15752-9/723790605_2212001719595420_3399882032422854968_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=103&ccb=1-7&_nc_sid=9f807c&_nc_ohc=HDutTQswFb0Q7kNvwHN7cJj&_nc_oc=Ado2acAwZ7-40q-Y7ZJiWZ2O9dEaI-tPtAfGIE4smRzC069oU8qg_IuJ5AZ5TlAIV1ZH76klQpj1fNIQx3282mn_&_nc_zt=23&_nc_ht=scontent-bos5-1.xx&_nc_ss=7b6a8&oh=03_Q7gFMrN7hGz1npbWFLCSGNvd_0b93sYj-TwLTx-AXFeXwkQ&oe=6A62B884",
+      url: "https://lh3.googleusercontent.com/d/1jR3qQnUZNKxFQYw2zmnzQKNDtTl1DDsR",
       title: "Left Chest Logo Design"
     }
   ];
