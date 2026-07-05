@@ -17,11 +17,23 @@ import {
   Info 
 } from 'lucide-react';
 
+import tshirtMockupImg from '../assets/images/save_our_youth_tshirt_1783268391106.jpg';
+import tshirtCloseUpImg from '../assets/images/save_our_youth_close_up_1783268404754.jpg';
+import displaySheetImg from '../assets/images/save_our_youth_full_display_sheet_1783268800620.jpg';
+
 export default function MerchPage() {
   const images = [
     {
-      url: "https://scontent-bos5-1.xx.fbcdn.net/v/t1.15752-9/729566832_2633036090465089_8940830409767576087_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=110&ccb=1-7&_nc_sid=9f807c&_nc_ohc=Xno8SjH0tPcQ7kNvwEyCHmg&_nc_oc=AdqSbG7WhxDukrrpdfePnAQLR1q7VaUiV7OzQV7uqL2gmGfi9OQfrjdZs_Sgupu4rnyG4MZ5J-gYEMUNCn6z-onC&_nc_zt=23&_nc_ht=scontent-bos5-1.xx&_nc_ss=7b6a8&oh=03_Q7cD5gEIxo_z2dTePMXQ0kdLMbK5Mp_2L4uv9JCAuNY3f3juBw&oe=6A629B5D",
-      title: "Save Our Youth Design Mockup"
+      url: displaySheetImg,
+      title: "Full Product Display"
+    },
+    {
+      url: tshirtMockupImg,
+      title: "Full T-Shirt Mockup"
+    },
+    {
+      url: tshirtCloseUpImg,
+      title: "T-Shirt Detail Photo"
     },
     {
       url: "https://lh3.googleusercontent.com/d/1jR3qQnUZNKxFQYw2zmnzQKNDtTl1DDsR",
@@ -84,7 +96,7 @@ export default function MerchPage() {
         size: selectedSize,
         quantity,
         deliveryType,
-        address: deliveryType === 'shipping' ? `${address}, ${city} ${zip}` : 'Local Pickup (Keyport/Bayonne)',
+        address: deliveryType === 'shipping' ? `${address}, ${city} ${zip}` : 'Hudson County Pickup (Bayonne/Jersey City Centers)',
         subtotal,
         donation: finalDonation,
         total,
@@ -144,7 +156,7 @@ export default function MerchPage() {
                   </div>
 
                   {/* Thumbnail Selector */}
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-3 gap-3">
                     {images.map((img, idx) => (
                       <button
                         key={idx}
@@ -159,10 +171,10 @@ export default function MerchPage() {
                           src={img.url} 
                           alt={img.title} 
                           referrerPolicy="no-referrer"
-                          className="h-20 object-contain rounded-lg"
+                          className="h-16 w-full object-contain rounded-lg"
                         />
                         <span className="text-[9px] font-bold text-slate-500 uppercase tracking-tight text-center font-display truncate w-full">
-                          {idx === 0 ? "Full Tee Mockup" : "Left Chest Logo"}
+                          {img.title}
                         </span>
                       </button>
                     ))}
@@ -401,8 +413,8 @@ export default function MerchPage() {
                                 : 'bg-white border-slate-150 text-slate-600 hover:border-slate-200'
                             }`}
                           >
-                            <span className="text-xs">Local Pickup</span>
-                            <span className="text-[9px] font-light opacity-80">(Bayonne or Keyport Centers - Free)</span>
+                            <span className="text-xs">Hudson County Pickup</span>
+                            <span className="text-[9px] font-light opacity-80">(Bayonne &amp; Jersey City Centers - Free)</span>
                           </button>
                           <button
                             type="button"
