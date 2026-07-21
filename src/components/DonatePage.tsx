@@ -68,6 +68,79 @@ export default function DonatePage({ onDonate }: DonatePageProps) {
               {/* Bento Grid layout */}
               <BentoPricing onSelect={onDonate} />
 
+              {/* Supporters & Community Partners Section */}
+              <div className="bg-white rounded-[2.5rem] p-8 md:p-10 border border-slate-105 shadow-sm space-y-6">
+                <div className="flex flex-col gap-1.5 text-left">
+                  <span className="text-brand-light-blue font-bold uppercase tracking-[0.25em] text-[10px] block font-display">
+                    Our Backers &amp; Allies
+                  </span>
+                  <h3 className="font-display text-2xl font-black uppercase text-slate-900 tracking-tight">
+                    Supporters &amp; Community Partners
+                  </h3>
+                  <p className="text-slate-650 font-light text-xs md:text-sm leading-relaxed">
+                    We are deeply grateful to the corporate foundations, local businesses, and anonymous patrons whose generous sponsorships empower our daily youth operations.
+                  </p>
+                </div>
+
+                <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+                  {/* Partner 1 */}
+                  <div className="bg-slate-50 border border-slate-100 p-5 rounded-2xl flex flex-col justify-between hover:border-brand-blue/10 transition-all">
+                    <div>
+                      <div className="flex items-center gap-1.5 mb-2.5">
+                        <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
+                        <span className="text-[9px] text-blue-600 font-bold uppercase tracking-wider font-display">Grant Ally</span>
+                      </div>
+                      <h4 className="font-display font-black text-slate-900 text-sm uppercase tracking-tight">
+                        New York Giants
+                      </h4>
+                      <p className="text-slate-500 font-light text-[11px] mt-1 leading-relaxed">
+                        NFL Foundation &amp; youth development grant support coordinates.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Partner 2 */}
+                  <div className="bg-slate-50 border border-slate-100 p-5 rounded-2xl flex flex-col justify-between hover:border-brand-blue/10 transition-all">
+                    <div>
+                      <div className="flex items-center gap-1.5 mb-2.5">
+                        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                        <span className="text-[9px] text-emerald-600 font-bold uppercase tracking-wider font-display">Local Sponsor</span>
+                      </div>
+                      <h4 className="font-display font-black text-slate-900 text-sm uppercase tracking-tight">
+                        Dawn’s Auto Body
+                      </h4>
+                      <p className="text-slate-500 font-light text-[11px] mt-1 leading-relaxed">
+                        Jersey City community youth sponsorships and local athletic support.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Partner 3: Anonymous Support option */}
+                  <div className="bg-slate-50 border border-slate-100 p-5 rounded-2xl flex flex-col justify-between hover:border-brand-blue/10 transition-all">
+                    <div>
+                      <div className="flex items-center gap-1.5 mb-2.5">
+                        <span className="w-2 h-2 rounded-full bg-slate-400" />
+                        <span className="text-[9px] text-slate-500 font-bold uppercase tracking-wider font-display">Patron Support</span>
+                      </div>
+                      <h4 className="font-display font-black text-slate-900 text-sm uppercase tracking-tight">
+                        Anonymous Donors
+                      </h4>
+                      <p className="text-slate-500 font-light text-[11px] mt-1 leading-relaxed">
+                        Honoring the parents, individuals, and families choosing to support privately.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Secure / Option description */}
+                <div className="bg-brand-blue/5 border border-brand-light-blue/20 p-4 rounded-xl flex items-start gap-3 text-slate-700">
+                  <ShieldCheck className="w-4 h-4 text-brand-light-blue shrink-0 mt-0.5" />
+                  <p className="text-[11px] font-light leading-relaxed">
+                    <strong>Would your organization like to support?</strong> You can choose to be recognized on our official donor board or opt to remain completely anonymous when processing your donation via our secure Zeffy platform.
+                  </p>
+                </div>
+              </div>
+
               {/* Direct message card */}
               <div className="bg-white rounded-[2.5rem] p-8 md:p-10 border border-slate-105 shadow-sm space-y-4">
                 <div className="flex items-center gap-3">

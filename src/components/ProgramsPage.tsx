@@ -30,7 +30,7 @@ import {
 
 interface ProgramsPageProps {
   onDonate?: () => void;
-  onNavigate?: (page: 'home' | 'about' | 'programs' | 'hire' | 'youth-support' | 'partnerships' | 'sponsors' | 'donate' | 'contact') => void;
+  onNavigate?: (page: 'home' | 'about' | 'programs' | 'hire' | 'youth-support' | 'partnerships' | 'sponsors' | 'donate' | 'contact' | 'merch') => void;
 }
 
 export default function ProgramsPage({ onDonate, onNavigate }: ProgramsPageProps) {
@@ -337,125 +337,162 @@ export default function ProgramsPage({ onDonate, onNavigate }: ProgramsPageProps
 
                   {prog.isMentorship && (
                     <div className="mt-8 space-y-8 text-left">
-                      {/* Current Programs & Registration */}
-                      <div className="space-y-4">
+                      {/* What's Happening at Project 201 */}
+                      <div className="space-y-6">
                         <div className="flex items-center gap-2">
                           <span className="h-0.5 w-8 bg-brand-light-blue" />
                           <h3 className="font-display text-xs font-black text-brand-light-blue uppercase tracking-[0.15em] select-none">
-                            Current Chapters &amp; Registration
+                            What&apos;s Happening at Project 201
                           </h3>
                         </div>
                         
-                        <div className="grid md:grid-cols-2 gap-5">
-                          {/* Bayonne Chapter */}
-                          <div className="bg-slate-900 border border-emerald-500/20 hover:border-emerald-500/40 rounded-[2rem] p-6 relative overflow-hidden transition-all duration-300 shadow-xl flex flex-col justify-between">
-                            <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/5 rounded-full blur-2xl pointer-events-none" />
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                          {/* Item 1: Current fundraising campaigns */}
+                          <div className="bg-slate-900 border border-brand-light-blue/10 hover:border-brand-light-blue/30 rounded-3xl p-6 relative overflow-hidden transition-all duration-300 shadow-xl flex flex-col justify-between">
+                            <div className="absolute top-0 right-0 w-20 h-20 bg-brand-light-blue/5 rounded-full blur-xl pointer-events-none" />
                             <div>
                               <div className="flex justify-between items-start mb-4">
-                                <span className="text-[9px] text-emerald-450 font-bold bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-full uppercase tracking-wider select-none">
-                                  ✅ Active Program
-                                </span>
-                                <span className="text-[9px] text-slate-400 font-mono tracking-widest uppercase">
-                                  Established 2021
+                                <span className="text-[9px] text-brand-light-blue font-bold bg-brand-light-blue/10 border border-brand-light-blue/20 px-2.5 py-1 rounded-full uppercase tracking-wider select-none">
+                                  ❤️ Active Campaign
                                 </span>
                               </div>
-                              
-                              <h4 className="font-display font-black text-white text-lg uppercase leading-tight tracking-wide">
-                                Bayonne Chapter
+                              <h4 className="font-display font-black text-white text-base uppercase tracking-wide">
+                                Fundraising Campaigns
                               </h4>
-                              <p className="text-slate-400 font-light text-xs mt-1.5 leading-relaxed">
-                                Our flagship mentorship circle. Teens gather weekly to build character, set physical routines, and discuss real life solutions in a high-accountability format. Partnered and hosted by San Vito&apos;s!
+                              <p className="text-slate-400 font-light text-xs mt-2 leading-relaxed">
+                                Sponsoring local athlete slots, fresh meals, and custom equipment. Your donations directly provide resources for local New Jersey teens.
                               </p>
-                              
-                              <div className="mt-5 space-y-2.5 text-slate-200 text-xs font-light bg-white/5 border border-white/5 p-4 rounded-xl font-sans">
-                                <div className="flex items-center gap-2.5">
-                                  <MapPin size={13} className="text-emerald-400 shrink-0" />
-                                  <span>Hosted at <strong>San Vito&apos;s Restaurant &amp; Pizzeria</strong></span>
-                                </div>
-                                <div className="flex items-center gap-2.5">
-                                  <Users size={13} className="text-emerald-400 shrink-0" />
-                                  <span>Target Cohort: <strong>Ages 12–18</strong></span>
-                                </div>
-                                <div className="flex items-center gap-2.5">
-                                  <Clock size={13} className="text-emerald-400 shrink-0" />
-                                  <span>Schedule: <strong>Saturdays @ 12:30 PM</strong></span>
-                                </div>
-                              </div>
                             </div>
-                            
-                            <div className="mt-6 grid grid-cols-2 gap-3">
-                              <button
-                                onClick={() => {
-                                  setSubmissionFeedback(null);
-                                  setShowBayonneRegisterForm(true);
-                                }}
-                                className="bg-emerald-600 hover:bg-emerald-505 text-white text-[10px] uppercase font-black font-display tracking-widest py-3 px-4 rounded-xl text-center transition-all cursor-pointer shadow-lg hover:shadow-emerald-600/10"
-                              >
-                                Register Now
-                              </button>
-                              <button
-                                onClick={() => setActiveFlyer('bayonne')}
-                                className="bg-white/5 border border-white/10 hover:bg-white/10 text-slate-250 hover:text-white text-[10px] uppercase font-black font-display tracking-widest py-3 px-4 rounded-xl text-center transition-all cursor-pointer select-none"
-                              >
-                                View Flyer
-                              </button>
-                            </div>
+                            <button
+                              onClick={() => onDonate?.()}
+                              className="mt-6 w-full bg-brand-light-blue hover:bg-white text-brand-blue text-[10px] uppercase font-black font-display tracking-widest py-3 rounded-xl text-center transition-all cursor-pointer"
+                            >
+                              Donate &amp; Support
+                            </button>
                           </div>
 
-                          {/* Keyport Chapter */}
-                          <div className="bg-slate-900 border border-brand-light-blue/20 hover:border-brand-light-blue/40 rounded-[2rem] p-6 relative overflow-hidden transition-all duration-300 shadow-xl flex flex-col justify-between">
-                            <div className="absolute top-0 right-0 w-24 h-24 bg-brand-light-blue/5 rounded-full blur-2xl pointer-events-none" />
+                          {/* Item 2: New partnerships & sponsors */}
+                          <div className="bg-slate-900 border border-brand-light-blue/10 hover:border-brand-light-blue/30 rounded-3xl p-6 relative overflow-hidden transition-all duration-300 shadow-xl flex flex-col justify-between">
+                            <div className="absolute top-0 right-0 w-20 h-20 bg-brand-light-blue/5 rounded-full blur-xl pointer-events-none" />
                             <div>
                               <div className="flex justify-between items-start mb-4">
-                                <span className="text-[9px] text-cyan-400 font-bold bg-cyan-400/10 border border-cyan-400/20 px-2.5 py-1 rounded-full uppercase tracking-wider select-none animate-pulse">
-                                  🌊 Launching July 2026
-                                </span>
-                                <span className="text-[9px] text-slate-400 font-mono tracking-widest uppercase">
-                                  Bayshore Initiative
+                                <span className="text-[9px] text-emerald-400 font-bold bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-full uppercase tracking-wider select-none">
+                                  🤝 Trust &amp; Alliances
                                 </span>
                               </div>
-                              
-                              <h4 className="font-display font-black text-white text-lg uppercase leading-tight tracking-wide">
-                                Keyport Chapter
+                              <h4 className="font-display font-black text-white text-base uppercase tracking-wide">
+                                Partnerships &amp; Sponsors
                               </h4>
-                              <p className="text-slate-400 font-light text-xs mt-1.5 leading-relaxed">
-                                Located on the scenic Raritan Bay. This circle introduces nature outings, maritime exploration, and fishing alongside mentorship, visual art expressions, and life-planning workshops.
+                              <p className="text-slate-400 font-light text-xs mt-2 leading-relaxed">
+                                We are proud to collaborate with prestigious organizations like the <strong>New York Giants</strong> and trusted local allies like <strong>Dawn&apos;s Auto Body</strong>.
                               </p>
-                              
-                              <div className="mt-5 space-y-2.5 text-slate-200 text-xs font-light bg-white/5 border border-white/5 p-4 rounded-xl font-sans">
-                                <div className="flex items-center gap-2.5">
-                                  <MapPin size={13} className="text-brand-light-blue shrink-0" />
-                                  <span>Waterfront Marina / Bayfront Outings</span>
-                                </div>
-                                <div className="flex items-center gap-2.5">
-                                  <Users size={13} className="text-brand-light-blue shrink-0" />
-                                  <span>Target Cohort: <strong>Ages 12–18</strong></span>
-                                </div>
-                                <div className="flex items-center gap-2.5">
-                                  <Clock size={13} className="text-brand-light-blue shrink-0" />
-                                  <span>Schedule: <strong>Saturdays @ 11:00 AM</strong></span>
-                                </div>
+                            </div>
+                            <button
+                              onClick={() => onNavigate?.('sponsors')}
+                              className="mt-6 w-full bg-white/5 border border-white/10 hover:bg-white/10 text-slate-200 text-[10px] uppercase font-black font-display tracking-widest py-3 rounded-xl text-center transition-all cursor-pointer"
+                            >
+                              Our Sponsors
+                            </button>
+                          </div>
+
+                          {/* Item 3: Youth-designed merchandise */}
+                          <div className="bg-slate-900 border border-brand-light-blue/10 hover:border-brand-light-blue/30 rounded-3xl p-6 relative overflow-hidden transition-all duration-300 shadow-xl flex flex-col justify-between">
+                            <div className="absolute top-0 right-0 w-20 h-20 bg-brand-light-blue/5 rounded-full blur-xl pointer-events-none" />
+                            <div>
+                              <div className="flex justify-between items-start mb-4">
+                                <span className="text-[9px] text-cyan-400 font-bold bg-cyan-400/10 border border-cyan-400/20 px-2.5 py-1 rounded-full uppercase tracking-wider select-none">
+                                  👕 Youth-Created
+                                </span>
                               </div>
+                              <h4 className="font-display font-black text-white text-base uppercase tracking-wide">
+                                Youth-Designed Merch
+                              </h4>
+                              <p className="text-slate-400 font-light text-xs mt-2 leading-relaxed">
+                                Support our creative youth! Get the newly released, student-designed #SAVE OUR YOUTH premium graphic tees and left-chest logo shirts.
+                              </p>
                             </div>
-                            
-                            <div className="mt-6 grid grid-cols-2 gap-3">
-                              <button
-                                onClick={() => {
-                                  setSubmissionFeedback(null);
-                                  setInterestChapter('keyport');
-                                  setShowInterestForm(true);
-                                }}
-                                className="bg-brand-light-blue hover:bg-white text-brand-blue text-[10px] uppercase font-black font-display tracking-widest py-3 px-4 rounded-xl text-center transition-all cursor-pointer shadow-lg hover:shadow-cyan-400/10"
-                              >
-                                Join Interest List
-                              </button>
-                              <button
-                                onClick={() => setActiveFlyer('keyport')}
-                                className="bg-white/5 border border-white/10 hover:bg-white/10 text-slate-250 hover:text-white text-[10px] uppercase font-black font-display tracking-widest py-3 px-4 rounded-xl text-center transition-all cursor-pointer select-none"
-                              >
-                                View Flyer
-                              </button>
+                            <button
+                              onClick={() => onNavigate?.('merch')}
+                              className="mt-6 w-full bg-brand-light-blue hover:bg-white text-brand-blue text-[10px] uppercase font-black font-display tracking-widest py-3 rounded-xl text-center transition-all cursor-pointer"
+                            >
+                              Shop Merchandise
+                            </button>
+                          </div>
+
+                          {/* Item 4: Upcoming mentorship circles */}
+                          <div className="bg-slate-900 border border-brand-light-blue/10 hover:border-brand-light-blue/30 rounded-3xl p-6 relative overflow-hidden transition-all duration-300 shadow-xl flex flex-col justify-between">
+                            <div className="absolute top-0 right-0 w-20 h-20 bg-brand-light-blue/5 rounded-full blur-xl pointer-events-none" />
+                            <div>
+                              <div className="flex justify-between items-start mb-4">
+                                <span className="text-[9px] text-amber-400 font-bold bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded-full uppercase tracking-wider select-none">
+                                  📅 Future Cohorts
+                                </span>
+                              </div>
+                              <h4 className="font-display font-black text-white text-base uppercase tracking-wide">
+                                Upcoming Circles
+                              </h4>
+                              <p className="text-slate-400 font-light text-xs mt-2 leading-relaxed">
+                                While our active circles are pausing registrations, we are actively structuring upcoming cohorts for an extensive fall launch.
+                              </p>
                             </div>
+                            <button
+                              onClick={() => {
+                                setSubmissionFeedback(null);
+                                setInterestChapter(null);
+                                setShowInterestForm(true);
+                              }}
+                              className="mt-6 w-full bg-white/5 border border-white/10 hover:bg-white/10 text-slate-200 text-[10px] uppercase font-black font-display tracking-widest py-3 rounded-xl text-center transition-all cursor-pointer"
+                            >
+                              Join Interest List
+                            </button>
+                          </div>
+
+                          {/* Item 5: Volunteer opportunities */}
+                          <div className="bg-slate-900 border border-brand-light-blue/10 hover:border-brand-light-blue/30 rounded-3xl p-6 relative overflow-hidden transition-all duration-300 shadow-xl flex flex-col justify-between">
+                            <div className="absolute top-0 right-0 w-20 h-20 bg-brand-light-blue/5 rounded-full blur-xl pointer-events-none" />
+                            <div>
+                              <div className="flex justify-between items-start mb-4">
+                                <span className="text-[9px] text-violet-400 font-bold bg-violet-500/10 border border-violet-500/20 px-2.5 py-1 rounded-full uppercase tracking-wider select-none">
+                                  🌟 Join Our Team
+                                </span>
+                              </div>
+                              <h4 className="font-display font-black text-white text-base uppercase tracking-wide">
+                                Volunteer Opportunities
+                              </h4>
+                              <p className="text-slate-400 font-light text-xs mt-2 leading-relaxed">
+                                Become a screened and certified mentor, coach, or coordinator. Donate your time to guide, counsel, and anchor local students.
+                              </p>
+                            </div>
+                            <button
+                              onClick={() => onNavigate?.('contact')}
+                              className="mt-6 w-full bg-brand-light-blue hover:bg-white text-brand-blue text-[10px] uppercase font-black font-display tracking-widest py-3 rounded-xl text-center transition-all cursor-pointer"
+                            >
+                              Apply to Volunteer
+                            </button>
+                          </div>
+
+                          {/* Item 6: Ways to support Project 201 */}
+                          <div className="bg-slate-900 border border-brand-light-blue/10 hover:border-brand-light-blue/30 rounded-3xl p-6 relative overflow-hidden transition-all duration-300 shadow-xl flex flex-col justify-between">
+                            <div className="absolute top-0 right-0 w-20 h-20 bg-brand-light-blue/5 rounded-full blur-xl pointer-events-none" />
+                            <div>
+                              <div className="flex justify-between items-start mb-4">
+                                <span className="text-[9px] text-pink-400 font-bold bg-pink-500/10 border border-pink-500/20 px-2.5 py-1 rounded-full uppercase tracking-wider select-none">
+                                  🎁 Other Ways to Give
+                                </span>
+                              </div>
+                              <h4 className="font-display font-black text-white text-base uppercase tracking-wide">
+                                Ways to Support
+                              </h4>
+                              <p className="text-slate-400 font-light text-xs mt-2 leading-relaxed">
+                                From corporate matching, recurring sponsorships, and local service alignments, to donating program supplies or meals.
+                              </p>
+                            </div>
+                            <button
+                              onClick={() => onNavigate?.('contact')}
+                              className="mt-6 w-full bg-white/5 border border-white/10 hover:bg-white/10 text-slate-200 text-[10px] uppercase font-black font-display tracking-widest py-3 rounded-xl text-center transition-all cursor-pointer"
+                            >
+                              Inquire About Giving
+                            </button>
                           </div>
                         </div>
                       </div>
