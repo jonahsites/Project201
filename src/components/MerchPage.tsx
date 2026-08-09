@@ -20,9 +20,14 @@ import {
 import tshirtMockupImg from '../assets/images/save_our_youth_tshirt_1783268391106.jpg';
 import tshirtCloseUpImg from '../assets/images/save_our_youth_close_up_1783268404754.jpg';
 import displaySheetImg from '../assets/images/save_our_youth_full_display_sheet_1783268800620.jpg';
+import project201973Img from '../assets/images/project201_973_exact_tshirt_1786292209922.jpg';
 
 export default function MerchPage() {
   const images = [
+    {
+      url: project201973Img,
+      title: "PROJECT 201 x 973 Tee"
+    },
     {
       url: displaySheetImg,
       title: "Full Product Display"
@@ -42,6 +47,7 @@ export default function MerchPage() {
   ];
 
   const [activeImageIdx, setActiveImageIdx] = useState(0);
+  const [selectedDesign, setSelectedDesign] = useState<'973' | 'soy'>('973');
   const [selectedSize, setSelectedSize] = useState('L');
   const [quantity, setQuantity] = useState(1);
   const [additionalDonation, setAdditionalDonation] = useState(10);
@@ -93,6 +99,7 @@ export default function MerchPage() {
         name: `${firstName} ${lastName}`,
         email,
         phone,
+        design: selectedDesign === '973' ? 'PROJECT 201 x 973 Edition' : 'Save Our Youth Edition',
         size: selectedSize,
         quantity,
         deliveryType,
@@ -228,6 +235,64 @@ export default function MerchPage() {
 
                   {/* Selection & Checkout Form */}
                   <form onSubmit={handlePreorderSubmit} className="space-y-8">
+
+                    {/* Design Style Selector */}
+                    <div className="space-y-2.5">
+                      <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 font-display">
+                        Select Print Design:
+                      </label>
+                      <div className="grid sm:grid-cols-2 gap-3">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setSelectedDesign('973');
+                            setActiveImageIdx(0);
+                          }}
+                          className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer flex items-center justify-between ${
+                            selectedDesign === '973'
+                              ? 'bg-brand-blue/5 border-brand-blue text-brand-blue shadow-sm'
+                              : 'bg-white border-slate-150 text-slate-700 hover:border-slate-300'
+                          }`}
+                        >
+                          <div>
+                            <span className="block font-display font-black text-xs uppercase tracking-tight">
+                              PROJECT 201 x 973
+                            </span>
+                            <span className="text-[10px] font-light text-slate-500">
+                              Athletic Varsity Chest Logo
+                            </span>
+                          </div>
+                          {selectedDesign === '973' && (
+                            <CheckCircle className="w-4 h-4 text-brand-blue shrink-0" />
+                          )}
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setSelectedDesign('soy');
+                            setActiveImageIdx(1);
+                          }}
+                          className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer flex items-center justify-between ${
+                            selectedDesign === 'soy'
+                              ? 'bg-brand-blue/5 border-brand-blue text-brand-blue shadow-sm'
+                              : 'bg-white border-slate-150 text-slate-700 hover:border-slate-300'
+                          }`}
+                        >
+                          <div>
+                            <span className="block font-display font-black text-xs uppercase tracking-tight">
+                              #SAVE OUR YOUTH
+                            </span>
+                            <span className="text-[10px] font-light text-slate-500">
+                              Brushstroke Flag Design
+                            </span>
+                          </div>
+                          {selectedDesign === 'soy' && (
+                            <CheckCircle className="w-4 h-4 text-brand-blue shrink-0" />
+                          )}
+                        </button>
+                      </div>
+                    </div>
                     
                     {/* Size & Quantity Selection */}
                     <div className="grid md:grid-cols-2 gap-6">
@@ -554,6 +619,9 @@ export default function MerchPage() {
 
                     <span>Email:</span>
                     <span className="text-slate-800 text-right font-medium">{orderSummary.email}</span>
+
+                    <span>Selected Design:</span>
+                    <span className="text-slate-800 text-right font-bold">{orderSummary.design || 'PROJECT 201 x 973 Edition'}</span>
 
                     <span>Tee Size:</span>
                     <span className="text-slate-800 text-right font-bold">{orderSummary.size} (Qty: {orderSummary.quantity})</span>
