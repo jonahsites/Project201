@@ -1,11 +1,11 @@
-export const TARGET_EMAIL = 'jadovdav@icloud.com';
+export const TARGET_EMAIL = 'info@project201.org';
 
 interface FormPayload {
   [key: string]: any;
 }
 
 /**
- * Sends a form submission directly to jadovdav@icloud.com via AJAX formsubmit endpoint
+ * Sends a form submission directly to info@project201.org via AJAX formsubmit endpoint
  * and prepares a mailto fallback string.
  */
 export async function sendFormToEmail(formType: string, payload: FormPayload): Promise<{ success: boolean; mailtoUri: string }> {
