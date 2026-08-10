@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { sendFormToEmail, TARGET_EMAIL, openMailClient } from '../lib/emailService';
 import { 
   Building2, 
   Award, 
@@ -30,6 +31,7 @@ export default function SponsorsPartnersPage() {
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [mailtoUri, setMailtoUri] = useState('');
 
   interface SponsorItem {
     name: string;
@@ -109,13 +111,13 @@ export default function SponsorsPartnersPage() {
     }
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
-      setIsSubmitted(true);
-    }, 1200);
+    const result = await sendFormToEmail('Sponsorship & Business Partnership Proposal', formData);
+    setMailtoUri(result.mailtoUri);
+    setSubmitting(false);
+    setIsSubmitted(true);
   };
 
   return (
@@ -397,14 +399,33 @@ export default function SponsorsPartnersPage() {
                         />
                       </div>
 
-                      <button
-                        type="submit"
-                        disabled={submitting}
-                        className="w-full py-4 rounded-2xl bg-brand-blue hover:bg-brand-blue/95 text-white font-bold text-sm tracking-widest uppercase transition-all shadow-xl shadow-brand-blue/20 flex items-center justify-center gap-2"
-                      >
-                        {submitting ? 'Submitting...' : 'Send Sponsorship Proposal'}
-                        <ArrowRight className="w-4 h-4 text-brand-light-blue" />
-                      </button>
+                      <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setFormData({
+                              businessName: 'TEST TRIAL INC',
+                              contactName: 'TEST TRIAL',
+                              email: 'test@example.com',
+                              phone: '(201) 555-0199',
+                              city: '123 Main Ave, Jersey City, NJ',
+                              sponsorshipLevel: 'Corporate Sponsor',
+                              message: 'Test sponsorship proposal submission for Project 201.'
+                            });
+                          }}
+                          className="py-3 px-4 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-xs tracking-wider uppercase transition-all flex items-center justify-center gap-1.5 shrink-0"
+                        >
+                          Auto-Fill Test Data
+                        </button>
+                        <button
+                          type="submit"
+                          disabled={submitting}
+                          className="flex-1 py-4 rounded-2xl bg-brand-blue hover:bg-brand-blue/95 text-white font-bold text-sm tracking-widest uppercase transition-all shadow-xl shadow-brand-blue/20 flex items-center justify-center gap-2"
+                        >
+                          {submitting ? 'Submitting...' : 'Send Sponsorship Proposal'}
+                          <ArrowRight className="w-4 h-4 text-brand-light-blue" />
+                        </button>
+                      </div>
                     </motion.form>
                   ) : (
                     <motion.div 
@@ -418,29 +439,41 @@ export default function SponsorsPartnersPage() {
                       </div>
                       <div className="space-y-2">
                         <h4 className="font-display font-bold text-slate-900 text-lg uppercase tracking-tight">
-                          Proposal Received
+                          Proposal Dispatched to {TARGET_EMAIL}
                         </h4>
                         <p className="text-slate-500 font-light text-xs leading-relaxed max-w-sm mx-auto">
-                          Thank you for your willingness to sponsor of Project 201! Our team will verify and connect with **{formData.contactName}** via **{formData.email}** to configure documentation and branding display placements.
+                          Thank you for your interest in sponsoring Project 201! Your proposal has been sent to <strong>{TARGET_EMAIL}</strong>. Our team will verify details and reach out to <strong>{formData.contactName}</strong> at <strong>{formData.email}</strong>.
                         </p>
                       </div>
-                      <button 
-                        onClick={() => {
-                          setIsSubmitted(false);
-                          setFormData({
-                            businessName: '',
-                            contactName: '',
-                            email: '',
-                            phone: '',
-                            city: '',
-                            sponsorshipLevel: 'Community Partner',
-                            message: ''
-                          });
-                        }} 
-                        className="text-[10px] font-bold text-brand-blue uppercase tracking-widest border border-slate-200 px-6 py-2.5 rounded-xl hover:bg-slate-50 transition-colors"
-                      >
-                        Submit another proposal
-                      </button>
+
+                      <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+                        {mailtoUri && (
+                          <button
+                            onClick={() => openMailClient(mailtoUri)}
+                            className="text-xs font-bold bg-brand-blue text-white uppercase tracking-wider px-5 py-3 rounded-xl hover:bg-brand-blue/90 transition-colors shadow-sm flex items-center justify-center gap-2"
+                          >
+                            <Mail className="w-4 h-4 text-brand-light-blue" />
+                            Open Email Copy ({TARGET_EMAIL})
+                          </button>
+                        )}
+                        <button 
+                          onClick={() => {
+                            setIsSubmitted(false);
+                            setFormData({
+                              businessName: '',
+                              contactName: '',
+                              email: '',
+                              phone: '',
+                              city: '',
+                              sponsorshipLevel: 'Community Partner',
+                              message: ''
+                            });
+                          }} 
+                          className="text-xs font-bold text-slate-600 uppercase tracking-wider border border-slate-200 px-5 py-3 rounded-xl hover:bg-slate-50 transition-colors"
+                        >
+                          Submit Another Proposal
+                        </button>
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>

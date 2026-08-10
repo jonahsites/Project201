@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Check, Heart, Shield, Lock, CreditCard, User, Mail, Gift, ArrowRight } from 'lucide-react';
 import { Button } from './ui/button';
+import { sendFormToEmail, TARGET_EMAIL, openMailClient } from '../lib/emailService';
 
 interface DonationCheckoutProps {
   isOpen: boolean;
@@ -16,6 +17,7 @@ export const DonationCheckout = ({ isOpen, onClose, initialAmount = "25" }: Dona
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [mailtoUri, setMailtoUri] = useState("");
 
   const steps = [
     { id: 1, title: 'Amount', icon: Gift },
@@ -26,10 +28,16 @@ export const DonationCheckout = ({ isOpen, onClose, initialAmount = "25" }: Dona
   const handleNext = () => setStep(s => s + 1);
   const handleBack = () => setStep(s => s - 1);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const result = await sendFormToEmail('Donation Pledge Notification', {
+      amount: `$${amount}`,
+      donorName: isAnonymous ? 'Anonymous Supporter' : name,
+      email: isAnonymous ? 'Hidden (Anonymous)' : email,
+      isAnonymous
+    });
+    setMailtoUri(result.mailtoUri);
     setIsSubmitted(true);
-    // User will handle real submission logic
   };
 
   if (!isOpen) return null;
@@ -126,6 +134,19 @@ export const DonationCheckout = ({ isOpen, onClose, initialAmount = "25" }: Dona
                     exit={{ opacity: 0, x: -20 }}
                     className="space-y-6"
                   >
+                    <div className="flex justify-between items-center border-b border-slate-100 pb-2">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Donor Information</span>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setName('TEST TRIAL');
+                          setEmail('test@example.com');
+                        }}
+                        className="text-[10px] font-bold text-brand-blue bg-slate-100 hover:bg-slate-200 px-3 py-1 rounded-lg uppercase tracking-wider"
+                      >
+                        Auto-Fill Test Data
+                      </button>
+                    </div>
                     <div className="space-y-4">
                       <div>
                         <label className="block text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">Display Name</label>

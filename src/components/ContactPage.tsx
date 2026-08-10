@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { sendFormToEmail, TARGET_EMAIL, openMailClient } from '../lib/emailService';
 import { 
   Phone, 
   Mail, 
@@ -25,14 +26,15 @@ export default function ContactPage() {
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [mailtoUri, setMailtoUri] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
-      setIsSubmitted(true);
-    }, 1200);
+    const result = await sendFormToEmail('General Contact Inquiry', formData);
+    setMailtoUri(result.mailtoUri);
+    setSubmitting(false);
+    setIsSubmitted(true);
   };
 
   return (
@@ -239,14 +241,31 @@ export default function ContactPage() {
                         />
                       </div>
 
-                      <button
-                        type="submit"
-                        disabled={submitting}
-                        className="w-full py-4 rounded-2xl bg-brand-blue hover:bg-brand-blue/95 text-white font-bold text-sm tracking-widest uppercase transition-all shadow-xl shadow-brand-blue/20 flex items-center justify-center gap-2"
-                      >
-                        {submitting ? 'Sending Request...' : 'Send Message'}
-                        <Send className="w-4 h-4 text-brand-light-blue" />
-                      </button>
+                      <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setFormData({
+                              name: 'TEST TRIAL',
+                              email: 'test@example.com',
+                              phone: '(201) 555-0199',
+                              subject: 'General Question',
+                              message: '123 Main Ave test message submission for Project 201.'
+                            });
+                          }}
+                          className="py-3 px-4 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-xs tracking-wider uppercase transition-all flex items-center justify-center gap-1.5 shrink-0"
+                        >
+                          Auto-Fill Test Data
+                        </button>
+                        <button
+                          type="submit"
+                          disabled={submitting}
+                          className="flex-1 py-4 rounded-2xl bg-brand-blue hover:bg-brand-blue/95 text-white font-bold text-sm tracking-widest uppercase transition-all shadow-xl shadow-brand-blue/20 flex items-center justify-center gap-2"
+                        >
+                          {submitting ? 'Sending Request...' : 'Send Message'}
+                          <Send className="w-4 h-4 text-brand-light-blue" />
+                        </button>
+                      </div>
                     </motion.form>
                   ) : (
                     <motion.div 
@@ -260,27 +279,39 @@ export default function ContactPage() {
                       </div>
                       <div className="space-y-2">
                         <h4 className="font-display font-bold text-slate-900 text-lg uppercase tracking-tight">
-                          Message Dispatched
+                          Message Dispatched to {TARGET_EMAIL}
                         </h4>
                         <p className="text-slate-500 font-light text-xs leading-relaxed max-w-sm mx-auto">
-                          Thank you for reaching out of Project 201. Your message has been sent successfully. Our support office will respond to **{formData.email}** within 24–48 hours.
+                          Thank you for reaching out to Project 201. Your message has been sent directly to <strong>{TARGET_EMAIL}</strong>. Our support team will reply to <strong>{formData.email}</strong> shortly.
                         </p>
                       </div>
-                      <button 
-                        onClick={() => {
-                          setIsSubmitted(false);
-                          setFormData({
-                            name: '',
-                            email: '',
-                            phone: '',
-                            subject: 'General Question',
-                            message: ''
-                          });
-                        }} 
-                        className="text-[10px] font-bold text-brand-blue uppercase tracking-widest border border-slate-200 px-6 py-2.5 rounded-xl hover:bg-slate-50 transition-colors"
-                      >
-                        Send another message
-                      </button>
+                      
+                      <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+                        {mailtoUri && (
+                          <button
+                            onClick={() => openMailClient(mailtoUri)}
+                            className="text-xs font-bold bg-brand-blue text-white uppercase tracking-wider px-5 py-3 rounded-xl hover:bg-brand-blue/90 transition-colors shadow-sm flex items-center justify-center gap-2"
+                          >
+                            <Mail className="w-4 h-4 text-brand-light-blue" />
+                            Open Email Copy ({TARGET_EMAIL})
+                          </button>
+                        )}
+                        <button 
+                          onClick={() => {
+                            setIsSubmitted(false);
+                            setFormData({
+                              name: '',
+                              email: '',
+                              phone: '',
+                              subject: 'General Question',
+                              message: ''
+                            });
+                          }} 
+                          className="text-xs font-bold text-slate-600 uppercase tracking-wider border border-slate-200 px-5 py-3 rounded-xl hover:bg-slate-50 transition-colors"
+                        >
+                          Send Another Message
+                        </button>
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>

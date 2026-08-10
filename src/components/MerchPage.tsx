@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { sendFormToEmail, TARGET_EMAIL, openMailClient } from '../lib/emailService';
 import { 
   ShoppingBag, 
   Sparkles, 
@@ -89,30 +90,35 @@ export default function MerchPage() {
   const finalDonation = additionalDonation;
   const total = subtotal + finalDonation;
 
-  const handlePreorderSubmit = (e: React.FormEvent) => {
+  const [orderMailtoUri, setOrderMailtoUri] = useState('');
+
+  const handlePreorderSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsPreordering(true);
     
-    // Simulate API registration of pre-order
-    setTimeout(() => {
-      setOrderSummary({
-        name: `${firstName} ${lastName}`,
-        email,
-        phone,
-        design: selectedDesign === '973' ? 'PROJECT 201 x 973 Edition' : 'Save Our Youth Edition',
-        size: selectedSize,
-        quantity,
-        deliveryType,
-        address: deliveryType === 'shipping' ? `${address}, ${city} ${zip}` : 'Hudson County Pickup (Bayonne/Jersey City Centers)',
-        subtotal,
-        donation: finalDonation,
-        total,
-        preorderId: "SOY-" + Math.floor(100000 + Math.random() * 900000)
-      });
-      setIsPreordering(false);
-      setIsSuccess(true);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 1200);
+    const summaryData = {
+      name: `${firstName} ${lastName}`,
+      email,
+      phone,
+      design: selectedDesign === '973' ? 'PROJECT 201 x 973 Edition' : 'Save Our Youth Edition',
+      size: selectedSize,
+      quantity,
+      deliveryType,
+      address: deliveryType === 'shipping' ? `${address}, ${city} ${zip}` : 'Hudson County Pickup (Bayonne/Jersey City Centers)',
+      subtotal: `$${subtotal.toFixed(2)}`,
+      donation: `$${finalDonation.toFixed(2)}`,
+      total: `$${total.toFixed(2)}`,
+      preorderId: "SOY-" + Math.floor(100000 + Math.random() * 900000)
+    };
+
+    setOrderSummary(summaryData);
+
+    const result = await sendFormToEmail('Campaign Merchandise Pre-Order', summaryData);
+    setOrderMailtoUri(result.mailtoUri);
+
+    setIsPreordering(false);
+    setIsSuccess(true);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -566,20 +572,39 @@ export default function MerchPage() {
                     </div>
 
                     {/* Pre-order trigger button */}
-                    <button
-                      type="submit"
-                      disabled={isPreordering}
-                      className="w-full py-4 rounded-xl bg-brand-blue hover:bg-brand-blue/95 text-white font-bold text-xs tracking-widest uppercase transition-all shadow-lg shadow-brand-blue/15 flex items-center justify-center gap-2 cursor-pointer hover:scale-[1.01] active:scale-[0.99] disabled:opacity-55"
-                    >
-                      {isPreordering ? (
-                        <>Processing Pre-Order...</>
-                      ) : (
-                        <>
-                          <ShoppingBag size={14} />
-                          PRE-ORDER NOW
-                        </>
-                      )}
-                    </button>
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setFirstName('TEST');
+                          setLastName('TRIAL');
+                          setEmail('test@example.com');
+                          setPhone('(201) 555-0199');
+                          setAddress('123 Main Ave');
+                          setCity('Bayonne');
+                          setZip('07002');
+                          setSelectedSize('L');
+                          setQuantity(1);
+                        }}
+                        className="py-3 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-xs tracking-wider uppercase transition-all flex items-center justify-center gap-1.5 shrink-0"
+                      >
+                        Auto-Fill Test Data
+                      </button>
+                      <button
+                        type="submit"
+                        disabled={isPreordering}
+                        className="flex-1 py-4 rounded-xl bg-brand-blue hover:bg-brand-blue/95 text-white font-bold text-xs tracking-widest uppercase transition-all shadow-lg shadow-brand-blue/15 flex items-center justify-center gap-2 cursor-pointer hover:scale-[1.01] active:scale-[0.99] disabled:opacity-55"
+                      >
+                        {isPreordering ? (
+                          <>Processing Pre-Order...</>
+                        ) : (
+                          <>
+                            <ShoppingBag size={14} />
+                            PRE-ORDER NOW
+                          </>
+                        )}
+                      </button>
+                    </div>
 
                   </form>
                 </div>
@@ -637,18 +662,44 @@ export default function MerchPage() {
                     )}
 
                     <span className="pt-2 border-t border-dashed border-slate-200">Pre-Order Subtotal:</span>
-                    <span className="text-slate-850 text-right font-medium pt-2 border-t border-dashed border-slate-200">${orderSummary.subtotal.toFixed(2)}</span>
+                    <span className="text-slate-850 text-right font-medium pt-2 border-t border-dashed border-slate-200">
+                      {typeof orderSummary.subtotal === 'number' ? `$${orderSummary.subtotal.toFixed(2)}` : orderSummary.subtotal}
+                    </span>
 
-                    {orderSummary.donation > 0 && (
+                    {orderSummary.donation && (
                       <>
                         <span className="text-emerald-600">Added Supporter Donation:</span>
-                        <span className="text-emerald-600 text-right font-medium">+${orderSummary.donation.toFixed(2)}</span>
+                        <span className="text-emerald-600 text-right font-medium">
+                          {typeof orderSummary.donation === 'number' ? `+$${orderSummary.donation.toFixed(2)}` : orderSummary.donation}
+                        </span>
                       </>
                     )}
 
                     <span className="pt-2 border-t border-slate-300 text-sm font-bold text-slate-900">Total Charged:</span>
-                    <span className="text-sm font-black text-brand-blue text-right pt-2 border-t border-slate-300">${orderSummary.total.toFixed(2)}</span>
+                    <span className="text-sm font-black text-brand-blue text-right pt-2 border-t border-slate-300">
+                      {typeof orderSummary.total === 'number' ? `$${orderSummary.total.toFixed(2)}` : orderSummary.total}
+                    </span>
                   </div>
+                </div>
+
+                {/* Email Confirmation Notice */}
+                <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 text-left flex flex-col sm:flex-row items-center justify-between gap-3">
+                  <div>
+                    <span className="text-[10px] font-bold text-emerald-700 uppercase tracking-wider block font-display">
+                      Direct Email Notification
+                    </span>
+                    <p className="text-slate-600 text-xs mt-0.5 leading-relaxed">
+                      This pre-order request has been automatically routed to <strong>{TARGET_EMAIL}</strong>.
+                    </p>
+                  </div>
+                  {orderMailtoUri && (
+                    <button
+                      onClick={() => openMailClient(orderMailtoUri)}
+                      className="shrink-0 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-xl transition-all shadow-sm"
+                    >
+                      Open Email App ({TARGET_EMAIL})
+                    </button>
+                  )}
                 </div>
 
                 {/* Payment Steps Section */}

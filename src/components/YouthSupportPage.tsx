@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { sendFormToEmail, TARGET_EMAIL, openMailClient } from '../lib/emailService';
 import { 
   Users, 
   Sparkles, 
@@ -14,7 +15,8 @@ import {
   School,
   Accessibility,
   Heart,
-  FileText
+  FileText,
+  Mail
 } from 'lucide-react';
 
 export default function YouthSupportPage() {
@@ -32,6 +34,7 @@ export default function YouthSupportPage() {
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [mailtoUri, setMailtoUri] = useState('');
 
   const concernsList = [
     "Youth struggling with motivation",
@@ -85,13 +88,13 @@ export default function YouthSupportPage() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
-      setIsSubmitted(true);
-    }, 1200);
+    const result = await sendFormToEmail('Youth & Parent Support Intake Request', formData);
+    setMailtoUri(result.mailtoUri);
+    setSubmitting(false);
+    setIsSubmitted(true);
   };
 
   return (
@@ -356,14 +359,35 @@ export default function YouthSupportPage() {
                         />
                       </div>
 
-                      <button
-                        type="submit"
-                        disabled={submitting}
-                        className="w-full py-4 rounded-2xl bg-brand-blue hover:bg-brand-blue/95 text-white font-bold text-sm tracking-widest uppercase transition-all shadow-xl shadow-brand-blue/20 flex items-center justify-center gap-2"
-                      >
-                        {submitting ? 'Submitting...' : 'Submit Support Request'}
-                        <Send className="w-4 h-4 text-brand-light-blue" />
-                      </button>
+                      <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setFormData({
+                              parentName: 'TEST TRIAL',
+                              childAge: '14',
+                              city: '123 Main Ave, Jersey City, NJ',
+                              mainConcerns: ['Youth struggling with motivation', 'School behavioral or recess support'],
+                              customConcern: 'Test youth support intake request for Project 201.',
+                              interestedProgram: 'All-Around Mentorship & Athletics',
+                              preferredContact: 'Phone',
+                              contactValue: '(201) 555-0199 | test@example.com',
+                              availability: 'Weekdays - Evenings'
+                            });
+                          }}
+                          className="py-3 px-4 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-xs tracking-wider uppercase transition-all flex items-center justify-center gap-1.5 shrink-0"
+                        >
+                          Auto-Fill Test Data
+                        </button>
+                        <button
+                          type="submit"
+                          disabled={submitting}
+                          className="flex-1 py-4 rounded-2xl bg-brand-blue hover:bg-brand-blue/95 text-white font-bold text-sm tracking-widest uppercase transition-all shadow-xl shadow-brand-blue/20 flex items-center justify-center gap-2"
+                        >
+                          {submitting ? 'Submitting...' : 'Submit Support Request'}
+                          <Send className="w-4 h-4 text-brand-light-blue" />
+                        </button>
+                      </div>
                     </motion.form>
                   ) : (
                     <motion.div 
@@ -377,31 +401,43 @@ export default function YouthSupportPage() {
                       </div>
                       <div className="space-y-2">
                         <h4 className="font-display font-bold text-slate-900 text-lg uppercase tracking-tight">
-                          Intake Submitted
+                          Intake Dispatched to {TARGET_EMAIL}
                         </h4>
                         <p className="text-slate-500 font-light text-xs leading-relaxed max-w-sm mx-auto">
-                          Thank you for trusting Project 201. Your request has been securely processed. Our Youth Development Specialist (Shawn Kelly) will contact you via **{formData.preferredContact}** during the preferred slot **{formData.availability}**.
+                          Thank you for trusting Project 201. Your support intake request has been sent to <strong>{TARGET_EMAIL}</strong>. Our Youth Development Specialist will reach out via <strong>{formData.contactValue || formData.preferredContact}</strong>.
                         </p>
                       </div>
-                      <button 
-                        onClick={() => {
-                          setIsSubmitted(false);
-                          setFormData({
-                            parentName: '',
-                            childAge: '',
-                            city: '',
-                            mainConcerns: [],
-                            customConcern: '',
-                            interestedProgram: '',
-                            preferredContact: 'Phone',
-                            contactValue: '',
-                            availability: ''
-                          });
-                        }} 
-                        className="text-[10px] font-bold text-brand-blue uppercase tracking-widest border border-slate-200 px-6 py-2.5 rounded-xl hover:bg-slate-50 transition-colors"
-                      >
-                        Submit another request
-                      </button>
+
+                      <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+                        {mailtoUri && (
+                          <button
+                            onClick={() => openMailClient(mailtoUri)}
+                            className="text-xs font-bold bg-brand-blue text-white uppercase tracking-wider px-5 py-3 rounded-xl hover:bg-brand-blue/90 transition-colors shadow-sm flex items-center justify-center gap-2"
+                          >
+                            <Mail className="w-4 h-4 text-brand-light-blue" />
+                            Open Email Copy ({TARGET_EMAIL})
+                          </button>
+                        )}
+                        <button 
+                          onClick={() => {
+                            setIsSubmitted(false);
+                            setFormData({
+                              parentName: '',
+                              childAge: '',
+                              city: '',
+                              mainConcerns: [],
+                              customConcern: '',
+                              interestedProgram: '',
+                              preferredContact: 'Phone',
+                              contactValue: '',
+                              availability: ''
+                            });
+                          }} 
+                          className="text-xs font-bold text-slate-600 uppercase tracking-wider border border-slate-200 px-5 py-3 rounded-xl hover:bg-slate-50 transition-colors"
+                        >
+                          Submit Another Request
+                        </button>
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>

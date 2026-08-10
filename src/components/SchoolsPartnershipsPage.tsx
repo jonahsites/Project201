@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { sendFormToEmail, TARGET_EMAIL, openMailClient } from '../lib/emailService';
 import { 
   Building2, 
   Award, 
@@ -13,7 +14,8 @@ import {
   School,
   FileSpreadsheet,
   CheckCircle,
-  HelpCircle
+  HelpCircle,
+  Mail
 } from 'lucide-react';
 
 export default function SchoolsPartnershipsPage() {
@@ -30,6 +32,7 @@ export default function SchoolsPartnershipsPage() {
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [mailtoUri, setMailtoUri] = useState('');
 
   const programs = [
     {
@@ -59,13 +62,13 @@ export default function SchoolsPartnershipsPage() {
     "Trauma-Aware Framework Implementation"
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
-      setIsSubmitted(true);
-    }, 1200);
+    const result = await sendFormToEmail('School & System Partnership Inquiry', formData);
+    setMailtoUri(result.mailtoUri);
+    setSubmitting(false);
+    setIsSubmitted(true);
   };
 
   return (
@@ -297,14 +300,34 @@ export default function SchoolsPartnershipsPage() {
                         />
                       </div>
 
-                      <button
-                        type="submit"
-                        disabled={submitting}
-                        className="w-full py-4 rounded-2xl bg-brand-blue hover:bg-brand-blue/95 text-white font-bold text-sm tracking-widest uppercase transition-all shadow-xl shadow-brand-blue/20 flex items-center justify-center gap-2"
-                      >
-                        {submitting ? 'Submitting...' : 'Request Collaboration'}
-                        <ArrowRight className="w-4 h-4 text-brand-light-blue" />
-                      </button>
+                      <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setFormData({
+                              contactName: 'TEST TRIAL',
+                              title: 'Program Director',
+                              organization: 'TEST ACADEMY / CMO',
+                              contactValue: 'test@example.com | (201) 555-0199',
+                              city: '123 Main Ave, Bayonne, NJ',
+                              collaborationType: 'Care Management Organization (CMO)',
+                              collaborationGoals: 'Test school agency coordination request for Project 201.',
+                              consent: true
+                            });
+                          }}
+                          className="py-3 px-4 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-xs tracking-wider uppercase transition-all flex items-center justify-center gap-1.5 shrink-0"
+                        >
+                          Auto-Fill Test Data
+                        </button>
+                        <button
+                          type="submit"
+                          disabled={submitting}
+                          className="flex-1 py-4 rounded-2xl bg-brand-blue hover:bg-brand-blue/95 text-white font-bold text-sm tracking-widest uppercase transition-all shadow-xl shadow-brand-blue/20 flex items-center justify-center gap-2"
+                        >
+                          {submitting ? 'Submitting...' : 'Request Collaboration'}
+                          <ArrowRight className="w-4 h-4 text-brand-light-blue" />
+                        </button>
+                      </div>
                     </motion.form>
                   ) : (
                     <motion.div 
@@ -318,30 +341,42 @@ export default function SchoolsPartnershipsPage() {
                       </div>
                       <div className="space-y-2">
                         <h4 className="font-display font-bold text-slate-900 text-lg uppercase tracking-tight">
-                          CoRD referral Received
+                          Referral Dispatched to {TARGET_EMAIL}
                         </h4>
                         <p className="text-slate-500 font-light text-xs leading-relaxed max-w-sm mx-auto">
-                          Thank you for coordinating with Project 201. Your affiliation request has been routed to Executive Director Shawn Kelly. We will verify and follow up via **{formData.contactValue}** to configure documentation.
+                          Thank you for coordinating with Project 201. Your affiliation request has been sent to <strong>{TARGET_EMAIL}</strong>. Executive Director Shawn Kelly and team will follow up via <strong>{formData.contactValue}</strong>.
                         </p>
                       </div>
-                      <button 
-                        onClick={() => {
-                          setIsSubmitted(false);
-                          setFormData({
-                            contactName: '',
-                            title: '',
-                            organization: '',
-                            contactValue: '',
-                            city: '',
-                            collaborationType: 'Care Management Organization (CMO)',
-                            collaborationGoals: '',
-                            consent: false
-                          });
-                        }} 
-                        className="text-[10px] font-bold text-brand-blue uppercase tracking-widest border border-slate-200 px-6 py-2.5 rounded-xl hover:bg-slate-50 transition-colors"
-                      >
-                        Submit another inquiry
-                      </button>
+
+                      <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+                        {mailtoUri && (
+                          <button
+                            onClick={() => openMailClient(mailtoUri)}
+                            className="text-xs font-bold bg-brand-blue text-white uppercase tracking-wider px-5 py-3 rounded-xl hover:bg-brand-blue/90 transition-colors shadow-sm flex items-center justify-center gap-2"
+                          >
+                            <Mail className="w-4 h-4 text-brand-light-blue" />
+                            Open Email Copy ({TARGET_EMAIL})
+                          </button>
+                        )}
+                        <button 
+                          onClick={() => {
+                            setIsSubmitted(false);
+                            setFormData({
+                              contactName: '',
+                              title: '',
+                              organization: '',
+                              contactValue: '',
+                              city: '',
+                              collaborationType: 'Care Management Organization (CMO)',
+                              collaborationGoals: '',
+                              consent: false
+                            });
+                          }} 
+                          className="text-xs font-bold text-slate-600 uppercase tracking-wider border border-slate-200 px-5 py-3 rounded-xl hover:bg-slate-50 transition-colors"
+                        >
+                          Submit Another Inquiry
+                        </button>
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>

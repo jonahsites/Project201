@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { sendFormToEmail, TARGET_EMAIL, openMailClient } from '../lib/emailService';
 import { 
   Dumbbell, 
   Users, 
@@ -74,72 +75,81 @@ export default function ProgramsPage({ onDonate, onNavigate }: ProgramsPageProps
 
   const [submissionFeedback, setSubmissionFeedback] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [programMailtoUri, setProgramMailtoUri] = useState('');
 
-  const handleInterestSubmit = (e: React.FormEvent) => {
+  const handleInterestSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
-      // Save locally to simulate persistence
-      const submissions = JSON.parse(localStorage.getItem('mentorship_interests') || '[]');
-      submissions.push({ ...interestData, chapter: interestChapter, date: new Date().toISOString() });
-      localStorage.setItem('mentorship_interests', JSON.stringify(submissions));
+    
+    const payload = { ...interestData, chapter: interestChapter, date: new Date().toISOString() };
+    const result = await sendFormToEmail('Mentorship Program Interest Registration', payload);
+    setProgramMailtoUri(result.mailtoUri);
 
-      setIsSubmitting(false);
-      setSubmissionFeedback('interest_success');
-      setInterestData({
-        name: '',
-        parentName: '',
-        email: '',
-        phone: '',
-        age: '14',
-        questions: ''
-      });
-    }, 1200);
+    const submissions = JSON.parse(localStorage.getItem('mentorship_interests') || '[]');
+    submissions.push(payload);
+    localStorage.setItem('mentorship_interests', JSON.stringify(submissions));
+
+    setIsSubmitting(false);
+    setSubmissionFeedback('interest_success');
+    setInterestData({
+      name: '',
+      parentName: '',
+      email: '',
+      phone: '',
+      age: '14',
+      questions: ''
+    });
   };
 
-  const handleCommunitySubmit = (e: React.FormEvent) => {
+  const handleCommunitySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
-      const submissions = JSON.parse(localStorage.getItem('community_circle_requests') || '[]');
-      submissions.push({ ...communityData, date: new Date().toISOString() });
-      localStorage.setItem('community_circle_requests', JSON.stringify(submissions));
+    
+    const payload = { ...communityData, date: new Date().toISOString() };
+    const result = await sendFormToEmail('Community Circle Request', payload);
+    setProgramMailtoUri(result.mailtoUri);
 
-      setIsSubmitting(false);
-      setSubmissionFeedback('community_success');
-      setCommunityData({
-        repName: '',
-        orgType: 'school',
-        orgName: '',
-        city: '',
-        email: '',
-        phone: '',
-        timeline: 'fall_2026',
-        message: ''
-      });
-    }, 1200);
+    const submissions = JSON.parse(localStorage.getItem('community_circle_requests') || '[]');
+    submissions.push(payload);
+    localStorage.setItem('community_circle_requests', JSON.stringify(submissions));
+
+    setIsSubmitting(false);
+    setSubmissionFeedback('community_success');
+    setCommunityData({
+      repName: '',
+      orgType: 'school',
+      orgName: '',
+      city: '',
+      email: '',
+      phone: '',
+      timeline: 'fall_2026',
+      message: ''
+    });
   };
 
-  const handleRegisterSubmit = (e: React.FormEvent) => {
+  const handleRegisterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
-      const submissions = JSON.parse(localStorage.getItem('bayonne_registrants') || '[]');
-      submissions.push({ ...registerData, date: new Date().toISOString() });
-      localStorage.setItem('bayonne_registrants', JSON.stringify(submissions));
+    
+    const payload = { ...registerData, date: new Date().toISOString() };
+    const result = await sendFormToEmail('Bayonne Chapter Registration', payload);
+    setProgramMailtoUri(result.mailtoUri);
 
-      setIsSubmitting(false);
-      setSubmissionFeedback('register_success');
-      setRegisterData({
-        childName: '',
-        age: '13',
-        parentName: '',
-        parentEmail: '',
-        parentPhone: '',
-        disclosures: '',
-        rulesAccepted: false
-      });
-    }, 1200);
+    const submissions = JSON.parse(localStorage.getItem('bayonne_registrants') || '[]');
+    submissions.push(payload);
+    localStorage.setItem('bayonne_registrants', JSON.stringify(submissions));
+
+    setIsSubmitting(false);
+    setSubmissionFeedback('register_success');
+    setRegisterData({
+      childName: '',
+      age: '13',
+      parentName: '',
+      parentEmail: '',
+      parentPhone: '',
+      disclosures: '',
+      rulesAccepted: false
+    });
   };
 
   const customPrograms = [
@@ -1132,14 +1142,23 @@ export default function ProgramsPage({ onDonate, onNavigate }: ProgramsPageProps
                       ✓
                     </div>
                     <div>
-                      <h4 className="font-display font-bold text-white text-sm uppercase">Interest Registered Successfully!</h4>
+                      <h4 className="font-display font-bold text-white text-sm uppercase">Interest Registered to {TARGET_EMAIL}</h4>
                       <p className="text-slate-350 text-[11px] mt-1 font-light leading-relaxed">
-                        Thank you! We have logged your interest sequence. You are now placed in our Bayshore VIP queue, and Jonah or a Project 201 representative will email/text you with detailed flyer materials soon!
+                        Thank you! Your interest registration has been routed to <strong>{TARGET_EMAIL}</strong>. A Project 201 representative will email/text you with detailed flyer materials soon!
                       </p>
                     </div>
+                    {programMailtoUri && (
+                      <button
+                        type="button"
+                        onClick={() => openMailClient(programMailtoUri)}
+                        className="bg-emerald-600 hover:bg-emerald-500 text-white font-display text-[9px] uppercase font-bold tracking-wider px-6 py-2.5 rounded-xl cursor-pointer transition-all w-full flex items-center justify-center gap-2"
+                      >
+                        Open Email Copy ({TARGET_EMAIL})
+                      </button>
+                    )}
                     <button
                       onClick={() => setShowInterestForm(false)}
-                      className="bg-emerald-600 hover:bg-emerald-500 text-white font-display text-[9px] uppercase font-bold tracking-wider px-6 py-2.5 rounded-xl cursor-pointer transition-all w-full"
+                      className="text-slate-400 hover:text-white font-display text-[9px] uppercase font-bold tracking-wider py-1.5 w-full transition-all"
                     >
                       Close Portal
                     </button>
@@ -1292,16 +1311,25 @@ export default function ProgramsPage({ onDonate, onNavigate }: ProgramsPageProps
                       ✓
                     </div>
                     <div>
-                      <h4 className="font-display font-bold text-white text-sm uppercase">Registration Submitted Successfully!</h4>
+                      <h4 className="font-display font-bold text-white text-sm uppercase">Registration Sent to {TARGET_EMAIL}</h4>
                       <p className="text-slate-350 text-[11px] mt-1 font-light leading-relaxed">
-                        Excellent! Your registration for the **Bayonne Chapter at San Vito&apos;s** has been logged in our cohort tracking pool database. We will issue a parent registration packet and invoice statement details coordinates to your email soon.
+                        Your registration details for the <strong>Bayonne Chapter at San Vito’s</strong> have been routed directly to <strong>{TARGET_EMAIL}</strong>. We will issue a parent packet to <strong>{registerData.parentEmail}</strong> shortly.
                       </p>
                     </div>
+                    {programMailtoUri && (
+                      <button
+                        type="button"
+                        onClick={() => openMailClient(programMailtoUri)}
+                        className="bg-emerald-600 hover:bg-emerald-500 text-white font-display text-[9px] uppercase font-bold tracking-wider px-6 py-2.5 rounded-xl cursor-pointer transition-all w-full flex items-center justify-center gap-2"
+                      >
+                        Open Email Copy ({TARGET_EMAIL})
+                      </button>
+                    )}
                     <button
                       onClick={() => setShowBayonneRegisterForm(false)}
-                      className="bg-emerald-600 hover:bg-emerald-500 text-white font-display text-[9px] uppercase font-bold tracking-wider px-6 py-2.5 rounded-xl cursor-pointer transition-all w-full"
+                      className="text-slate-400 hover:text-white font-display text-[9px] uppercase font-bold tracking-wider py-1.5 w-full transition-all"
                     >
-                      Finished
+                      Dismiss Portal
                     </button>
                   </motion.div>
                 ) : (
@@ -1467,14 +1495,23 @@ export default function ProgramsPage({ onDonate, onNavigate }: ProgramsPageProps
                       ✓
                     </div>
                     <div>
-                      <h4 className="font-display font-bold text-white text-sm uppercase">Inquiry Received Perfectly!</h4>
+                      <h4 className="font-display font-bold text-white text-sm uppercase">Inquiry Sent to {TARGET_EMAIL}</h4>
                       <p className="text-slate-350 text-[11px] mt-1 font-light leading-relaxed">
-                        Fantastic proposal details logged! Thank you for advocating for youth leaders in your area. We will analyze space hosting possibilities, connect regional sponsors, and email/call you to set up a scoping meeting ASAP.
+                        Your proposal details have been dispatched to <strong>{TARGET_EMAIL}</strong>. Thank you for advocating for youth leaders. We will connect with you at <strong>{communityData.email}</strong> ASAP.
                       </p>
                     </div>
+                    {programMailtoUri && (
+                      <button
+                        type="button"
+                        onClick={() => openMailClient(programMailtoUri)}
+                        className="bg-brand-light-blue hover:bg-white text-brand-blue font-display text-[9px] uppercase font-bold tracking-wider px-6 py-2.5 rounded-xl cursor-pointer transition-all w-full flex items-center justify-center gap-2"
+                      >
+                        Open Email Copy ({TARGET_EMAIL})
+                      </button>
+                    )}
                     <button
                       onClick={() => setShowCommunityForm(false)}
-                      className="bg-brand-light-blue hover:bg-white hover:text-brand-blue text-brand-blue font-display text-[9px] uppercase font-bold tracking-wider px-6 py-2.5 rounded-xl cursor-pointer transition-all w-full"
+                      className="text-slate-400 hover:text-white font-display text-[9px] uppercase font-bold tracking-wider py-1.5 w-full transition-all"
                     >
                       Dismiss Portal
                     </button>

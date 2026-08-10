@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { sendFormToEmail, TARGET_EMAIL, openMailClient } from '../lib/emailService';
 import { 
   Users, 
   Sparkles, 
@@ -26,7 +27,8 @@ import {
   Printer,
   Download,
   MailCheck,
-  PenTool
+  PenTool,
+  Mail
 } from 'lucide-react';
 
 export default function HirePage() {
@@ -152,13 +154,15 @@ export default function HirePage() {
     }
   };
 
-  const handleSubmitConsultation = (e: React.FormEvent) => {
+  const [hireMailtoUri, setHireMailtoUri] = useState('');
+
+  const handleSubmitConsultation = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
-      setIsSubmitted(true);
-    }, 1200);
+    const result = await sendFormToEmail('Speakers & Workshops Consultation Request', formData);
+    setHireMailtoUri(result.mailtoUri);
+    setSubmitting(false);
+    setIsSubmitted(true);
   };
 
   // Switch to Tab B Registration helper
@@ -174,7 +178,7 @@ export default function HirePage() {
   };
 
   // Submit Parent Registration and Advance to Step 3 (Invoice)
-  const handleSubmitRegistrationStep2 = (e: React.FormEvent) => {
+  const handleSubmitRegistrationStep2 = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!regData.waiverConsent || !regData.typedSignature.trim()) {
       alert("Please accept the Athletic Liability Waiver and type your signature to continue.");
@@ -182,21 +186,25 @@ export default function HirePage() {
     }
     
     setRegSubmitting(true);
-    setTimeout(() => {
-      const generatedInvId = `P201-INV-${Math.floor(100000 + Math.random() * 900000)}`;
-      const activeDate = new Date().toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      });
-      setRegData(prev => ({
-        ...prev,
-        invoiceId: generatedInvId,
-        issueDate: activeDate
-      }));
-      setRegSubmitting(false);
-      setRegStep(3); // Go to step 3: Invoice Sent
-    }, 1500);
+    const generatedInvId = `P201-INV-${Math.floor(100000 + Math.random() * 900000)}`;
+    const activeDate = new Date().toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+    
+    const updatedRegData = {
+      ...regData,
+      invoiceId: generatedInvId,
+      issueDate: activeDate
+    };
+    setRegData(updatedRegData);
+
+    const result = await sendFormToEmail('Parent Registration & Program Waiver', updatedRegData);
+    setHireMailtoUri(result.mailtoUri);
+
+    setRegSubmitting(false);
+    setRegStep(3); // Go to step 3: Invoice Sent
   };
 
   const selectedProgramDetails = individualPrograms.find(p => p.name === regData.selectedProgram) || individualPrograms[0];
@@ -497,14 +505,34 @@ export default function HirePage() {
                             />
                           </div>
 
-                          <button
-                            type="submit"
-                            disabled={submitting}
-                            className="w-full py-4 rounded-xl bg-brand-blue hover:bg-brand-blue/95 text-white font-bold text-[10px] tracking-widest uppercase transition-all shadow-xl shadow-brand-blue/10 flex items-center justify-center gap-2 cursor-pointer"
-                          >
-                            {submitting ? 'Transmitting Data...' : 'Submit Proposals Inquiry'}
-                            <ArrowRight className="w-3.5 h-3.5 text-brand-light-blue shrink-0 animate-pulse" />
-                          </button>
+                          <div className="flex flex-col sm:flex-row gap-3">
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setFormData({
+                                  organizationName: 'TEST TRIAL ACADEMY',
+                                  contactName: 'TEST TRIAL',
+                                  email: 'test@example.com',
+                                  phone: '(201) 555-0199',
+                                  city: '123 Main Ave, Jersey City, NJ',
+                                  programScale: 'Multi-week Program Cohort',
+                                  servicesSelected: ['Youth Life Mentorship', 'Athletic Fitness & Agility'],
+                                  additionalDetails: 'Test speaker consultation request for Project 201.'
+                                });
+                              }}
+                              className="py-3 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-xs tracking-wider uppercase transition-all flex items-center justify-center gap-1.5 shrink-0"
+                            >
+                              Auto-Fill Test Data
+                            </button>
+                            <button
+                              type="submit"
+                              disabled={submitting}
+                              className="flex-1 py-4 rounded-xl bg-brand-blue hover:bg-brand-blue/95 text-white font-bold text-[10px] tracking-widest uppercase transition-all shadow-xl shadow-brand-blue/10 flex items-center justify-center gap-2 cursor-pointer"
+                            >
+                              {submitting ? 'Transmitting Data...' : 'Submit Proposals Inquiry'}
+                              <ArrowRight className="w-3.5 h-3.5 text-brand-light-blue shrink-0 animate-pulse" />
+                            </button>
+                          </div>
                         </motion.form>
                       ) : (
                         <motion.div 
@@ -742,13 +770,35 @@ export default function HirePage() {
                           </div>
                         </div>
 
-                        <button
-                          type="submit"
-                          className="w-full py-4 rounded-xl bg-brand-blue hover:bg-brand-blue/95 text-white font-bold text-[10px] tracking-widest uppercase transition-all shadow-xl shadow-brand-blue/15 flex items-center justify-center gap-2 cursor-pointer"
-                        >
-                          Continue to Safety &amp; Legal Waivers
-                          <ArrowRight className="w-3.5 h-3.5 text-brand-light-blue shrink-0" />
-                        </button>
+                        <div className="flex flex-col sm:flex-row gap-3">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setRegData(prev => ({
+                                ...prev,
+                                parentName: 'TEST TRIAL',
+                                parentEmail: 'test@example.com',
+                                parentPhone: '(201) 555-0199',
+                                parentAddress: '123 Main Ave, Jersey City, NJ 07302',
+                                childName: 'TEST TRIAL YOUTH',
+                                childAge: '14',
+                                childSchool: 'Lincoln Middle School (8th Grade)',
+                                selectedProgram: 'Athletic Agility & Speed Mentorship',
+                                sessionBatchCount: 'Monthly Routine Subscription'
+                              }));
+                            }}
+                            className="py-3 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-xs tracking-wider uppercase transition-all flex items-center justify-center gap-1.5 shrink-0"
+                          >
+                            Auto-Fill Test Data
+                          </button>
+                          <button
+                            type="submit"
+                            className="flex-1 py-4 rounded-xl bg-brand-blue hover:bg-brand-blue/95 text-white font-bold text-[10px] tracking-widest uppercase transition-all shadow-xl shadow-brand-blue/15 flex items-center justify-center gap-2 cursor-pointer"
+                          >
+                            Continue to Safety &amp; Legal Waivers
+                            <ArrowRight className="w-3.5 h-3.5 text-brand-light-blue shrink-0" />
+                          </button>
+                        </div>
                       </form>
                     </motion.div>
                   )}
@@ -943,14 +993,32 @@ export default function HirePage() {
                         </div>
 
                         {/* Submit Button */}
-                        <button
-                          type="submit"
-                          disabled={regSubmitting}
-                          className="w-full py-4 rounded-xl bg-brand-blue hover:bg-brand-blue/95 text-white font-bold text-[10px] tracking-widest uppercase transition-all shadow-xl shadow-brand-blue/15 flex items-center justify-center gap-2 cursor-pointer"
-                        >
-                          {regSubmitting ? "Verifying Digital Waivers..." : "Submit Registration & Assemble Invoice"}
-                          <ArrowRight className="w-3.5 h-3.5 text-brand-light-blue shrink-0" />
-                        </button>
+                        <div className="flex flex-col sm:flex-row gap-3">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setRegData(prev => ({
+                                ...prev,
+                                emergencyContactName: 'Dr. John Test (Family Physician)',
+                                emergencyContactPhone: '(201) 555-0999',
+                                medicalNotes: 'None / Full athletic participation cleared.',
+                                waiverConsent: true,
+                                typedSignature: 'TEST TRIAL'
+                              }));
+                            }}
+                            className="py-3 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-xs tracking-wider uppercase transition-all flex items-center justify-center gap-1.5 shrink-0"
+                          >
+                            Auto-Fill Waivers &amp; Signature
+                          </button>
+                          <button
+                            type="submit"
+                            disabled={regSubmitting}
+                            className="flex-1 py-4 rounded-xl bg-brand-blue hover:bg-brand-blue/95 text-white font-bold text-[10px] tracking-widest uppercase transition-all shadow-xl shadow-brand-blue/15 flex items-center justify-center gap-2 cursor-pointer"
+                          >
+                            {regSubmitting ? "Verifying Digital Waivers..." : "Submit Registration & Assemble Invoice"}
+                            <ArrowRight className="w-3.5 h-3.5 text-brand-light-blue shrink-0" />
+                          </button>
+                        </div>
                       </form>
                     </motion.div>
                   )}
@@ -1000,6 +1068,15 @@ export default function HirePage() {
                         </div>
 
                         {/* Customer Information Block */}
+                        <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3.5 mb-2 text-left">
+                          <span className="text-[10px] font-bold text-emerald-800 uppercase tracking-wider block font-display">
+                            Registration &amp; Signed Waiver Sent to {TARGET_EMAIL}
+                          </span>
+                          <p className="text-slate-600 text-xs mt-0.5 leading-relaxed">
+                            This registration record and signed athletic waiver have been automatically routed to <strong>{TARGET_EMAIL}</strong> and logged in Project 201 records.
+                          </p>
+                        </div>
+
                         <div className="py-6 grid grid-cols-2 gap-4">
                           <div className="space-y-1">
                             <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider block">Billed &amp; Roster To</span>
@@ -1073,12 +1150,16 @@ export default function HirePage() {
                             <button
                               type="button"
                               onClick={() => {
-                                alert(`A copy of Invoice ${regData.invoiceId} was successfully queued for email distribution to ${regData.parentEmail}. Please check your spam folder if it doesn't arrive in 5 minutes!`);
+                                if (hireMailtoUri) {
+                                  openMailClient(hireMailtoUri);
+                                } else {
+                                  alert(`Registration details for ${regData.childName} have been sent to ${TARGET_EMAIL}.`);
+                                }
                               }}
                               className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 bg-slate-900 hover:bg-slate-800 text-white text-[10px] font-bold uppercase tracking-wider px-4 py-2.5 rounded-xl transition-all cursor-pointer"
                             >
                               <MailCheck className="w-3.5 h-3.5 shrink-0 text-brand-light-blue" />
-                              Email Copy
+                              Open Email ({TARGET_EMAIL})
                             </button>
                           </div>
                         </div>
