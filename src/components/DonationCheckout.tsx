@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, Check, Heart, Shield, Lock, CreditCard, User, Mail, Gift, ArrowRight } from 'lucide-react';
+import { X, Check, Heart, Shield, Lock, CreditCard, User, Mail, Gift, ArrowRight, MapPin, Copy } from 'lucide-react';
 import { Button } from './ui/button';
 import { sendFormToEmail, TARGET_EMAIL, openMailClient } from '../lib/emailService';
 
@@ -18,6 +18,14 @@ export const DonationCheckout = ({ isOpen, onClose, initialAmount = "25" }: Dona
   const [name, setName] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [mailtoUri, setMailtoUri] = useState("");
+  const [showMailCheck, setShowMailCheck] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyCheckAddress = () => {
+    navigator.clipboard?.writeText("Project 201\n576 Avenue A\nBayonne, NJ 07002");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   const steps = [
     { id: 1, title: 'Amount', icon: Gift },
@@ -234,7 +242,7 @@ export const DonationCheckout = ({ isOpen, onClose, initialAmount = "25" }: Dona
                   <button 
                     type="button"
                     onClick={handleBack}
-                    className="flex-1 h-16 rounded-2xl bg-slate-100 text-slate-600 font-bold uppercase tracking-widest text-xs hover:bg-slate-200 transition-colors"
+                    className="flex-1 h-16 rounded-2xl bg-slate-100 text-slate-600 font-bold uppercase tracking-widest text-xs hover:bg-slate-200 transition-colors cursor-pointer"
                   >
                     Back
                   </button>
@@ -243,7 +251,7 @@ export const DonationCheckout = ({ isOpen, onClose, initialAmount = "25" }: Dona
                   <button 
                     type="button"
                     onClick={handleNext}
-                    className="flex-[2] h-16 rounded-2xl bg-brand-blue text-white font-bold uppercase tracking-widest text-xs hover:bg-brand-blue/90 shadow-xl shadow-brand-blue/20 transition-all flex items-center justify-center gap-2"
+                    className="flex-[2] h-16 rounded-2xl bg-brand-blue text-white font-bold uppercase tracking-widest text-xs hover:bg-brand-blue/90 shadow-xl shadow-brand-blue/20 transition-all flex items-center justify-center gap-2 cursor-pointer"
                   >
                     Next
                     <ArrowRight className="w-4 h-4" />
@@ -251,10 +259,51 @@ export const DonationCheckout = ({ isOpen, onClose, initialAmount = "25" }: Dona
                 ) : (
                   <button 
                     type="submit"
-                    className="flex-[2] h-16 rounded-2xl bg-brand-light-blue text-brand-blue font-bold uppercase tracking-widest text-xs hover:bg-brand-light-blue/90 shadow-xl shadow-brand-light-blue/20 transition-all flex items-center justify-center gap-2"
+                    className="flex-[2] h-16 rounded-2xl bg-brand-light-blue text-brand-blue font-bold uppercase tracking-widest text-xs hover:bg-brand-light-blue/90 shadow-xl shadow-brand-light-blue/20 transition-all flex items-center justify-center gap-2 cursor-pointer"
                   >
                     Complete Donation
                   </button>
+                )}
+              </div>
+
+              {/* Prefer to mail a check */}
+              <div className="pt-2 border-t border-slate-100 text-center">
+                <button
+                  type="button"
+                  onClick={() => setShowMailCheck(!showMailCheck)}
+                  className="text-[11px] font-bold text-slate-500 hover:text-brand-blue uppercase tracking-wider transition-colors inline-flex items-center gap-1.5 cursor-pointer"
+                >
+                  <MapPin className="w-3.5 h-3.5 text-brand-light-blue" />
+                  {showMailCheck ? "Hide Check Mailing Info" : "Prefer to mail a check?"}
+                </button>
+
+                {showMailCheck && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="mt-3 p-4 bg-slate-50 border border-slate-200/70 rounded-2xl text-left space-y-2"
+                  >
+                    <p className="text-xs text-slate-600 font-light leading-relaxed">
+                      If you would like to donate to <strong>Project 201</strong>, please send a check made payable to <strong>Project 201</strong> to:
+                    </p>
+                    <div className="bg-white p-3 rounded-xl border border-slate-200 text-xs font-mono text-slate-800 space-y-0.5">
+                      <div className="font-bold font-display text-slate-900">Project 201</div>
+                      <div>576 Avenue A</div>
+                      <div>Bayonne, NJ 07002</div>
+                    </div>
+                    <div className="flex items-center justify-between pt-1">
+                      <span className="text-[10px] text-brand-blue font-bold">We thank you for your support!</span>
+                      <button
+                        type="button"
+                        onClick={handleCopyCheckAddress}
+                        className="text-[10px] font-bold text-slate-600 hover:text-slate-900 bg-slate-200/70 hover:bg-slate-200 px-2.5 py-1 rounded-lg flex items-center gap-1 cursor-pointer"
+                      >
+                        {copied ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3" />}
+                        {copied ? "Copied" : "Copy"}
+                      </button>
+                    </div>
+                  </motion.div>
                 )}
               </div>
             </form>

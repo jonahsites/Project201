@@ -90,7 +90,7 @@ export default function ContactPage() {
 
                 {/* Direct email link */}
                 <a 
-                  href="mailto:project201inc@gmail.com"
+                  href="mailto:info@project201.org"
                   className="p-6 bg-white border border-slate-100 rounded-3xl flex gap-4 items-start shadow-sm hover:border-brand-blue/30 transition-all block group"
                 >
                   <div className="w-10 h-10 shrink-0 bg-brand-blue/5 rounded-xl flex items-center justify-center text-brand-blue group-hover:bg-brand-blue group-hover:text-white transition-colors">
@@ -98,7 +98,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h4 className="text-slate-800 font-bold text-sm">Email Address</h4>
-                    <span className="text-slate-500 text-xs font-light block mt-1">project201inc@gmail.com</span>
+                    <span className="text-slate-500 text-xs font-light block mt-1">info@project201.org</span>
                   </div>
                 </a>
 
@@ -116,14 +116,15 @@ export default function ContactPage() {
                   </div>
                 </a>
 
-                {/* Region indicator */}
+                {/* Headquarters Address */}
                 <div className="p-6 bg-white border border-slate-100 rounded-3xl flex gap-4 items-start shadow-sm">
                   <div className="w-10 h-10 shrink-0 bg-brand-blue/5 rounded-xl flex items-center justify-center text-brand-blue">
                     <MapPin className="w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="text-slate-800 font-bold text-sm">Coverage Network</h4>
-                    <span className="text-slate-500 text-xs font-light block mt-1">Jersey City &amp; Statewide, New Jersey</span>
+                    <h4 className="text-slate-800 font-bold text-sm">Headquarters &amp; Mailing Address</h4>
+                    <span className="text-slate-700 text-xs font-medium block mt-1">Project 201</span>
+                    <span className="text-slate-500 text-xs font-light block">576 Avenue A, Bayonne, NJ 07002</span>
                   </div>
                 </div>
 

@@ -67,11 +67,11 @@ export default function Footer({ onPageChange }: FooterProps) {
                   <span className="text-slate-500 text-[10px] font-bold tracking-wider uppercase">Executive Director</span>
                 </div>
               </div>
-              <a href="mailto:project201inc@gmail.com" className="flex items-center gap-4 text-slate-400 hover:text-white transition-colors text-xs">
+              <a href="mailto:info@project201.org" className="flex items-center gap-4 text-slate-400 hover:text-white transition-colors text-xs">
                 <div className="w-10 h-10 shrink-0 bg-white/5 rounded-xl flex items-center justify-center">
                    <Mail className="w-4 h-4" />
                 </div>
-                project201inc@gmail.com
+                info@project201.org
               </a>
               <a href="tel:2017255062" className="flex items-center gap-4 text-slate-400 hover:text-white transition-colors text-xs">
                 <div className="w-10 h-10 shrink-0 bg-white/5 rounded-xl flex items-center justify-center">
@@ -79,6 +79,12 @@ export default function Footer({ onPageChange }: FooterProps) {
                 </div>
                 201-725-5062
               </a>
+              <div className="flex items-center gap-4 text-slate-400 text-xs">
+                <div className="w-10 h-10 shrink-0 bg-white/5 rounded-xl flex items-center justify-center">
+                   <MapPin className="w-4 h-4" />
+                </div>
+                <span>576 Avenue A, Bayonne, NJ 07002</span>
+              </div>
             </div>
           </div>
         </div>

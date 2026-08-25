@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { 
   Heart, 
@@ -7,9 +7,16 @@ import {
   ShieldCheck, 
   Award, 
   TrendingUp, 
-  CheckCircle,
-  HelpCircle,
-  Clock
+  CheckCircle, 
+  HelpCircle, 
+  Clock,
+  Mail,
+  Copy,
+  Check,
+  Building2,
+  MapPin,
+  Image as ImageIcon,
+  FileText
 } from 'lucide-react';
 import { BentoPricing } from './ui/bento-pricing';
 
@@ -18,6 +25,14 @@ interface DonatePageProps {
 }
 
 export default function DonatePage({ onDonate }: DonatePageProps) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyAddress = () => {
+    const text = "Project 201\n576 Avenue A\nBayonne, NJ 07002";
+    navigator.clipboard?.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
+  };
   const previousDonations = [
     { name: "Anonymous Support", amount: 500, time: "2 hours ago", focus: "Sports Equipment" },
     { name: "Jersey City Local Sponsor", amount: 250, time: "1 day ago", focus: "Recess Programs" },
@@ -67,6 +82,99 @@ export default function DonatePage({ onDonate }: DonatePageProps) {
 
               {/* Bento Grid layout */}
               <BentoPricing onSelect={onDonate} />
+
+              {/* Donate by Check / Mail Section */}
+              <div className="bg-gradient-to-br from-brand-blue to-slate-900 text-white rounded-[2.5rem] p-8 md:p-10 border border-brand-light-blue/20 shadow-2xl relative overflow-hidden space-y-6">
+                <div className="absolute top-0 right-0 w-80 h-80 bg-brand-light-blue/10 rounded-full blur-3xl pointer-events-none" />
+                
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-6 relative z-10">
+                  <div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="w-2.5 h-2.5 rounded-full bg-brand-light-blue animate-pulse" />
+                      <span className="text-brand-light-blue font-bold uppercase tracking-[0.25em] text-[10px] block font-display">
+                        Offline Giving &amp; Check Contributions
+                      </span>
+                    </div>
+                    <h3 className="font-display text-2xl md:text-3xl font-black uppercase text-white tracking-tight">
+                      Donate by Mail or Check
+                    </h3>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={handleCopyAddress}
+                      className="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 border border-white/10 cursor-pointer shrink-0"
+                    >
+                      {copied ? (
+                        <>
+                          <Check className="w-4 h-4 text-emerald-400" />
+                          <span className="text-emerald-400">Address Copied</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-4 h-4 text-brand-light-blue" />
+                          <span>Copy Address</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-12 gap-8 items-center relative z-10">
+                  {/* Text & Address details */}
+                  <div className="md:col-span-7 space-y-5">
+                    <p className="text-slate-200 text-sm md:text-base font-light leading-relaxed">
+                      If you would like to donate to <strong className="text-white font-semibold">Project 201</strong>, please send a check made payable to <strong className="text-brand-light-blue font-bold">Project 201</strong> to:
+                    </p>
+
+                    <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/15 space-y-1.5 shadow-inner">
+                      <div className="flex items-center gap-2 text-brand-light-blue mb-2 font-display text-xs font-bold uppercase tracking-widest">
+                        <MapPin className="w-4 h-4" />
+                        <span>Mailing Address Coordinates</span>
+                      </div>
+                      <p className="font-display text-lg md:text-xl font-black text-white tracking-wide uppercase">
+                        Project 201
+                      </p>
+                      <p className="font-sans text-base text-slate-100 font-medium tracking-wide">
+                        576 Avenue A
+                      </p>
+                      <p className="font-sans text-base text-slate-100 font-medium tracking-wide">
+                        Bayonne, NJ 07002
+                      </p>
+                    </div>
+
+                    <div className="pt-2">
+                      <p className="text-brand-light-blue font-display text-sm md:text-base font-bold tracking-wide uppercase flex items-center gap-2">
+                        <Heart className="w-4 h-4 text-rose-400 fill-rose-400 shrink-0" />
+                        We thank you for your support!
+                      </p>
+                      <p className="text-slate-400 text-xs font-light mt-1">
+                        Checks will be processed promptly and an official tax-deductible donor acknowledgment letter will be issued to your return address.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Image Placeholder */}
+                  <div className="md:col-span-5">
+                    <div className="bg-white/5 border-2 border-dashed border-white/20 rounded-3xl p-6 flex flex-col items-center justify-center text-center relative overflow-hidden group hover:border-brand-light-blue/50 transition-all min-h-[220px]">
+                      <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center text-brand-light-blue mb-3 group-hover:scale-110 transition-transform shadow-lg">
+                        <ImageIcon className="w-8 h-8" />
+                      </div>
+                      <span className="text-[10px] font-bold text-brand-light-blue uppercase tracking-widest font-display mb-1 block">
+                        Image Placeholder
+                      </span>
+                      <h4 className="font-display font-bold text-white text-sm uppercase tracking-tight">
+                        Project 201
+                      </h4>
+                      <p className="text-slate-350 text-[11px] font-light mt-0.5">
+                        576 Avenue A, Bayonne, NJ 07002
+                      </p>
+                      <div className="mt-3 px-3 py-1 bg-white/10 rounded-full text-[9px] font-mono text-slate-300">
+                        Facility / Mailing Center Asset
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
               {/* Supporters & Community Partners Section */}
               <div className="bg-white rounded-[2.5rem] p-8 md:p-10 border border-slate-105 shadow-sm space-y-6">
