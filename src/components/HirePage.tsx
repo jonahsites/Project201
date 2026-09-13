@@ -118,7 +118,6 @@ export default function HirePage() {
   const individualPrograms = [
     { id: 'boxing', name: "Boxing Programs & Mentorship Circle", price: 120, unit: "Monthly Routine", category: "Boxing" },
     { id: 'baseball', name: "Baseball Lessons & Athletic Acceleration", price: 75, unit: "Per Private Session", category: "Baseball" },
-    { id: 'swimming', name: "201 Swim Academy (5 Private Lessons)", price: 125, unit: "Per 5-Session Program", category: "Swimming" },
     { id: 'basketball', name: "Basketball Skills & Position Conditioning", price: 65, unit: "Per Class", category: "Basketball" },
     { id: 'speed_agility', name: "Speed & Agility Performance Training", price: 70, unit: "Per Session", category: "Athletics" },
     { id: 'one_one_mentor', name: "One-on-One Intimate Youth Coaching & Mentoring", price: 95, unit: "Per Mentorship Hour", category: "Mentorship" },
@@ -344,19 +343,19 @@ export default function HirePage() {
                     ))}
                   </div>
 
-                  {/* Direct Swim & Specific Sports registration redirect */}
+                  {/* Direct Sports & Activities registration redirect */}
                   <div className="bg-brand-blue rounded-[2.5rem] p-8 text-white relative overflow-hidden shadow-xl shadow-brand-blue/15">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-brand-light-blue/20 rounded-full blur-3xl pointer-events-none" />
                     <div className="relative z-10 space-y-4 max-w-xl text-left">
                       <span className="text-brand-light-blue font-bold uppercase tracking-widest text-[9px]">Are you a parent registering a child?</span>
                       <h3 className="font-display font-extrabold text-white text-xl uppercase tracking-wide leading-tight">
-                        Register Directly for Boxing, Swim Academy, Baseball &amp; Personal Training
+                        Register Directly for Boxing, Baseball &amp; Personal Training
                       </h3>
                       <p className="text-slate-300 font-light text-xs leading-relaxed">
                         Rather than requesting a customized corporate consultation, sign your children up instantly online! Fill out medical info, sign digital safety waivers, and receive an active invoice statement details for billing schedules immediately.
                       </p>
                       <button 
-                        onClick={() => handleStartDirectRegistration("201 Swim Academy (5 Private Lessons)")}
+                        onClick={() => handleStartDirectRegistration("Boxing Programs & Mentorship Circle")}
                         className="bg-brand-light-blue hover:bg-brand-light-blue/90 text-brand-blue font-bold text-[10px] uppercase tracking-widest px-6 py-3 rounded-xl transition-all cursor-pointer inline-flex items-center gap-1.5"
                       >
                         Launch Direct Registration Portal
@@ -819,7 +818,7 @@ export default function HirePage() {
                             Emergency Protocols &amp; Waivers
                           </h2>
                           <p className="text-slate-500 font-light text-xs leading-relaxed">
-                            Complete health disclosures and sign the athletic and swimming safety release waivers to issue parent invoices and billing schedules.
+                            Complete health disclosures and sign the athletic safety release waivers to issue parent invoices and billing schedules.
                           </p>
                         </div>
                         <button 
@@ -919,7 +918,7 @@ export default function HirePage() {
                               SECTION I — ATHLETICS &amp; COMBAT LIABILITY CODES
                             </p>
                             <p>
-                              As the parent/legal guardian of the youth participant name entered, I hereby authorize participation in structural programs hosted by Project 201 (including boxing training, swimming modules, baseball routines, physical conditioning, and mentor events). I recognize that physical athletic practices, non-contact/contact sports, and community travel involve minor and major physical risks.
+                              As the parent/legal guardian of the youth participant name entered, I hereby authorize participation in structural programs hosted by Project 201 (including boxing training, baseball routines, physical conditioning, and mentor events). I recognize that physical athletic practices, non-contact/contact sports, and community travel involve minor and major physical risks.
                             </p>
                             <p>
                               I agree that Project 201, Coach Shawn Kelly, Coach Ana Espinal, and partnering municipal community gyms, schools, and coaches are entirely indemnified against liabilities, medical expenses, accidental injuries, or physical damages stemming in any form from active lessons.
@@ -943,7 +942,7 @@ export default function HirePage() {
                                 className="mt-0.5 rounded border-slate-300 text-brand-blue focus:ring-brand-light-blue w-4 h-4 cursor-pointer"
                               />
                               <span className="text-slate-650 text-[11px] font-medium leading-relaxed">
-                                I confirm I am the legal guardian. I have read, understood, and accept Section I: Project 201 Athletic &amp; Swimming Liability Release Agreement *
+                                I confirm I am the legal guardian. I have read, understood, and accept Section I: Project 201 Athletic Liability Release Agreement *
                               </span>
                             </label>
 

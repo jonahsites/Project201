@@ -169,24 +169,6 @@ export default function ProgramsPage({ onDonate, onNavigate }: ProgramsPageProps
       ]
     },
     {
-      title: "201 Swim Academy",
-      sub: "Building Strong Swimmers for Life!",
-      icon: Waves,
-      image: "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&q=80&w=1200",
-      bannerText: "SWIMMING ACADEMY",
-      color: "from-blue-600 to-cyan-900",
-      description: "Official private swimming safety and physical water competence lessons for all ages. We prioritize raw confidence, fundamental water safety, and survival skills to overcome water fears one single, supportive lesson at a time. Available in tailored 1-on-1, semi-private, and small group sessions.",
-      highlights: [
-        "Water safety focused instruction & protocols",
-        "Water familiarization & confident swimming skills",
-        "Beginner to advanced stroke style development",
-        "Safety & active survival skills coaching",
-        "Children & adults of all ages welcome",
-        "Private, safe, supportive & comforting focus"
-      ],
-      isSwimming: true
-    },
-    {
       title: "201 Boxing",
       sub: "Discipline, Endurance & Respect",
       icon: Target,
@@ -612,83 +594,6 @@ export default function ProgramsPage({ onDonate, onNavigate }: ProgramsPageProps
                         <p className="text-[11px] font-bold text-brand-light-blue tracking-wide">
                           {prog.specialPanel.ctaText} Please contact us to coordinate.
                         </p>
-                      </div>
-                    </div>
-                  )}
-
-                  {prog.isSwimming && (
-                    <div className="mt-8 p-6 bg-gradient-to-br from-brand-blue via-sky-900 to-cyan-900 border border-brand-light-blue/20 rounded-[2.5rem] text-white shadow-2xl relative overflow-hidden text-left">
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-400/15 rounded-full blur-2xl pointer-events-none" />
-                      <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-brand-light-blue/10 rounded-full blur-xl pointer-events-none" />
-                      
-                      {/* Logo header */}
-                      <div className="flex justify-between items-start border-b border-white/10 pb-4 relative z-10">
-                        <div className="space-y-1">
-                          <span className="text-[8px] font-bold text-cyan-350 tracking-[0.2em] font-mono block uppercase">201 SPORTS • EST. 2021</span>
-                          <h4 className="font-display text-lg font-black uppercase text-white leading-none">201 SWIM ACADEMY</h4>
-                          <span className="text-[9px] text-slate-350 font-light block italic">Building Strong Swimmers for Life!</span>
-                        </div>
-                        <div className="bg-amber-400 text-slate-950 font-display text-[9px] font-black uppercase px-2.5 py-1.5 rounded-lg shrink-0 tracking-widest shadow select-none animate-bounce">
-                          5 SESSIONS
-                        </div>
-                      </div>
-
-                      {/* Package details */}
-                      <div className="grid md:grid-cols-12 gap-5 py-5 relative z-10 border-b border-white/10">
-                        <div className="md:col-span-5 flex flex-col justify-center space-y-1 bg-white/5 border border-white/10 rounded-2xl p-4 text-center">
-                          <span className="text-[9px] text-cyan-300 font-bold uppercase tracking-wider block">Program Package</span>
-                          <span className="text-4xl font-black font-display text-white">$125</span>
-                          <span className="text-[10px] text-slate-300 font-light block">5 Private Lessons • 30 Mins Each</span>
-                          <span className="text-[8px] bg-red-500/20 text-red-305 font-bold tracking-wider px-2 py-0.5 rounded-full mt-2 self-center uppercase animate-pulse">Limited Spots Available!</span>
-                        </div>
-
-                        <div className="md:col-span-7 space-y-3">
-                          <span className="text-[9px] text-slate-400 font-bold uppercase tracking-widest block">Instruction Details</span>
-                          <div className="space-y-2">
-                            <div className="flex items-center gap-2">
-                              <Check className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
-                              <span className="text-[11px] text-slate-200 font-light">Water Safety Focused Lessons</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                              <Check className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
-                              <span className="text-[11px] text-slate-200 font-light">Water Familiarization &amp; Overcoming Fear</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                              <Check className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
-                              <span className="text-[11px] text-slate-200 font-light">Beginner to Advanced Stroke Coaching</span>
-                            </div>
-                          </div>
-                          
-                          <div className="pt-1 select-none">
-                            <span className="inline-block text-[9px] font-bold bg-white/10 text-slate-200 border border-white/10 px-2.5 py-0.5 rounded uppercase tracking-wide mr-1.5 mb-1.5">Private</span>
-                            <span className="inline-block text-[9px] font-bold bg-white/10 text-slate-200 border border-white/10 px-2.5 py-0.5 rounded uppercase tracking-wide mr-1.5 mb-1.5">Semi-Private</span>
-                            <span className="inline-block text-[9px] font-bold bg-white/10 text-slate-200 border border-white/10 px-2.5 py-0.5 rounded uppercase tracking-wide mb-1.5">Small Group 1-on-1</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Contact and Sign Up */}
-                      <div className="pt-4 flex flex-col sm:flex-row justify-between items-center gap-4 relative z-10">
-                        <div className="space-y-1 text-left self-start sm:self-center">
-                          <span className="text-[9px] text-cyan-300 font-bold uppercase tracking-wider block">Serious Inquiries Only</span>
-                          <div className="flex flex-col text-[11px] text-slate-350 space-y-0.5 font-sans">
-                            <span className="flex items-center gap-1.5 font-bold text-white">
-                              <Phone className="w-3 h-3 text-cyan-400" /> 201-725-5062 <span className="text-[9px] font-light text-slate-400">(Call/Text)</span>
-                            </span>
-                            <span className="flex items-center gap-1.5">
-                              <Mail className="w-3 h-3 text-cyan-400" /> project201inc@gmail.com
-                            </span>
-                          </div>
-                        </div>
-
-                        {onNavigate && (
-                          <button 
-                            onClick={() => onNavigate('hire')}
-                            className="w-full sm:w-auto bg-amber-400 hover:bg-amber-300 active:scale-95 text-slate-950 font-display text-[10px] uppercase font-black tracking-widest px-6 py-3 rounded-xl transition-all shadow-lg flex items-center justify-center gap-1.5 cursor-pointer shrink-0"
-                          >
-                            Register Spot Online <ArrowRight size={12} />
-                          </button>
-                        )}
                       </div>
                     </div>
                   )}
