@@ -15,6 +15,7 @@ import EventsPage from './components/EventsPage';
 import DonatePage from './components/DonatePage';
 import ContactPage from './components/ContactPage';
 import MerchPage from './components/MerchPage';
+import HolidayDropSection from './components/HolidayDropSection';
 
 import { DonationCheckout } from './components/DonationCheckout';
 import { SoftGlowBackground } from './components/ui/SoftGlowBackground';
@@ -33,7 +34,7 @@ import {
   Star
 } from 'lucide-react';
 
-const VALID_PAGES = ['home', 'about', 'programs', 'hire', 'youth-support', 'partnerships', 'sponsors', 'donate', 'contact', 'merch'] as const;
+const VALID_PAGES = ['home', 'about', 'programs', 'hire', 'youth-support', 'partnerships', 'sponsors', 'donate', 'contact', 'merch', 'holiday-drop'] as const;
 type PageType = typeof VALID_PAGES[number];
 
 function getPageFromUrl(): PageType {
@@ -101,19 +102,21 @@ export default function App() {
 
   // Specific community photos from Drive requested by the user
   const communityPhotos = [
-    "https://lh3.googleusercontent.com/d/14hMdGg2T_KhM39RFkARigPoNOlhZAt6h",
-    "https://lh3.googleusercontent.com/d/1EWVVBgaSPHDlZH43LUxcZyCzdB2YFDbh",
-    "https://lh3.googleusercontent.com/d/1LoZ5o-SsUKjPM82EkM_H286zxdRoOYi0",
-    "https://lh3.googleusercontent.com/d/1O8rXfrSdLVQDNaLq9UphQcS3wNbLjdXP",
-    "https://lh3.googleusercontent.com/d/1OJSszuwK2nd64braXEWTLuH4MsF6Ap9B",
-    "https://lh3.googleusercontent.com/d/1ZdDx1k4tWuT_DZ6R2QrmBnbNwGIC9ywx",
-    "https://lh3.googleusercontent.com/d/1_wWCoskagS7gXofuguJYWOebpUeHiBSV",
-    "https://lh3.googleusercontent.com/d/1fZM9VMinL-zEooGvoSWp1kS7sgpuhMgT",
-    "https://lh3.googleusercontent.com/d/1h2SdU22OyfnHHxVlUAV6TxEdVfQfUl6C",
-    "https://lh3.googleusercontent.com/d/1ij0c6x2te4sYxY4gRI63zH84EmKJ2TzA",
-    "https://lh3.googleusercontent.com/d/1kdjoEnKj7ITTgvZst4SBW2vxWJc815tH",
-    "https://lh3.googleusercontent.com/d/1lbP930zRdCQzjdChwW7QG8Dr_sulYcma",
-    "https://lh3.googleusercontent.com/d/1n7OB8UqGRZ92yFK5mgaO6dAi0i3HC_bg"
+    "https://lh3.googleusercontent.com/d/10NdIV7FeIt5tIMhFOWKsiMuM-uyhI_Db",
+    "https://lh3.googleusercontent.com/d/13aND3E8KNJgCn80zUh8EdNjXop5E3HEH",
+    "https://lh3.googleusercontent.com/d/13zHLJ8oTLd-goOxDLITydzZfFCmCABlk",
+    "https://lh3.googleusercontent.com/d/14Bbiwk_VYTyHK4mIsDK6GoPHe7HNYARh",
+    "https://lh3.googleusercontent.com/d/17g5VEHcANuRmly8jBswRPBmp6lrgupXq",
+    "https://lh3.googleusercontent.com/d/1Ds-o_Hg5Qm2fA0sS7ybSnlHCI8dlMCpt",
+    "https://lh3.googleusercontent.com/d/1L0cLNuH8hdJchCD0BIgyFzZIm0BJLWlF",
+    "https://lh3.googleusercontent.com/d/1M0HwqaNFccK3FFxPfUQxTeOSzkyv33_3",
+    "https://lh3.googleusercontent.com/d/1TCtwj6nM05Y7Y5lR_rsyYNF6IbErmzL4",
+    "https://lh3.googleusercontent.com/d/1YBRTvldGcoB_fA8vuIstjmUAyl8dlHT5",
+    "https://lh3.googleusercontent.com/d/1agyaeBUUOiASpnxJoW9bFswsSwVLdUEE",
+    "https://lh3.googleusercontent.com/d/1enyTSJEjOfzEUFRQ0zKE4qCvxjuwlSry",
+    "https://lh3.googleusercontent.com/d/1fOWZZzWRgsNZS_aB_tCyNqSvYrcidgHe",
+    "https://lh3.googleusercontent.com/d/1kkrGaepZ_PN04fwyxvycAiymBpr_fmkh",
+    "https://lh3.googleusercontent.com/d/1nTPDEyLCS3fLcD4bRXn06ZVbBOGdhnSS"
   ];
 
   return (
@@ -133,7 +136,12 @@ export default function App() {
           {currentPage === 'home' && (
             <main>
               {/* Hero Banner */}
-              <Hero onDonate={() => handleDonate()} onLearnMore={() => setCurrentPage('programs')} onSupportClick={() => setCurrentPage('youth-support')} />
+              <Hero 
+                onDonate={() => handleDonate()} 
+                onLearnMore={() => setCurrentPage('programs')} 
+                onSupportClick={() => setCurrentPage('youth-support')}
+                onHolidayDropClick={() => setCurrentPage('holiday-drop')}
+              />
 
               <SoftGlowBackground>
                 {/* The Umbrella Framework Section (Requested by user: 201 Sports, 201 Boxing, Mentorship, Schools, Summer) */}
@@ -239,6 +247,9 @@ export default function App() {
                     </div>
                   </div>
                 </section>
+
+                {/* 201 EST. 1947 Holiday Drop Section */}
+                <HolidayDropSection standalone={false} />
 
                 {/* Strong IMPACT Section (Stats, Testimonials, Live community files) */}
                 <section className="py-24 bg-slate-950 text-white relative overflow-hidden">
@@ -575,6 +586,7 @@ export default function App() {
           {currentPage === 'donate' && (
             <DonatePage onDonate={(amt) => handleDonate(amt)} />
           )}
+          {currentPage === 'holiday-drop' && <HolidayDropSection standalone={true} />}
           {currentPage === 'merch' && <MerchPage />}
           {currentPage === 'contact' && <ContactPage />}
         </motion.div>

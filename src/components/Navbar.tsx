@@ -4,7 +4,7 @@ import { Menu, X, Instagram, Facebook, Youtube } from 'lucide-react';
 
 interface NavbarProps {
   activePage: string;
-  onPageChange: (page: 'home' | 'about' | 'programs' | 'hire' | 'youth-support' | 'partnerships' | 'sponsors' | 'donate' | 'contact' | 'merch') => void;
+  onPageChange: (page: 'home' | 'about' | 'programs' | 'hire' | 'youth-support' | 'partnerships' | 'sponsors' | 'donate' | 'contact' | 'merch' | 'holiday-drop') => void;
 }
 
 export default function Navbar({ activePage, onPageChange }: NavbarProps) {
@@ -27,6 +27,7 @@ export default function Navbar({ activePage, onPageChange }: NavbarProps) {
     { name: 'Youth Support', id: 'youth-support' as const },
     { name: 'Schools & Partnerships', id: 'partnerships' as const },
     { name: 'Sponsors & Partners', id: 'sponsors' as const },
+    { name: 'Holiday Drop', id: 'holiday-drop' as const, isDrop: true },
     { name: 'Merch', id: 'merch' as const },
     { name: 'Donate', id: 'donate' as const },
     { name: 'Contact', id: 'contact' as const },
@@ -48,7 +49,7 @@ export default function Navbar({ activePage, onPageChange }: NavbarProps) {
               className="flex items-center gap-2 group bg-transparent border-0 text-left focus:outline-none p-0 cursor-pointer"
             >
               <img 
-                src="https://lh3.googleusercontent.com/d/1O9W1-AkWLdXANr6KOYuVfeSMT1Zf2zbf" 
+                src="https://cdn.prod.website-files.com/676454c7900c0070c4219d2a/67a1e7a94e7d4cbcfd580329_uc.png" 
                 alt="Project 201 Logo" 
                 className="h-10 w-auto transition-transform group-hover:scale-110"
               />
@@ -64,13 +65,18 @@ export default function Navbar({ activePage, onPageChange }: NavbarProps) {
               <button
                 key={link.name}
                 onClick={() => onPageChange(link.id)}
-                className={`text-[10px] uppercase font-bold tracking-widest transition-all hover:text-brand-light-blue cursor-pointer focus:outline-none p-1 ${
+                className={`text-[10px] uppercase font-bold tracking-widest transition-all hover:text-brand-light-blue cursor-pointer focus:outline-none p-1 flex items-center gap-1.5 ${
                   activePage === link.id
                     ? 'text-brand-light-blue border-b-2 border-brand-light-blue'
                     : showSolidNavBar ? 'text-slate-700' : 'text-white'
                 }`}
               >
                 {link.name}
+                {'isDrop' in link && (link as any).isDrop && (
+                  <span className="px-1.5 py-0.5 rounded-full bg-amber-400/20 text-amber-500 font-black text-[7px] tracking-normal border border-amber-400/40 animate-pulse">
+                    NEW
+                  </span>
+                )}
               </button>
             ))}
             <div className={`flex items-center space-x-3 border-l ml-2 pl-4 ${showSolidNavBar ? 'border-slate-350' : 'border-white/20'}`}>
@@ -115,13 +121,18 @@ export default function Navbar({ activePage, onPageChange }: NavbarProps) {
                     setIsOpen(false);
                     onPageChange(link.id);
                   }}
-                  className={`block w-full text-left px-4 py-3 text-xs font-bold uppercase tracking-widest rounded-xl transition-all focus:outline-none ${
+                  className={`w-full text-left px-4 py-3 text-xs font-bold uppercase tracking-widest rounded-xl transition-all focus:outline-none flex items-center justify-between ${
                     activePage === link.id
                       ? 'bg-brand-blue/5 text-brand-light-blue'
                       : 'text-slate-700 hover:text-brand-blue hover:bg-slate-50'
                   }`}
                 >
-                  {link.name}
+                  <span>{link.name}</span>
+                  {'isDrop' in link && (link as any).isDrop && (
+                    <span className="px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-600 text-[8px] font-black tracking-normal border border-amber-400/40">
+                      DECEMBER DROP
+                    </span>
+                  )}
                 </button>
               ))}
               <div className="pt-4 flex justify-between items-center px-4 border-t border-slate-100 mt-4">

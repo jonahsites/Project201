@@ -1,7 +1,17 @@
 import { motion } from 'motion/react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Sparkles } from 'lucide-react';
 
-export default function Hero({ onDonate, onLearnMore, onSupportClick }: { onDonate?: () => void, onLearnMore?: () => void, onSupportClick?: () => void }) {
+export default function Hero({ 
+  onDonate, 
+  onLearnMore, 
+  onSupportClick,
+  onHolidayDropClick 
+}: { 
+  onDonate?: () => void;
+  onLearnMore?: () => void;
+  onSupportClick?: () => void;
+  onHolidayDropClick?: () => void;
+}) {
   const logos = [
     { name: '201 Sports', logo: '201 SPORTS' },
     { name: '201 Boxing', logo: '201 BOXING' },
@@ -16,7 +26,7 @@ export default function Hero({ onDonate, onLearnMore, onSupportClick }: { onDona
       {/* Background Image / Overlay */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="https://lh3.googleusercontent.com/d/1_wWCoskagS7gXofuguJYWOebpUeHiBSV" 
+          src="https://lh3.googleusercontent.com/d/17g5VEHcANuRmly8jBswRPBmp6lrgupXq" 
           alt="Youth sports training" 
           className="w-full h-full object-cover opacity-60"
         />
@@ -30,6 +40,23 @@ export default function Hero({ onDonate, onLearnMore, onSupportClick }: { onDona
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-4xl"
         >
+          {onHolidayDropClick && (
+            <motion.button
+              type="button"
+              onClick={onHolidayDropClick}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-light-blue/20 hover:bg-brand-light-blue/30 border border-brand-light-blue/40 text-brand-light-blue text-xs sm:text-sm font-display font-bold uppercase tracking-wider mb-6 backdrop-blur-md cursor-pointer group"
+            >
+              <Sparkles className="w-4 h-4 text-amber-300 animate-pulse" />
+              <span>201 EST. 1947 Holiday Drop Live Pre-Orders</span>
+              <span className="bg-amber-400 text-slate-950 font-black text-[9px] px-2 py-0.5 rounded-full ml-1">
+                DECEMBER DROP
+              </span>
+              <span className="text-white/60 group-hover:translate-x-0.5 transition-transform">→</span>
+            </motion.button>
+          )}
+
           <h1 className="font-display text-[11vw] md:text-8xl lg:text-9xl font-bold text-white mb-8 tracking-tighter leading-[0.85] uppercase">
             Empowering youth.<br />
             <span className="opacity-90">Building leaders.</span>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Facebook, Instagram, Youtube, Mail, Phone, MapPin } from 'lucide-react';
 
 interface FooterProps {
-  onPageChange?: (page: 'home' | 'about' | 'programs' | 'hire' | 'youth-support' | 'partnerships' | 'sponsors' | 'donate' | 'contact' | 'merch') => void;
+  onPageChange?: (page: 'home' | 'about' | 'programs' | 'hire' | 'youth-support' | 'partnerships' | 'sponsors' | 'donate' | 'contact' | 'merch' | 'holiday-drop') => void;
 }
 
 export default function Footer({ onPageChange }: FooterProps) {
@@ -13,7 +13,7 @@ export default function Footer({ onPageChange }: FooterProps) {
           <div className="lg:col-span-1 space-y-6">
             <div className="flex items-center gap-2">
               <img 
-                src="https://lh3.googleusercontent.com/d/1O9W1-AkWLdXANr6KOYuVfeSMT1Zf2zbf" 
+                src="https://cdn.prod.website-files.com/676454c7900c0070c4219d2a/67a1e7a94e7d4cbcfd580329_uc.png" 
                 alt="Project 201 Logo" 
                 className="h-10 w-auto"
               />
@@ -38,6 +38,10 @@ export default function Footer({ onPageChange }: FooterProps) {
             <h4 className="font-display font-bold text-sm mb-8 uppercase text-brand-light-blue tracking-widest">Navigation</h4>
             <div className="flex flex-col space-y-4 text-left items-start">
               <button onClick={() => onPageChange?.('home')} className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left">Home</button>
+              <button onClick={() => onPageChange?.('holiday-drop')} className="text-amber-400 hover:text-amber-300 transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left flex items-center gap-1.5">
+                <span>201 Holiday Drop</span>
+                <span className="px-1.5 py-0.5 rounded-full bg-amber-400/20 text-amber-300 text-[8px] font-black">1947</span>
+              </button>
               <button onClick={() => onPageChange?.('about')} className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left">About Us</button>
               <button onClick={() => onPageChange?.('programs')} className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left">Our Branches</button>
               <button onClick={() => onPageChange?.('merch')} className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left text-cyan-400 font-semibold">Save Our Youth Merch</button>

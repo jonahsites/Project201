@@ -23,9 +23,10 @@ export default function OurStory() {
           <div className="relative">
             <div className="aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl relative z-10">
               <img 
-                src="https://lh3.googleusercontent.com/d/1ij0c6x2te4sYxY4gRI63zH84EmKJ2TzA" 
+                src="https://lh3.googleusercontent.com/d/10NdIV7FeIt5tIMhFOWKsiMuM-uyhI_Db" 
                 alt="Youth athlete portrait" 
                 className="w-full h-full object-cover"
+                referrerPolicy="no-referrer"
               />
             </div>
             {/* Background Accent */}

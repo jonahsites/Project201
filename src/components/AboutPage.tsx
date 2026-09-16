@@ -97,7 +97,7 @@ export default function AboutPage() {
             <div className="relative">
               <div className="aspect-[4/5] rounded-[3.5rem] overflow-hidden shadow-2xl relative z-10 border-4 border-white">
                 <img 
-                  src="https://lh3.googleusercontent.com/d/1ij0c6x2te4sYxY4gRI63zH84EmKJ2TzA" 
+                  src="https://lh3.googleusercontent.com/d/10NdIV7FeIt5tIMhFOWKsiMuM-uyhI_Db" 
                   alt="Authentic training environment portrait" 
                   className="w-full h-full object-cover select-none"
                   referrerPolicy="no-referrer"

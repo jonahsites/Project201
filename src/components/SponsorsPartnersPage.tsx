@@ -65,7 +65,7 @@ export default function SponsorsPartnersPage() {
       description: "Focused on mental wellness, self-organization, and coping structures. Organized Minds is a proud sponsor of Project 201's vision, amplifying mental health stories and athletic focus. Natanya and Project 201 teamed up to co-host deep conversations on the Organized Minds podcast.",
       tier: "Official Media & Wellness Sponsor",
       badgeColor: "bg-purple-500/10 text-purple-600 border-purple-500/20",
-      image: "https://lh3.googleusercontent.com/d/1m7hQKetvIt27_kz4Tf_UPR17htBcinAT",
+      image: "https://lh3.googleusercontent.com/d/1M0HwqaNFccK3FFxPfUQxTeOSzkyv33_3",
       youtubeLinks: [
         { label: "Listen to Podcast Pt. 1", url: "https://youtu.be/ZpK2uFa8ytc" },
         { label: "Listen to Podcast Pt. 2", url: "https://youtu.be/65ZBhKg1g88" }

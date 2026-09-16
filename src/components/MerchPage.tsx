@@ -22,8 +22,14 @@ import tshirtMockupImg from '../assets/images/save_our_youth_tshirt_178326839110
 import tshirtCloseUpImg from '../assets/images/save_our_youth_close_up_1783268404754.jpg';
 import displaySheetImg from '../assets/images/save_our_youth_full_display_sheet_1783268800620.jpg';
 import project201973Img from '../assets/images/project201_973_exact_tshirt_1786292209922.jpg';
+import HolidayDropSection from './HolidayDropSection';
 
-export default function MerchPage() {
+interface MerchPageProps {
+  initialTab?: 'holiday' | 'tees';
+}
+
+export default function MerchPage({ initialTab = 'holiday' }: MerchPageProps) {
+  const [activeTab, setActiveTab] = useState<'holiday' | 'tees'>(initialTab);
   const images = [
     {
       url: project201973Img,
@@ -42,7 +48,7 @@ export default function MerchPage() {
       title: "T-Shirt Detail Photo"
     },
     {
-      url: "https://lh3.googleusercontent.com/d/1jR3qQnUZNKxFQYw2zmnzQKNDtTl1DDsR",
+      url: "https://lh3.googleusercontent.com/d/1agyaeBUUOiASpnxJoW9bFswsSwVLdUEE",
       title: "Left Chest Logo Design"
     }
   ];
@@ -128,23 +134,68 @@ export default function MerchPage() {
         <div className="pointer-events-none absolute inset-0 opacity-15">
           <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-brand-light-blue rounded-full blur-[120px]" />
         </div>
-        <div className="container mx-auto px-4 relative z-10 max-w-6xl text-center">
-          <span className="text-brand-light-blue font-bold uppercase tracking-[0.25em] text-[10px] block mb-3 font-display">
-            Official Campaign Merchandise
-          </span>
-          <h1 className="font-display text-3xl md:text-5xl font-black text-white uppercase mb-4 leading-tight tracking-tight">
-            Save Our Youth <span className="text-brand-light-blue font-light">Pre-Order</span>
-          </h1>
-          <p className="max-w-2xl mx-auto text-slate-300 font-light text-xs md:text-sm leading-relaxed">
-            Wear your support on your chest. 100% of proceeds fund our active 1-on-1 mentorship networks, positive role modeling, and community outings in New Jersey.
-          </p>
+        <div className="container mx-auto px-4 relative z-10 max-w-6xl text-center space-y-6">
+          <div className="space-y-3">
+            <span className="text-brand-light-blue font-bold uppercase tracking-[0.25em] text-[10px] block font-display">
+              {activeTab === 'holiday' ? 'Official Holiday Drop • Limited Pre-Order' : 'Official Campaign Merchandise'}
+            </span>
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white uppercase leading-tight tracking-tight">
+              {activeTab === 'holiday' ? (
+                <>201 <span className="text-brand-light-blue font-light">EST. 1947</span></>
+              ) : (
+                <>Save Our Youth <span className="text-brand-light-blue font-light">Collection</span></>
+              )}
+            </h1>
+            <p className="max-w-2xl mx-auto text-slate-300 font-light text-xs sm:text-sm md:text-base leading-relaxed">
+              {activeTab === 'holiday' 
+                ? 'Commemorating New Jersey’s original 1947 area code. Heavyweight black hoodies and premium crewnecks supporting Project 201 youth programs across the entire state.'
+                : 'Wear your support on your chest. 100% of proceeds fund our active 1-on-1 mentorship networks, positive role modeling, and community outings in New Jersey.'}
+            </p>
+          </div>
+
+          {/* Collection Tab Selector */}
+          <div className="inline-flex p-1.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 max-w-xl mx-auto">
+            <button
+              type="button"
+              onClick={() => setActiveTab('holiday')}
+              className={`px-5 py-2.5 rounded-xl font-display font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer ${
+                activeTab === 'holiday'
+                  ? 'bg-brand-light-blue text-brand-blue shadow-lg font-black'
+                  : 'text-white/80 hover:text-white'
+              }`}
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>201 EST. 1947 Holiday Drop</span>
+              <span className="px-1.5 py-0.5 rounded-full bg-amber-400 text-slate-950 text-[8px] font-black">
+                NEW
+              </span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setActiveTab('tees')}
+              className={`px-5 py-2.5 rounded-xl font-display font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer ${
+                activeTab === 'tees'
+                  ? 'bg-brand-light-blue text-brand-blue shadow-lg font-black'
+                  : 'text-white/80 hover:text-white'
+              }`}
+            >
+              <span>Save Our Youth Tees</span>
+            </button>
+          </div>
         </div>
       </section>
 
-      {/* Main Layout */}
-      <section className="py-16">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <AnimatePresence mode="wait">
+      {/* Tab 1: 201 EST. 1947 Holiday Drop Section */}
+      {activeTab === 'holiday' && (
+        <HolidayDropSection standalone={false} />
+      )}
+
+      {/* Tab 2: Classic Save Our Youth Pre-Order Section */}
+      {activeTab === 'tees' && (
+        <section className="py-16">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <AnimatePresence mode="wait">
             {!isSuccess ? (
               <div className="grid lg:grid-cols-12 gap-12">
                 
@@ -767,6 +818,7 @@ export default function MerchPage() {
           </AnimatePresence>
         </div>
       </section>
+      )}
     </div>
   );
 }
