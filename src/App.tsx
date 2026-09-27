@@ -16,6 +16,7 @@ import DonatePage from './components/DonatePage';
 import ContactPage from './components/ContactPage';
 import MerchPage from './components/MerchPage';
 import HolidayDropSection from './components/HolidayDropSection';
+import VanCampaignSection from './components/VanCampaignSection';
 
 import { DonationCheckout } from './components/DonationCheckout';
 import { SoftGlowBackground } from './components/ui/SoftGlowBackground';
@@ -76,6 +77,15 @@ export default function App() {
 
   const handleDonate = (amount?: string) => {
     window.open("https://www.zeffy.com/en-US/donation-form/support-project--201", "_blank", "noopener,noreferrer");
+  };
+
+  const handleVanCampaignClick = () => {
+    const el = document.getElementById('youth-van-campaign');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      setCurrentPage('donate');
+    }
   };
 
   useEffect(() => {
@@ -141,6 +151,7 @@ export default function App() {
                 onLearnMore={() => setCurrentPage('programs')} 
                 onSupportClick={() => setCurrentPage('youth-support')}
                 onHolidayDropClick={() => setCurrentPage('holiday-drop')}
+                onVanCampaignClick={handleVanCampaignClick}
               />
 
               <SoftGlowBackground>
@@ -247,6 +258,9 @@ export default function App() {
                     </div>
                   </div>
                 </section>
+
+                {/* Featured Pizzeria Partner & Youth Transportation Van Campaign */}
+                <VanCampaignSection onNavigateContact={() => setCurrentPage('contact')} />
 
                 {/* 201 EST. 1947 Holiday Drop Section */}
                 <HolidayDropSection standalone={false} />
@@ -584,7 +598,10 @@ export default function App() {
           {currentPage === 'partnerships' && <SchoolsPartnershipsPage />}
           {currentPage === 'sponsors' && <SponsorsPartnersPage />}
           {currentPage === 'donate' && (
-            <DonatePage onDonate={(amt) => handleDonate(amt)} />
+            <DonatePage 
+              onDonate={(amt) => handleDonate(amt)} 
+              onNavigateContact={() => setCurrentPage('contact')}
+            />
           )}
           {currentPage === 'holiday-drop' && <HolidayDropSection standalone={true} />}
           {currentPage === 'merch' && <MerchPage />}

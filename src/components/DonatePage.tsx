@@ -19,12 +19,14 @@ import {
   FileText
 } from 'lucide-react';
 import { BentoPricing } from './ui/bento-pricing';
+import VanCampaignSection from './VanCampaignSection';
 
 interface DonatePageProps {
   onDonate: (amount?: string) => void;
+  onNavigateContact?: () => void;
 }
 
-export default function DonatePage({ onDonate }: DonatePageProps) {
+export default function DonatePage({ onDonate, onNavigateContact }: DonatePageProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopyAddress = () => {
@@ -55,11 +57,22 @@ export default function DonatePage({ onDonate }: DonatePageProps) {
             Help Us Build Stronger Youth, <br />
             <span className="text-brand-light-blue font-light">Stronger Families, and Stronger Communities.</span>
           </h1>
-          <p className="max-w-2xl mx-auto text-slate-350 font-light text-xs md:text-sm leading-relaxed">
+          <p className="max-w-2xl mx-auto text-slate-350 font-light text-xs md:text-sm leading-relaxed mb-6">
             Donations support mentorship, leadership development, sports programming, educational opportunities, and positive role models for youth across New Jersey, helping them make positive life decisions. At Project 201, we believe sports are just one of the tools we use to guide the next generation.
           </p>
+
+          <a 
+            href="#youth-van-campaign"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-amber-400 text-slate-950 font-display font-black text-xs uppercase tracking-wider shadow-lg hover:bg-amber-300 transition-all cursor-pointer animate-pulse"
+          >
+            <span>🍕 Pizzeria Partner Campaign: Youth Passenger Van Fundraiser</span>
+            <span>↓</span>
+          </a>
         </div>
       </section>
+
+      {/* Featured Spotlight: Youth Transportation Van & Pizzeria Campaign */}
+      <VanCampaignSection onNavigateContact={onNavigateContact} />
 
       {/* Main Campaign tracking & Bento grid options */}
       <section className="py-24">

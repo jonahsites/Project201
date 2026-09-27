@@ -5,12 +5,14 @@ export default function Hero({
   onDonate, 
   onLearnMore, 
   onSupportClick,
-  onHolidayDropClick 
+  onHolidayDropClick,
+  onVanCampaignClick
 }: { 
   onDonate?: () => void;
   onLearnMore?: () => void;
   onSupportClick?: () => void;
   onHolidayDropClick?: () => void;
+  onVanCampaignClick?: () => void;
 }) {
   const logos = [
     { name: '201 Sports', logo: '201 SPORTS' },
@@ -40,22 +42,41 @@ export default function Hero({
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-4xl"
         >
-          {onHolidayDropClick && (
-            <motion.button
-              type="button"
-              onClick={onHolidayDropClick}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-light-blue/20 hover:bg-brand-light-blue/30 border border-brand-light-blue/40 text-brand-light-blue text-xs sm:text-sm font-display font-bold uppercase tracking-wider mb-6 backdrop-blur-md cursor-pointer group"
-            >
-              <Sparkles className="w-4 h-4 text-amber-300 animate-pulse" />
-              <span>201 EST. 1947 Holiday Drop Live Pre-Orders</span>
-              <span className="bg-amber-400 text-slate-950 font-black text-[9px] px-2 py-0.5 rounded-full ml-1">
-                DECEMBER DROP
-              </span>
-              <span className="text-white/60 group-hover:translate-x-0.5 transition-transform">→</span>
-            </motion.button>
-          )}
+          <div className="flex flex-wrap items-center gap-3 mb-6">
+            {onVanCampaignClick && (
+              <motion.button
+                type="button"
+                onClick={onVanCampaignClick}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-400/20 hover:bg-amber-400/30 border border-amber-400/40 text-amber-300 text-xs sm:text-sm font-display font-bold uppercase tracking-wider backdrop-blur-md cursor-pointer group shadow-lg"
+              >
+                <span>🍕</span>
+                <span>Pizzeria Partner Van Campaign</span>
+                <span className="bg-amber-400 text-slate-950 font-black text-[9px] px-2 py-0.5 rounded-full ml-1">
+                  ZEFFY LIVE
+                </span>
+                <span className="text-white/60 group-hover:translate-x-0.5 transition-transform">→</span>
+              </motion.button>
+            )}
+
+            {onHolidayDropClick && (
+              <motion.button
+                type="button"
+                onClick={onHolidayDropClick}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-light-blue/20 hover:bg-brand-light-blue/30 border border-brand-light-blue/40 text-brand-light-blue text-xs sm:text-sm font-display font-bold uppercase tracking-wider backdrop-blur-md cursor-pointer group"
+              >
+                <Sparkles className="w-4 h-4 text-amber-300 animate-pulse" />
+                <span>201 EST. 1947 Holiday Drop</span>
+                <span className="bg-amber-400 text-slate-950 font-black text-[9px] px-2 py-0.5 rounded-full ml-1">
+                  DECEMBER DROP
+                </span>
+                <span className="text-white/60 group-hover:translate-x-0.5 transition-transform">→</span>
+              </motion.button>
+            )}
+          </div>
 
           <h1 className="font-display text-[11vw] md:text-8xl lg:text-9xl font-bold text-white mb-8 tracking-tighter leading-[0.85] uppercase">
             Empowering youth.<br />
@@ -69,24 +90,22 @@ export default function Hero({
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            {/* Donate Now kept on the site but hidden for now per user request */}
-            {false && (
-              <button 
-                onClick={() => onDonate?.()}
-                className="bg-brand-light-blue hover:bg-white text-brand-blue px-10 py-4 rounded-2xl font-bold text-lg transition-all shadow-2xl hover:scale-105 active:scale-95 cursor-pointer font-display uppercase tracking-wider"
-              >
-                Donate Now
-              </button>
-            )}
+            <button 
+              onClick={() => onVanCampaignClick?.()}
+              className="bg-amber-400 hover:bg-amber-300 text-slate-950 px-8 py-4 rounded-2xl font-black text-base sm:text-lg transition-all shadow-2xl hover:scale-105 active:scale-95 cursor-pointer font-display uppercase tracking-wider flex items-center justify-center gap-2 border border-amber-300"
+            >
+              <span>🚐 Support Van Fund</span>
+              <span className="text-xs bg-slate-950/20 px-2 py-0.5 rounded-full font-bold">Zeffy</span>
+            </button>
             <button 
               onClick={() => onLearnMore?.()}
-              className="bg-brand-light-blue hover:bg-white text-brand-blue px-10 py-4 rounded-2xl font-bold text-lg transition-all shadow-2xl hover:scale-105 active:scale-95 cursor-pointer font-display uppercase tracking-wider"
+              className="bg-brand-light-blue hover:bg-white text-brand-blue px-8 py-4 rounded-2xl font-bold text-base sm:text-lg transition-all shadow-2xl hover:scale-105 active:scale-95 cursor-pointer font-display uppercase tracking-wider text-center"
             >
               Our Branches
             </button>
             <button 
               onClick={() => onSupportClick?.()}
-              className="bg-white/10 hover:bg-white/20 text-white backdrop-blur-md px-10 py-4 rounded-2xl font-bold text-lg transition-all border border-white/20 text-center cursor-pointer font-display uppercase tracking-wider"
+              className="bg-white/10 hover:bg-white/20 text-white backdrop-blur-md px-8 py-4 rounded-2xl font-bold text-base sm:text-lg transition-all border border-white/20 text-center cursor-pointer font-display uppercase tracking-wider"
             >
               Get Support
             </button>

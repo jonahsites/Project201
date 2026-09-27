@@ -90,8 +90,8 @@ export default function SponsorsPartnersPage() {
     {
       name: "San Vito’s Restaurant & Pizzeria",
       location: "Bayonne, NJ",
-      description: "Community partner and host location for the Bayonne Mentorship Circle. San Vito’s generously provides a safe meeting space, warm meals, and positive peer group settings for our youth.",
-      tier: "Community Core Partner",
+      description: "Community core partner and host location for the Bayonne Mentorship Circle. San Vito’s generously provides a safe meeting space, warm meals, and positive peer group settings for our youth. San Vito's is spearheading the community QR code initiative on pizza orders to help Project 201 fund a passenger van to transport youth across New Jersey.",
+      tier: "Community Core Partner • QR Campaign Ally",
       badgeColor: "bg-emerald-500/10 text-emerald-500 border-emerald-500/20"
     }
   ];
