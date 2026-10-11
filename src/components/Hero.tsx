@@ -94,7 +94,7 @@ export default function Hero({
               onClick={() => onVanCampaignClick?.()}
               className="bg-amber-400 hover:bg-amber-300 text-slate-950 px-8 py-4 rounded-2xl font-black text-base sm:text-lg transition-all shadow-2xl hover:scale-105 active:scale-95 cursor-pointer font-display uppercase tracking-wider flex items-center justify-center gap-2 border border-amber-300"
             >
-              <span>🚐 Support Van Fund</span>
+              <span>🚐 Support Transportation Fund</span>
               <span className="text-xs bg-slate-950/20 px-2 py-0.5 rounded-full font-bold">Zeffy</span>
             </button>
             <button 

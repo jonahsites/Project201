@@ -148,7 +148,7 @@ export default function MerchPage({ initialTab = 'holiday' }: MerchPageProps) {
             </h1>
             <p className="max-w-2xl mx-auto text-slate-300 font-light text-xs sm:text-sm md:text-base leading-relaxed">
               {activeTab === 'holiday' 
-                ? 'Commemorating New Jersey’s original 1947 area code. Heavyweight black hoodies and premium crewnecks supporting Project 201 youth programs across the entire state.'
+                ? 'Commemorating New Jersey’s original 1947 area code. Premium heavyweight crewnecks supporting Project 201 youth programs across the entire state.'
                 : 'Wear your support on your chest. 100% of proceeds fund our active 1-on-1 mentorship networks, positive role modeling, and community outings in New Jersey.'}
             </p>
           </div>

@@ -26,7 +26,6 @@ import {
 import { sendFormToEmail, TARGET_EMAIL, openMailClient } from '../lib/emailService';
 
 // Fallback illustrations
-import holidayHoodieImg from '../assets/images/holiday_drop_hoodie_1789594162467.jpg';
 import holidayCrewneckImg from '../assets/images/holiday_drop_crewneck_1789594179393.jpg';
 
 export interface HolidayDropSectionProps {
@@ -38,27 +37,12 @@ export default function HolidayDropSection({ standalone = false }: HolidayDropSe
   // Product item options
   const products = [
     {
-      id: 'hoodie',
-      name: '201 EST. 1947 Heavyweight Hoodie',
-      tagline: 'Clean. Bold. Timeless.',
-      price: 55,
-      image: holidayHoodieImg,
-      badge: 'Holiday Drop Signature',
-      features: [
-        'Heavyweight 400+ GSM cotton-poly premium fleece',
-        'Double-layered warmth hood with metal drawstring eyelets',
-        'Spacious reinforced kangaroo front pocket',
-        'Collegiate block "201 EST. 1947" screen-printed chest emblem',
-        'Ultra-soft brushed interior with heavy ribbed cuffs & hem'
-      ]
-    },
-    {
       id: 'crewneck',
       name: '201 EST. 1947 Classic Crewneck',
       tagline: 'Heritage Knit. Everyday Comfort.',
       price: 45,
       image: holidayCrewneckImg,
-      badge: 'Classic Athletic Fit',
+      badge: 'Holiday Drop Signature',
       features: [
         'Premium 380 GSM ring-spun cotton fleece',
         'Reinforced ribbed crew collar that retains shape',
@@ -70,7 +54,7 @@ export default function HolidayDropSection({ standalone = false }: HolidayDropSe
     }
   ];
 
-  const [selectedProduct, setSelectedProduct] = useState<'hoodie' | 'crewneck'>('hoodie');
+  const [selectedProduct, setSelectedProduct] = useState<'crewneck'>('crewneck');
   const [selectedSize, setSelectedSize] = useState('L');
   const [quantity, setQuantity] = useState(1);
   const [activeImageIdx, setActiveImageIdx] = useState(0);
@@ -129,10 +113,6 @@ export default function HolidayDropSection({ standalone = false }: HolidayDropSe
     {
       url: currentItem.image,
       title: `${currentItem.name} - Front Mockup`
-    },
-    {
-      url: selectedProduct === 'hoodie' ? holidayCrewneckImg : holidayHoodieImg,
-      title: selectedProduct === 'hoodie' ? '201 Classic Crewneck Option' : '201 Heavyweight Hoodie Option'
     }
   ];
 
@@ -149,7 +129,7 @@ export default function HolidayDropSection({ standalone = false }: HolidayDropSe
       email: email.trim(),
       phone: phone.trim(),
       product: currentItem.name,
-      itemType: selectedProduct === 'hoodie' ? 'Heavyweight Hoodie' : 'Classic Crewneck',
+      itemType: 'Classic Crewneck',
       color: 'Triple Black / Heritage White Print',
       size: selectedSize,
       quantity,
@@ -215,7 +195,7 @@ export default function HolidayDropSection({ standalone = false }: HolidayDropSe
           </h2>
 
           <p className="text-sm md:text-base text-slate-300 font-light leading-relaxed max-w-2xl mx-auto">
-            Heavyweight hoodies and premium crewnecks commemorating New Jersey’s original 1947 area code.
+            Premium heavyweight crewnecks commemorating New Jersey’s original 1947 area code.
             Wear the code. Fuel the mission.
           </p>
 
@@ -311,38 +291,25 @@ export default function HolidayDropSection({ standalone = false }: HolidayDropSe
                   </div>
                 </div>
 
-                {/* Garment Selector: Switcher between Hoodie & Crewneck */}
-                <div className="grid grid-cols-2 gap-4">
-                  {products.map((prod) => (
-                    <button
-                      key={prod.id}
-                      type="button"
-                      onClick={() => {
-                        setSelectedProduct(prod.id as any);
-                        setActiveImageIdx(0);
-                      }}
-                      className={`p-3 rounded-2xl border text-left transition-all cursor-pointer flex items-center gap-3 ${
-                        selectedProduct === prod.id
-                          ? 'bg-brand-blue/40 border-brand-light-blue shadow-lg text-white'
-                          : 'bg-white/5 border-white/10 hover:border-white/20 text-slate-300'
-                      }`}
-                    >
-                      <img 
-                        src={prod.image} 
-                        alt={prod.name}
-                        referrerPolicy="no-referrer"
-                        className="w-14 h-14 object-cover rounded-xl shrink-0 bg-slate-900 border border-white/10" 
-                      />
-                      <div className="min-w-0">
-                        <span className="font-display font-bold text-xs uppercase block truncate text-white">
-                          {prod.id === 'hoodie' ? 'Hoodie ($55)' : 'Crewneck ($45)'}
-                        </span>
-                        <span className="text-[9px] text-slate-400 block truncate">
-                          {prod.tagline}
-                        </span>
-                      </div>
-                    </button>
-                  ))}
+                {/* Featured Garment Showcase Card */}
+                <div className="p-4 rounded-2xl border bg-brand-blue/30 border-brand-light-blue/60 text-white flex items-center gap-4 shadow-lg">
+                  <img 
+                    src={currentItem.image} 
+                    alt={currentItem.name}
+                    referrerPolicy="no-referrer"
+                    className="w-16 h-16 object-cover rounded-xl shrink-0 bg-slate-900 border border-white/10" 
+                  />
+                  <div className="min-w-0">
+                    <span className="font-display font-bold text-sm uppercase block truncate text-white">
+                      {currentItem.name} (${currentItem.price})
+                    </span>
+                    <span className="text-xs text-brand-light-blue block truncate font-medium">
+                      {currentItem.tagline}
+                    </span>
+                    <span className="text-[10px] text-slate-300 block mt-0.5">
+                      Heavyweight 380 GSM ring-spun fleece • Triple Black
+                    </span>
+                  </div>
                 </div>
 
                 {/* Quality Details Checklist */}
@@ -393,43 +360,25 @@ export default function HolidayDropSection({ standalone = false }: HolidayDropSe
 
                   <form onSubmit={handlePreorderSubmit} className="space-y-6">
                     
-                    {/* Item Choice (Hoodie vs Crewneck) */}
+                    {/* Item Choice */}
                     <div className="space-y-2">
                       <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 font-display">
-                        1. Select Garment Style:
+                        1. Garment Style:
                       </label>
-                      <div className="grid grid-cols-2 gap-3">
-                        <button
-                          type="button"
-                          onClick={() => setSelectedProduct('hoodie')}
-                          className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between ${
-                            selectedProduct === 'hoodie'
-                              ? 'bg-brand-blue/5 border-brand-blue text-brand-blue shadow-sm'
-                              : 'bg-slate-50 border-slate-200 text-slate-700 hover:border-slate-300'
-                          }`}
-                        >
-                          <div className="flex justify-between items-center w-full">
-                            <span className="font-display font-extrabold text-xs uppercase">Heavyweight Hoodie</span>
-                            {selectedProduct === 'hoodie' && <CheckCircle className="w-4 h-4 text-brand-blue" />}
+                      <div className="p-3.5 rounded-2xl border bg-brand-blue/5 border-brand-blue text-brand-blue shadow-sm flex items-center justify-between">
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="font-display font-extrabold text-xs uppercase text-slate-950">201 EST. 1947 Classic Crewneck</span>
+                            <span className="text-[10px] bg-brand-blue text-white px-2 py-0.5 rounded-full font-bold">Included</span>
                           </div>
-                          <span className="text-sm font-black font-display mt-1 text-slate-900">$55.00</span>
-                        </button>
-
-                        <button
-                          type="button"
-                          onClick={() => setSelectedProduct('crewneck')}
-                          className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between ${
-                            selectedProduct === 'crewneck'
-                              ? 'bg-brand-blue/5 border-brand-blue text-brand-blue shadow-sm'
-                              : 'bg-slate-50 border-slate-200 text-slate-700 hover:border-slate-300'
-                          }`}
-                        >
-                          <div className="flex justify-between items-center w-full">
-                            <span className="font-display font-extrabold text-xs uppercase">Classic Crewneck</span>
-                            {selectedProduct === 'crewneck' && <CheckCircle className="w-4 h-4 text-brand-blue" />}
-                          </div>
-                          <span className="text-sm font-black font-display mt-1 text-slate-900">$45.00</span>
-                        </button>
+                          <span className="text-[11px] text-slate-500 font-light block mt-0.5">
+                            Premium 380 GSM Ring-Spun Fleece • Triple Black
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm font-black font-display text-slate-950">$45.00</span>
+                          <CheckCircle className="w-4 h-4 text-brand-blue shrink-0" />
+                        </div>
                       </div>
                     </div>
 
