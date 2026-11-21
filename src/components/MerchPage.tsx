@@ -23,6 +23,7 @@ import tshirtCloseUpImg from '../assets/images/save_our_youth_close_up_178326840
 import displaySheetImg from '../assets/images/save_our_youth_full_display_sheet_1783268800620.jpg';
 import project201973Img from '../assets/images/project201_973_exact_tshirt_1786292209922.jpg';
 import HolidayDropSection from './HolidayDropSection';
+import { EditableText } from './cms/Editable';
 
 interface MerchPageProps {
   initialTab?: 'holiday' | 'tees';
@@ -136,21 +137,36 @@ export default function MerchPage({ initialTab = 'holiday' }: MerchPageProps) {
         </div>
         <div className="container mx-auto px-4 relative z-10 max-w-6xl text-center space-y-6">
           <div className="space-y-3">
-            <span className="text-brand-light-blue font-bold uppercase tracking-[0.25em] text-[10px] block font-display">
-              {activeTab === 'holiday' ? 'Official Holiday Drop • Limited Pre-Order' : 'Official Campaign Merchandise'}
-            </span>
+            <EditableText
+              id={`merch.hero.${activeTab}.eyebrow`}
+              as="span"
+              label="Merch Hero Eyebrow"
+              defaultText={activeTab === 'holiday' ? 'Official Holiday Drop • Limited Pre-Order' : 'Official Campaign Merchandise'}
+              className="text-brand-light-blue font-bold uppercase tracking-[0.25em] text-[10px] block font-display"
+            />
             <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white uppercase leading-tight tracking-tight">
-              {activeTab === 'holiday' ? (
-                <>201 <span className="text-brand-light-blue font-light">EST. 1947</span></>
-              ) : (
-                <>Save Our Youth <span className="text-brand-light-blue font-light">Collection</span></>
-              )}
+              <EditableText
+                id={`merch.hero.${activeTab}.title1`}
+                label="Merch Hero Title 1"
+                defaultText={activeTab === 'holiday' ? '201' : 'Save Our Youth'}
+              />{' '}
+              <EditableText
+                id={`merch.hero.${activeTab}.title2`}
+                label="Merch Hero Title 2"
+                defaultText={activeTab === 'holiday' ? 'EST. 1947' : 'Collection'}
+                className="text-brand-light-blue font-light"
+              />
             </h1>
-            <p className="max-w-2xl mx-auto text-slate-300 font-light text-xs sm:text-sm md:text-base leading-relaxed">
-              {activeTab === 'holiday' 
+            <EditableText
+              id={`merch.hero.${activeTab}.subtitle`}
+              as="p"
+              multiline
+              label="Merch Hero Subtitle"
+              defaultText={activeTab === 'holiday'
                 ? 'Commemorating New Jersey’s original 1947 area code. Premium heavyweight crewnecks supporting Project 201 youth programs across the entire state.'
                 : 'Wear your support on your chest. 100% of proceeds fund our active 1-on-1 mentorship networks, positive role modeling, and community outings in New Jersey.'}
-            </p>
+              className="max-w-2xl mx-auto text-slate-300 font-light text-xs sm:text-sm md:text-base leading-relaxed"
+            />
           </div>
 
           {/* Collection Tab Selector */}

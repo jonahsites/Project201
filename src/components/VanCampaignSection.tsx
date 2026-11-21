@@ -20,6 +20,8 @@ import {
   Compass,
   CheckCircle2
 } from 'lucide-react';
+import { EditableImage, EditableText } from './cms/Editable';
+import { useSiteContent } from '../context/SiteContentContext';
 
 const ZEFFY_CAMPAIGN_URL = "https://www.zeffy.com/en-US/donation-form/support-project--201";
 const CAMPAIGN_FLYER_IMG = "/van-campaign-flyer.png";
@@ -32,6 +34,7 @@ interface VanCampaignSectionProps {
 }
 
 export default function VanCampaignSection({ standalone = false, onNavigateContact }: VanCampaignSectionProps) {
+  const { isConsoleMode, consoleEditMode } = useSiteContent();
   const [qrCodeDataUrl, setQrCodeDataUrl] = useState<string>('');
   const [copied, setCopied] = useState<boolean>(false);
   const [showPrintModal, setShowPrintModal] = useState<boolean>(false);
@@ -87,23 +90,46 @@ export default function VanCampaignSection({ standalone = false, onNavigateConta
         <div className="flex flex-wrap items-center justify-center gap-3 mb-6">
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/30 text-xs font-bold font-display uppercase tracking-widest backdrop-blur-md shadow-lg">
             <Pizza className="w-4 h-4 text-amber-400 animate-bounce" />
-            <span>Pizzeria Partner Community Campaign</span>
+            <EditableText
+              id="van.badge1"
+              label="Van Campaign Badge 1"
+              defaultText="Pizzeria Partner Community Campaign"
+            />
           </span>
           <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-brand-light-blue/20 text-brand-light-blue border border-brand-light-blue/30 text-xs font-bold font-display uppercase tracking-wider backdrop-blur-md">
             <Car className="w-4 h-4" />
-            <span>Youth Transportation Passenger Van Fundraiser</span>
+            <EditableText
+              id="van.badge2"
+              label="Van Campaign Badge 2"
+              defaultText="Youth Transportation Passenger Van Fundraiser"
+            />
           </span>
         </div>
 
         {/* Main Title Header */}
         <div className="text-center max-w-4xl mx-auto space-y-4 mb-16">
           <h2 className="font-display text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white leading-[1.05]">
-            🚐 HELP PROJECT 201 <br className="hidden sm:inline" />
-            <span className="text-brand-light-blue">GET OUR YOUTH THERE</span> 💙
+            <EditableText
+              id="van.title1"
+              label="Van Campaign Title Line 1"
+              defaultText="🚐 HELP PROJECT 201"
+            />{' '}
+            <br className="hidden sm:inline" />
+            <EditableText
+              id="van.title2"
+              label="Van Campaign Title Line 2"
+              defaultText="GET OUR YOUTH THERE 💙"
+              className="text-brand-light-blue"
+            />
           </h2>
-          <p className="text-slate-300 font-light text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-            Sometimes the opportunity is there — <strong className="text-white font-semibold">but the ride isn’t.</strong> At Project 201, we believe transportation should never be the reason a young person misses an opportunity to learn, grow, belong, or experience something new.
-          </p>
+          <EditableText
+            id="van.subtitle"
+            as="p"
+            multiline
+            label="Van Campaign Subtitle"
+            defaultText="Sometimes the opportunity is there — but the ride isn’t. At Project 201, we believe transportation should never be the reason a young person misses an opportunity to learn, grow, belong, or experience something new."
+            className="text-slate-300 font-light text-base sm:text-lg max-w-2xl mx-auto leading-relaxed"
+          />
         </div>
 
         {/* Core Spotlight Grid: QR Code & Direct Zeffy Support + Flyer Art */}
@@ -129,18 +155,20 @@ export default function VanCampaignSection({ standalone = false, onNavigateConta
 
               {/* Flyer Artwork */}
               <div 
-                onClick={() => setShowImageZoom(true)}
+                onClick={() => {
+                  if (isConsoleMode && consoleEditMode) return;
+                  setShowImageZoom(true);
+                }}
                 className="relative aspect-square rounded-2xl overflow-hidden border border-white/15 bg-slate-950/60 cursor-pointer group-hover:border-brand-light-blue/40 transition-all shadow-inner"
               >
-                <img 
-                  src={CAMPAIGN_FLYER_IMG} 
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = CAMPAIGN_FLYER_FALLBACK;
-                  }}
-                  alt="Support Project 201 - Help Our Youth Get There Flyer" 
+                <EditableImage
+                  id="van.flyerImage"
+                  defaultSrc={CAMPAIGN_FLYER_FALLBACK}
+                  alt="Support Project 201 - Help Our Youth Get There Flyer"
+                  label="Van Campaign Flyer Image"
                   className="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-slate-950/20 group-hover:bg-transparent transition-colors flex items-end p-4">
+                <div className="pointer-events-none absolute inset-0 bg-slate-950/20 group-hover:bg-transparent transition-colors flex items-end p-4">
                   <span className="text-[10px] font-bold text-white bg-slate-900/80 px-2.5 py-1 rounded-md backdrop-blur-sm border border-white/10">
                     Click to view full flyer
                   </span>
@@ -148,12 +176,21 @@ export default function VanCampaignSection({ standalone = false, onNavigateConta
               </div>
 
               <div className="pt-2 space-y-2">
-                <h3 className="font-display text-lg font-bold uppercase text-white tracking-wide">
-                  Vehicle Acquisition &amp; Safety Fund
-                </h3>
-                <p className="text-slate-350 text-xs font-light leading-relaxed">
-                  Funds raised through this campaign will help purchase and put a safe youth transportation vehicle into service, including necessary insurance, registration, safety equipment, and initial operating expenses.
-                </p>
+                <EditableText
+                  id="van.flyer.title"
+                  as="h3"
+                  label="Van Flyer Card Title"
+                  defaultText="Vehicle Acquisition & Safety Fund"
+                  className="font-display text-lg font-bold uppercase text-white tracking-wide"
+                />
+                <EditableText
+                  id="van.flyer.desc"
+                  as="p"
+                  multiline
+                  label="Van Flyer Card Description"
+                  defaultText="Funds raised through this campaign will help purchase and put a safe youth transportation vehicle into service, including necessary insurance, registration, safety equipment, and initial operating expenses."
+                  className="text-slate-350 text-xs font-light leading-relaxed"
+                />
               </div>
             </div>
 

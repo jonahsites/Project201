@@ -14,6 +14,7 @@ import {
   Sparkles,
   ArrowRight
 } from 'lucide-react';
+import { EditableText } from './cms/Editable';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -45,16 +46,35 @@ export default function ContactPage() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,white,transparent)]" />
         </div>
         <div className="container mx-auto px-4 relative z-10 max-w-6xl text-center">
-          <span className="text-brand-light-blue font-bold uppercase tracking-[0.25em] text-[10px] block mb-3 font-display">
-            Reach Out Directly
-          </span>
+          <EditableText
+            id="contact.hero.eyebrow"
+            as="span"
+            label="Contact Hero Eyebrow"
+            defaultText="Reach Out Directly"
+            className="text-brand-light-blue font-bold uppercase tracking-[0.25em] text-[10px] block mb-3 font-display"
+          />
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-white uppercase mb-6 leading-tight">
-            GET IN TOUCH <br />
-            <span className="font-bold text-brand-light-blue">&amp; JOIN THE MOVEMENT</span>
+            <EditableText
+              id="contact.hero.title1"
+              label="Contact Hero Title 1"
+              defaultText="GET IN TOUCH"
+            />{' '}
+            <br />
+            <EditableText
+              id="contact.hero.title2"
+              label="Contact Hero Title 2"
+              defaultText="& JOIN THE MOVEMENT"
+              className="font-bold text-brand-light-blue"
+            />
           </h1>
-          <p className="max-w-2xl mx-auto text-slate-300 font-light text-sm md:text-base leading-relaxed">
-            Have general inquiries, volunteering questions, or donation thoughts? Reach out to our executive staff and we'll reply directly.
-          </p>
+          <EditableText
+            id="contact.hero.subtitle"
+            as="p"
+            multiline
+            label="Contact Hero Subtitle"
+            defaultText="Have general inquiries, volunteering questions, or donation thoughts? Reach out to our executive staff and we'll reply directly."
+            className="max-w-2xl mx-auto text-slate-300 font-light text-sm md:text-base leading-relaxed"
+          />
         </div>
       </section>
 
@@ -66,13 +86,28 @@ export default function ContactPage() {
             {/* Left direct contact details */}
             <div className="lg:col-span-5 space-y-12">
               <div className="space-y-4">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-brand-light-blue font-display block">Direct Contacts</span>
-                <h2 className="font-display text-2xl font-bold uppercase text-slate-900 tracking-tight leading-none">
-                  Project 201 Headquarters
-                </h2>
-                <p className="text-slate-500 font-light text-xs md:text-sm leading-relaxed">
-                  We operate across Jersey City and statewide community circles. Send an email or phone us for rapid registration coordinate questions.
-                </p>
+                <EditableText
+                  id="contact.hq.eyebrow"
+                  as="span"
+                  label="Contact HQ Eyebrow"
+                  defaultText="Direct Contacts"
+                  className="text-[10px] font-bold uppercase tracking-widest text-brand-light-blue font-display block"
+                />
+                <EditableText
+                  id="contact.hq.title"
+                  as="h2"
+                  label="Contact HQ Title"
+                  defaultText="Project 201 Headquarters"
+                  className="font-display text-2xl font-bold uppercase text-slate-900 tracking-tight leading-none"
+                />
+                <EditableText
+                  id="contact.hq.desc"
+                  as="p"
+                  multiline
+                  label="Contact HQ Description"
+                  defaultText="We operate across Jersey City and statewide community circles. Send an email or phone us for rapid registration coordinate questions."
+                  className="text-slate-500 font-light text-xs md:text-sm leading-relaxed"
+                />
               </div>
 
               <div className="space-y-6">

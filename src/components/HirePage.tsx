@@ -30,6 +30,7 @@ import {
   PenTool,
   Mail
 } from 'lucide-react';
+import { EditableText } from './cms/Editable';
 
 export default function HirePage() {
   const [activeTab, setActiveTab] = useState<'consultation' | 'registration'>('consultation');
@@ -216,15 +217,34 @@ export default function HirePage() {
           <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-brand-light-blue rounded-full blur-[140px]" />
         </div>
         <div className="container mx-auto px-4 relative z-10 max-w-6xl text-center">
-          <span className="text-brand-light-blue font-bold uppercase tracking-[0.25em] text-xs block mb-3 font-display">
-            Project 201 Intake &amp; Booking
-          </span>
+          <EditableText
+            id="hire.hero.eyebrow"
+            as="span"
+            label="Hire Hero Eyebrow"
+            defaultText="Project 201 Intake & Booking"
+            className="text-brand-light-blue font-bold uppercase tracking-[0.25em] text-xs block mb-3 font-display"
+          />
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-white uppercase mb-5 leading-tight">
-            Work with <span className="font-bold text-brand-light-blue">Project 201</span>
+            <EditableText
+              id="hire.hero.title1"
+              label="Hire Hero Title 1"
+              defaultText="Work with"
+            />{' '}
+            <EditableText
+              id="hire.hero.title2"
+              label="Hire Hero Title 2"
+              defaultText="Project 201"
+              className="font-bold text-brand-light-blue"
+            />
           </h1>
-          <p className="max-w-2xl mx-auto text-slate-300 font-light text-sm md:text-base leading-relaxed">
-            Choose your path: Schools/Agencies can contract customized community lectures, assemblies, or training programs. Parents can register their youth directly for sports lessons, mentorship, and clinical sports preparation.
-          </p>
+          <EditableText
+            id="hire.hero.subtitle"
+            as="p"
+            multiline
+            label="Hire Hero Subtitle"
+            defaultText="Choose your path: Schools/Agencies can contract customized community lectures, assemblies, or training programs. Parents can register their youth directly for sports lessons, mentorship, and clinical sports preparation."
+            className="max-w-2xl mx-auto text-slate-300 font-light text-sm md:text-base leading-relaxed"
+          />
 
           {/* Interactive Navigation Switcher */}
           <div className="mt-12 max-w-2xl mx-auto flex p-1.5 bg-slate-900/60 rounded-2xl border border-white/10 relative z-20">

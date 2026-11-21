@@ -17,8 +17,11 @@ import {
   Instagram,
   Youtube
 } from 'lucide-react';
+import { EditableImage, EditableText } from './cms/Editable';
+import { useSiteContent } from '../context/SiteContentContext';
 
 export default function SponsorsPartnersPage() {
+  const { activeSettings, isConsoleMode, consoleEditMode } = useSiteContent();
   const [formData, setFormData] = useState({
     businessName: '',
     contactName: '',
@@ -128,16 +131,35 @@ export default function SponsorsPartnersPage() {
           <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-brand-light-blue rounded-full blur-[140px]" />
         </div>
         <div className="container mx-auto px-4 relative z-10 max-w-6xl text-center">
-          <span className="text-brand-light-blue font-bold uppercase tracking-[0.25em] text-xs block mb-3 font-display">
-            Sponsors &amp; Supporters
-          </span>
+          <EditableText
+            id="sponsors.hero.eyebrow"
+            as="span"
+            label="Sponsors Hero Eyebrow"
+            defaultText="Sponsors & Supporters"
+            className="text-brand-light-blue font-bold uppercase tracking-[0.25em] text-xs block mb-3 font-display"
+          />
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-white uppercase mb-6 leading-tight">
-            Our Sponsors &amp; <br />
-            <span className="font-bold text-brand-light-blue">Community Partners</span>
+            <EditableText
+              id="sponsors.hero.title1"
+              label="Sponsors Hero Title 1"
+              defaultText="Our Sponsors &"
+            />{' '}
+            <br />
+            <EditableText
+              id="sponsors.hero.title2"
+              label="Sponsors Hero Title 2"
+              defaultText="Community Partners"
+              className="font-bold text-brand-light-blue"
+            />
           </h1>
-          <p className="max-w-2xl mx-auto text-slate-300 font-light text-base md:text-lg leading-relaxed">
-            We are deeply grateful for the local businesses, restaurants, and organizations whose generous backing fuels our movement across New Jersey. Together, we make mentorship a reality.
-          </p>
+          <EditableText
+            id="sponsors.hero.subtitle"
+            as="p"
+            multiline
+            label="Sponsors Hero Subtitle"
+            defaultText="We are deeply grateful for the local businesses, restaurants, and organizations whose generous backing fuels our movement across New Jersey. Together, we make mentorship a reality."
+            className="max-w-2xl mx-auto text-slate-300 font-light text-base md:text-lg leading-relaxed"
+          />
         </div>
       </section>
 
@@ -153,30 +175,44 @@ export default function SponsorsPartnersPage() {
               <div className="space-y-6">
                 <div className="flex items-center gap-3">
                   <div className="w-1.5 h-8 bg-brand-light-blue rounded-full" />
-                  <h2 className="font-display text-3xl font-bold text-slate-900 uppercase">
-                    Our Featured Supporters
-                  </h2>
+                  <EditableText
+                    id="sponsors.list.title"
+                    as="h2"
+                    label="Sponsors List Heading"
+                    defaultText="Our Featured Supporters"
+                    className="font-display text-3xl font-bold text-slate-900 uppercase"
+                  />
                 </div>
-                <p className="text-slate-600 font-light text-sm md:text-base leading-relaxed">
-                  Generous corporate sponsors and local partners empower Project 201 to maintain athletic training, daily behavior diaries, structured circles, and safety gear.
-                </p>
+                <EditableText
+                  id="sponsors.list.subtitle"
+                  as="p"
+                  multiline
+                  label="Sponsors List Subtitle"
+                  defaultText="Generous corporate sponsors and local partners empower Project 201 to maintain athletic training, daily behavior diaries, structured circles, and safety gear."
+                  className="text-slate-600 font-light text-sm md:text-base leading-relaxed"
+                />
 
                 {/* Showcase Cards Grid */}
                 <div className="space-y-6">
-                  {sponsors.map((sp, idx) => (
+                  {sponsors.map((sp, idx) => {
+                    const imgOverride = activeSettings.imageOverrides[`sponsors.item.${idx}.image`];
+                    const showPhoto = Boolean(sp.image || imgOverride || (isConsoleMode && consoleEditMode));
+                    return (
                     <div 
                       key={idx} 
                       className="bg-white rounded-3xl p-8 border border-slate-100 shadow-sm hover:border-brand-blue/15 transition-all relative overflow-hidden group"
                     >
                       <div className="absolute top-0 right-0 w-32 h-32 bg-brand-light-blue/5 rounded-full blur-2xl group-hover:bg-brand-light-blue/10 transition-colors" />
                       <div className="flex flex-col sm:flex-row gap-6 relative z-10 items-start">
-                        {sp.image ? (
-                          <div className="w-20 h-20 rounded-2xl overflow-hidden shrink-0 border border-slate-100 shadow-sm">
-                            <img 
-                              src={sp.image} 
-                              alt={sp.name} 
+                        {showPhoto ? (
+                          <div className="w-20 h-20 rounded-2xl overflow-hidden shrink-0 border border-slate-100 shadow-sm relative">
+                            <EditableImage
+                              id={`sponsors.item.${idx}.image`}
+                              defaultSrc={sp.image || ''}
+                              alt={sp.name}
+                              label={`${sp.name} Logo / Image`}
+                              fallbackText={sp.name[0]}
                               className="w-full h-full object-cover"
-                              referrerPolicy="no-referrer"
                             />
                           </div>
                         ) : (
@@ -186,22 +222,39 @@ export default function SponsorsPartnersPage() {
                         )}
                         <div className="space-y-3 flex-1">
                           <div className="flex flex-wrap items-center gap-3">
-                            <h3 className="font-display font-extrabold text-slate-900 text-lg uppercase tracking-tight">
-                              {sp.name}
-                            </h3>
-                            <span className={`px-2.5 py-1 text-[9px] font-bold tracking-widest uppercase border rounded-full ${sp.badgeColor}`}>
-                              {sp.tier}
-                            </span>
+                            <EditableText
+                              id={`sponsors.item.${idx}.name`}
+                              as="h3"
+                              label={`Sponsor ${idx + 1} Name`}
+                              defaultText={sp.name}
+                              className="font-display font-extrabold text-slate-900 text-lg uppercase tracking-tight"
+                            />
+                            <EditableText
+                              id={`sponsors.item.${idx}.tier`}
+                              as="span"
+                              label={`Sponsor ${idx + 1} Tier`}
+                              defaultText={sp.tier}
+                              className={`px-2.5 py-1 text-[9px] font-bold tracking-widest uppercase border rounded-full ${sp.badgeColor}`}
+                            />
                           </div>
                           
                           <div className="flex items-center gap-1.5 text-slate-400 text-xs font-medium">
                             <MapPin className="w-3.5 h-3.5 shrink-0 text-brand-light-blue" />
-                            <span>{sp.location}</span>
+                            <EditableText
+                              id={`sponsors.item.${idx}.location`}
+                              label={`Sponsor ${idx + 1} Location`}
+                              defaultText={sp.location}
+                            />
                           </div>
 
-                          <p className="text-slate-500 font-light text-xs leading-relaxed">
-                            {sp.description}
-                          </p>
+                          <EditableText
+                            id={`sponsors.item.${idx}.description`}
+                            as="p"
+                            multiline
+                            label={`Sponsor ${idx + 1} Description`}
+                            defaultText={sp.description}
+                            className="text-slate-500 font-light text-xs leading-relaxed"
+                          />
 
                           {sp.instagramLink && (
                             <div className="pt-2">
@@ -236,7 +289,7 @@ export default function SponsorsPartnersPage() {
                         </div>
                       </div>
                     </div>
-                  ))}
+                  );})}
                 </div>
               </div>
 

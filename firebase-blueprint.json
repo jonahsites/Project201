@@ -1,0 +1,290 @@
+{
+  "entities": {
+    "SiteSettings": {
+      "title": "SiteSettings",
+      "description": "Global published website configuration, navigation order, hidden pages, and content/image overrides managed from /console.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "brandName": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "logoUrl": {
+          "type": "string",
+          "maxLength": 1000
+        },
+        "announcementBadge": {
+          "type": "string",
+          "maxLength": 60
+        },
+        "announcementText": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "announcementCta": {
+          "type": "string",
+          "maxLength": 60
+        },
+        "announcementVisible": {
+          "type": "boolean"
+        },
+        "pagesOrder": {
+          "type": "array",
+          "description": "Ordered list of page slugs."
+        },
+        "hiddenPages": {
+          "type": "array",
+          "description": "List of removed or hidden built-in page slugs."
+        },
+        "pageLabels": {
+          "type": "object",
+          "description": "Map of page slug to display label."
+        },
+        "textOverrides": {
+          "type": "object",
+          "description": "Map of semantic text block IDs to customized text strings."
+        },
+        "imageOverrides": {
+          "type": "object",
+          "description": "Map of semantic image slot IDs to image URLs or asset:// references."
+        },
+        "updatedBy": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "brandName",
+        "logoUrl",
+        "announcementBadge",
+        "announcementText",
+        "announcementCta",
+        "announcementVisible",
+        "pagesOrder",
+        "hiddenPages",
+        "pageLabels",
+        "textOverrides",
+        "imageOverrides",
+        "updatedBy",
+        "updatedAt"
+      ]
+    },
+    "CustomPage": {
+      "title": "CustomPage",
+      "description": "A user-created website page generated from a structured template in /console.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 80,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "slug": {
+          "type": "string",
+          "maxLength": 80,
+          "pattern": "^[a-z0-9\\-]+$"
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "templateType": {
+          "type": "string",
+          "enum": ["campaign", "program", "spotlight", "gallery"]
+        },
+        "published": {
+          "type": "boolean"
+        },
+        "showInNav": {
+          "type": "boolean"
+        },
+        "heroEyebrow": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "heroTitle": {
+          "type": "string",
+          "maxLength": 180
+        },
+        "heroSubtitle": {
+          "type": "string",
+          "maxLength": 800
+        },
+        "heroImage": {
+          "type": "string",
+          "maxLength": 1000
+        },
+        "ctaLabel": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "ctaTarget": {
+          "type": "string",
+          "maxLength": 300
+        },
+        "sectionTitle": {
+          "type": "string",
+          "maxLength": 180
+        },
+        "sectionBody": {
+          "type": "string",
+          "maxLength": 4000
+        },
+        "sectionImage": {
+          "type": "string",
+          "maxLength": 1000
+        },
+        "cards": {
+          "type": "array",
+          "description": "Up to 12 template content cards or gallery items."
+        },
+        "ownerId": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "slug",
+        "title",
+        "templateType",
+        "published",
+        "showInNav",
+        "heroEyebrow",
+        "heroTitle",
+        "heroSubtitle",
+        "heroImage",
+        "ctaLabel",
+        "ctaTarget",
+        "sectionTitle",
+        "sectionBody",
+        "sectionImage",
+        "cards",
+        "ownerId",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "MediaAsset": {
+      "title": "MediaAsset",
+      "description": "Uploaded image asset compressed for web delivery and stored in Firestore for /console and live pages.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "mimeType": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "dataUrl": {
+          "type": "string",
+          "maxLength": 800000
+        },
+        "width": {
+          "type": "number"
+        },
+        "height": {
+          "type": "number"
+        },
+        "sizeBytes": {
+          "type": "number"
+        },
+        "isPublic": {
+          "type": "boolean"
+        },
+        "uploadedBy": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "mimeType",
+        "dataUrl",
+        "width",
+        "height",
+        "sizeBytes",
+        "isPublic",
+        "uploadedBy",
+        "createdAt"
+      ]
+    },
+    "AdminUser": {
+      "title": "AdminUser",
+      "description": "Authorized console administrator account.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "email": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "role": {
+          "type": "string",
+          "enum": ["admin"]
+        },
+        "addedBy": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["uid", "email", "role", "addedBy", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/site_settings/{settingId}": {
+      "schema": { "$ref": "#/entities/SiteSettings" },
+      "description": "Published global website configuration and content overrides."
+    },
+    "/custom_pages/{pageId}": {
+      "schema": { "$ref": "#/entities/CustomPage" },
+      "description": "Template-based custom pages created in /console."
+    },
+    "/media_assets/{assetId}": {
+      "schema": { "$ref": "#/entities/MediaAsset" },
+      "description": "Uploaded image assets used across the website."
+    },
+    "/admins/{adminUid}": {
+      "schema": { "$ref": "#/entities/AdminUser" },
+      "description": "Authorized /console administrators."
+    }
+  }
+}

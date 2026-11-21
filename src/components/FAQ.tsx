@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Plus, Minus } from 'lucide-react';
+import { EditableText } from './cms/Editable';
 
 const faqs = [
   {
@@ -32,11 +33,27 @@ export default function FAQ() {
     <section className="py-24">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="text-center mb-16">
-          <span className="text-brand-light-blue font-bold tracking-widest text-xs uppercase mb-4 block">Information</span>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-slate-900 mb-4 uppercase">
-            201 Training FAQ's
-          </h2>
-          <p className="text-slate-500 font-light uppercase tracking-tighter">Looking for something specific?</p>
+          <EditableText
+            id="faq.eyebrow"
+            as="span"
+            label="FAQ Eyebrow"
+            defaultText="Information"
+            className="text-brand-light-blue font-bold tracking-widest text-xs uppercase mb-4 block"
+          />
+          <EditableText
+            id="faq.title"
+            as="h2"
+            label="FAQ Heading"
+            defaultText="201 Training FAQ's"
+            className="font-display text-4xl md:text-5xl font-bold text-slate-900 mb-4 uppercase"
+          />
+          <EditableText
+            id="faq.subtitle"
+            as="p"
+            label="FAQ Subtitle"
+            defaultText="Looking for something specific?"
+            className="text-slate-500 font-light uppercase tracking-tighter"
+          />
         </div>
 
         <div className="space-y-4">
@@ -46,9 +63,13 @@ export default function FAQ() {
                 onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
                 className="w-full flex items-center justify-between p-6 text-left hover:bg-slate-50 transition-colors"
               >
-                <span className="font-display font-bold text-slate-800 text-lg md:text-xl pr-8 uppercase tracking-tight">
-                  {faq.q}
-                </span>
+                <EditableText
+                  id={`faq.item.${idx}.q`}
+                  as="span"
+                  label={`FAQ Question ${idx + 1}`}
+                  defaultText={faq.q}
+                  className="font-display font-bold text-slate-800 text-lg md:text-xl pr-8 uppercase tracking-tight"
+                />
                 <div className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all ${openIndex === idx ? 'bg-brand-blue text-white' : 'bg-slate-100 text-slate-500'}`}>
                   {openIndex === idx ? <Minus size={18} /> : <Plus size={18} />}
                 </div>
@@ -61,7 +82,13 @@ export default function FAQ() {
                     exit={{ height: 0, opacity: 0 }}
                   >
                     <div className="px-6 pb-6 text-slate-600 leading-relaxed font-light">
-                      {faq.a}
+                      <EditableText
+                        id={`faq.item.${idx}.a`}
+                        as="p"
+                        multiline
+                        label={`FAQ Answer ${idx + 1}`}
+                        defaultText={faq.a}
+                      />
                     </div>
                   </motion.div>
                 )}

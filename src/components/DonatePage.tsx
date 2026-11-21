@@ -20,6 +20,8 @@ import {
 } from 'lucide-react';
 import { BentoPricing } from './ui/bento-pricing';
 import VanCampaignSection from './VanCampaignSection';
+import { EditableImage, EditableText } from './cms/Editable';
+import { useSiteContent } from '../context/SiteContentContext';
 
 interface DonatePageProps {
   onDonate: (amount?: string) => void;
@@ -28,6 +30,8 @@ interface DonatePageProps {
 
 export default function DonatePage({ onDonate, onNavigateContact }: DonatePageProps) {
   const [copied, setCopied] = useState(false);
+  const { activeSettings } = useSiteContent();
+  const mailingImageOverride = activeSettings.imageOverrides['donate.mailingImage'];
 
   const handleCopyAddress = () => {
     const text = "Project 201\n576 Avenue A\nBayonne, NJ 07002";
@@ -50,22 +54,45 @@ export default function DonatePage({ onDonate, onNavigateContact }: DonatePagePr
           <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-brand-light-blue rounded-full blur-[120px]" />
         </div>
         <div className="container mx-auto px-4 relative z-10 max-w-6xl text-center">
-          <span className="text-brand-light-blue font-bold uppercase tracking-[0.25em] text-[10px] block mb-3 font-display">
-            Invest in Statewide Growth
-          </span>
+          <EditableText
+            id="donate.hero.eyebrow"
+            as="span"
+            label="Donate Hero Eyebrow"
+            defaultText="Invest in Statewide Growth"
+            className="text-brand-light-blue font-bold uppercase tracking-[0.25em] text-[10px] block mb-3 font-display"
+          />
           <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-extrabold text-white uppercase mb-6 leading-tight max-w-4xl mx-auto tracking-tight">
-            Help Us Build Stronger Youth, <br />
-            <span className="text-brand-light-blue font-light">Stronger Families, and Stronger Communities.</span>
+            <EditableText
+              id="donate.hero.title1"
+              label="Donate Hero Headline 1"
+              defaultText="Help Us Build Stronger Youth,"
+            />{' '}
+            <br />
+            <EditableText
+              id="donate.hero.title2"
+              label="Donate Hero Headline 2"
+              defaultText="Stronger Families, and Stronger Communities."
+              className="text-brand-light-blue font-light"
+            />
           </h1>
-          <p className="max-w-2xl mx-auto text-slate-350 font-light text-xs md:text-sm leading-relaxed mb-6">
-            Donations support mentorship, leadership development, sports programming, educational opportunities, and positive role models for youth across New Jersey, helping them make positive life decisions. At Project 201, we believe sports are just one of the tools we use to guide the next generation.
-          </p>
+          <EditableText
+            id="donate.hero.subtitle"
+            as="p"
+            multiline
+            label="Donate Hero Description"
+            defaultText="Donations support mentorship, leadership development, sports programming, educational opportunities, and positive role models for youth across New Jersey, helping them make positive life decisions. At Project 201, we believe sports are just one of the tools we use to guide the next generation."
+            className="max-w-2xl mx-auto text-slate-350 font-light text-xs md:text-sm leading-relaxed mb-6"
+          />
 
           <a 
             href="#youth-van-campaign"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-amber-400 text-slate-950 font-display font-black text-xs uppercase tracking-wider shadow-lg hover:bg-amber-300 transition-all cursor-pointer animate-pulse"
           >
-            <span>🍕 Pizzeria Partner Campaign: Youth Passenger Van Fundraiser</span>
+            <EditableText
+              id="donate.hero.vanBadge"
+              label="Donate Van Campaign Badge"
+              defaultText="🍕 Pizzeria Partner Campaign: Youth Passenger Van Fundraiser"
+            />
             <span>↓</span>
           </a>
         </div>
@@ -82,15 +109,27 @@ export default function DonatePage({ onDonate, onNavigateContact }: DonatePagePr
             {/* Bento Tiers Grid (8 Columns code block) */}
             <div className="lg:col-span-8 space-y-12">
               <div className="flex flex-col gap-3">
-                <span className="text-brand-light-blue font-bold uppercase tracking-[0.25em] text-[10px] block font-display">
-                  Sponsorship Level Select
-                </span>
-                <h2 className="font-display text-3xl font-bold uppercase text-slate-900 tracking-tight leading-none">
-                  Select Your Impact Level
-                </h2>
-                <p className="text-slate-650 font-light text-xs md:text-sm leading-relaxed">
-                  Every level corresponds with verified support deliverables. Hover and tap an option to begin.
-                </p>
+                <EditableText
+                  id="donate.tiers.eyebrow"
+                  as="span"
+                  label="Impact Level Eyebrow"
+                  defaultText="Sponsorship Level Select"
+                  className="text-brand-light-blue font-bold uppercase tracking-[0.25em] text-[10px] block font-display"
+                />
+                <EditableText
+                  id="donate.tiers.title"
+                  as="h2"
+                  label="Impact Level Title"
+                  defaultText="Select Your Impact Level"
+                  className="font-display text-3xl font-bold uppercase text-slate-900 tracking-tight leading-none"
+                />
+                <EditableText
+                  id="donate.tiers.subtitle"
+                  as="p"
+                  label="Impact Level Subtitle"
+                  defaultText="Every level corresponds with verified support deliverables. Hover and tap an option to begin."
+                  className="text-slate-650 font-light text-xs md:text-sm leading-relaxed"
+                />
               </div>
 
               {/* Bento Grid layout */}
@@ -166,25 +205,41 @@ export default function DonatePage({ onDonate, onNavigateContact }: DonatePagePr
                     </div>
                   </div>
 
-                  {/* Image Placeholder */}
+                  {/* Facility Image (editable via /console) */}
                   <div className="md:col-span-5">
-                    <div className="bg-white/5 border-2 border-dashed border-white/20 rounded-3xl p-6 flex flex-col items-center justify-center text-center relative overflow-hidden group hover:border-brand-light-blue/50 transition-all min-h-[220px]">
-                      <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center text-brand-light-blue mb-3 group-hover:scale-110 transition-transform shadow-lg">
-                        <ImageIcon className="w-8 h-8" />
+                    {mailingImageOverride ? (
+                      <div className="relative rounded-3xl overflow-hidden border border-white/20 min-h-[220px] aspect-[4/3] shadow-xl">
+                        <EditableImage
+                          id="donate.mailingImage"
+                          defaultSrc={mailingImageOverride}
+                          alt="Project 201 Mailing Facility"
+                          label="Donate Page Facility Image"
+                          className="w-full h-full object-cover"
+                        />
                       </div>
-                      <span className="text-[10px] font-bold text-brand-light-blue uppercase tracking-widest font-display mb-1 block">
-                        Image Placeholder
-                      </span>
-                      <h4 className="font-display font-bold text-white text-sm uppercase tracking-tight">
-                        Project 201
-                      </h4>
-                      <p className="text-slate-350 text-[11px] font-light mt-0.5">
-                        576 Avenue A, Bayonne, NJ 07002
-                      </p>
-                      <div className="mt-3 px-3 py-1 bg-white/10 rounded-full text-[9px] font-mono text-slate-300">
-                        Facility / Mailing Center Asset
+                    ) : (
+                      <div className="bg-white/5 border-2 border-dashed border-white/20 rounded-3xl p-6 flex flex-col items-center justify-center text-center relative overflow-hidden group hover:border-brand-light-blue/50 transition-all min-h-[220px]">
+                        <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center text-brand-light-blue mb-3 group-hover:scale-110 transition-transform shadow-lg">
+                          <ImageIcon className="w-8 h-8" />
+                        </div>
+                        <span className="text-[10px] font-bold text-brand-light-blue uppercase tracking-widest font-display mb-1 block">
+                          Facility Photo
+                        </span>
+                        <h4 className="font-display font-bold text-white text-sm uppercase tracking-tight">
+                          Project 201
+                        </h4>
+                        <p className="text-slate-350 text-[11px] font-light mt-0.5">
+                          576 Avenue A, Bayonne, NJ 07002
+                        </p>
+                        <EditableImage
+                          id="donate.mailingImage"
+                          defaultSrc="https://lh3.googleusercontent.com/d/10NdIV7FeIt5tIMhFOWKsiMuM-uyhI_Db"
+                          alt="Upload Facility Photo"
+                          label="Donate Page Facility Image"
+                          className="sr-only"
+                        />
                       </div>
-                    </div>
+                    )}
                   </div>
                 </div>
               </div>

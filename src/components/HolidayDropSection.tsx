@@ -27,6 +27,7 @@ import { sendFormToEmail, TARGET_EMAIL, openMailClient } from '../lib/emailServi
 
 // Fallback illustrations
 import holidayCrewneckImg from '../assets/images/holiday_drop_crewneck_1789594179393.jpg';
+import { EditableImage, EditableText } from './cms/Editable';
 
 export interface HolidayDropSectionProps {
   onDonate?: () => void;
@@ -187,17 +188,35 @@ export default function HolidayDropSection({ standalone = false }: HolidayDropSe
         <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 text-brand-light-blue text-[10px] font-bold uppercase tracking-[0.2em] font-display">
             <Sparkles className="w-3.5 h-3.5 text-brand-light-blue animate-pulse" />
-            Official Limited Edition Pre-Order • December Holiday Drop
+            <EditableText
+              id="holiday.badge"
+              label="Holiday Drop Badge"
+              defaultText="Official Limited Edition Pre-Order • December Holiday Drop"
+            />
           </div>
 
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white uppercase tracking-tight leading-none">
-            201 <span className="text-brand-light-blue font-light">EST. 1947</span>
+            <EditableText
+              id="holiday.title1"
+              label="Holiday Drop Title 1"
+              defaultText="201"
+            />{' '}
+            <EditableText
+              id="holiday.title2"
+              label="Holiday Drop Title 2"
+              defaultText="EST. 1947"
+              className="text-brand-light-blue font-light"
+            />
           </h2>
 
-          <p className="text-sm md:text-base text-slate-300 font-light leading-relaxed max-w-2xl mx-auto">
-            Premium heavyweight crewnecks commemorating New Jersey’s original 1947 area code.
-            Wear the code. Fuel the mission.
-          </p>
+          <EditableText
+            id="holiday.subtitle"
+            as="p"
+            multiline
+            label="Holiday Drop Subtitle"
+            defaultText="Premium heavyweight crewnecks commemorating New Jersey’s original 1947 area code. Wear the code. Fuel the mission."
+            className="text-sm md:text-base text-slate-300 font-light leading-relaxed max-w-2xl mx-auto"
+          />
 
           <div className="flex flex-wrap items-center justify-center gap-4 pt-2 text-[11px] font-bold uppercase tracking-wider text-slate-400">
             <span className="flex items-center gap-1.5 text-white">
@@ -269,14 +288,11 @@ export default function HolidayDropSection({ standalone = false }: HolidayDropSe
                   </div>
 
                   <div className="aspect-square w-full flex items-center justify-center overflow-hidden rounded-2xl bg-slate-950/50 relative">
-                    <motion.img 
-                      key={`${selectedProduct}-${activeImageIdx}`}
-                      initial={{ opacity: 0, scale: 0.96 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.3 }}
-                      src={galleryImages[activeImageIdx]?.url || currentItem.image} 
+                    <EditableImage
+                      id="holiday.crewneck.image"
+                      defaultSrc={galleryImages[activeImageIdx]?.url || currentItem.image}
                       alt={galleryImages[activeImageIdx]?.title || currentItem.name}
-                      referrerPolicy="no-referrer"
+                      label="Holiday Drop Crewneck Image"
                       className="w-full h-full object-contain select-none group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>

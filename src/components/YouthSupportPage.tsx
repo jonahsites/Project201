@@ -18,6 +18,7 @@ import {
   FileText,
   Mail
 } from 'lucide-react';
+import { EditableText } from './cms/Editable';
 
 export default function YouthSupportPage() {
   const [formData, setFormData] = useState({
@@ -106,16 +107,35 @@ export default function YouthSupportPage() {
           <div className="absolute -bottom-24 -left-24 w-[30rem] h-[30rem] bg-brand-light-blue rounded-full blur-[140px]" />
         </div>
         <div className="container mx-auto px-4 relative z-10 max-w-6xl text-center">
-          <span className="text-brand-light-blue font-bold uppercase tracking-[0.25em] text-xs block mb-3">
-            Family & Parent Intake Portal
-          </span>
+          <EditableText
+            id="youthSupport.hero.eyebrow"
+            as="span"
+            label="Youth Support Hero Eyebrow"
+            defaultText="Family & Parent Intake Portal"
+            className="text-brand-light-blue font-bold uppercase tracking-[0.25em] text-xs block mb-3"
+          />
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-white uppercase mb-6 leading-tight">
-            YOUTH SUPPORT <br />
-            <span className="font-bold text-brand-light-blue">&amp; MENTORSHIP</span>
+            <EditableText
+              id="youthSupport.hero.title1"
+              label="Youth Support Title 1"
+              defaultText="YOUTH SUPPORT"
+            />{' '}
+            <br />
+            <EditableText
+              id="youthSupport.hero.title2"
+              label="Youth Support Title 2"
+              defaultText="& MENTORSHIP"
+              className="font-bold text-brand-light-blue"
+            />
           </h1>
-          <p className="max-w-2xl mx-auto text-slate-300 font-light text-base md:text-lg leading-relaxed">
-            Connecting parents, schools, and care teams with professional, structured mentorship to help youth find direction, build self-discipline, and unlock their full potential.
-          </p>
+          <EditableText
+            id="youthSupport.hero.subtitle"
+            as="p"
+            multiline
+            label="Youth Support Subtitle"
+            defaultText="Connecting parents, schools, and care teams with professional, structured mentorship to help youth find direction, build self-discipline, and unlock their full potential."
+            className="max-w-2xl mx-auto text-slate-300 font-light text-base md:text-lg leading-relaxed"
+          />
         </div>
       </section>
 
@@ -131,13 +151,22 @@ export default function YouthSupportPage() {
               <div className="space-y-6">
                 <div className="flex items-center gap-3">
                   <div className="w-1.5 h-8 bg-brand-light-blue rounded-full" />
-                  <h2 className="font-display text-3xl font-bold text-slate-900 uppercase">
-                    Who We Help
-                  </h2>
+                  <EditableText
+                    id="youthSupport.who.title"
+                    as="h2"
+                    label="Who We Help Title"
+                    defaultText="Who We Help"
+                    className="font-display text-3xl font-bold text-slate-900 uppercase"
+                  />
                 </div>
-                <p className="text-slate-600 font-light text-sm md:text-base leading-relaxed">
-                  Every child transitions through complicated seasons. We provide active support for individuals experiencing any of the following challenges:
-                </p>
+                <EditableText
+                  id="youthSupport.who.desc"
+                  as="p"
+                  multiline
+                  label="Who We Help Description"
+                  defaultText="Every child transitions through complicated seasons. We provide active support for individuals experiencing any of the following challenges:"
+                  className="text-slate-600 font-light text-sm md:text-base leading-relaxed"
+                />
 
                 <div className="grid sm:grid-cols-2 gap-4">
                   {concernsList.map((concern, idx) => (

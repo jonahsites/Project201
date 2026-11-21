@@ -1,0 +1,189 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Global safety net: default deny all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Core helper primitives
+    function isValidId(id) {
+      return id is string && id.size() >= 1 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isVerifiedUser() {
+      return isSignedIn() && request.auth.token.email_verified == true;
+    }
+
+    function isAdmin() {
+      return isVerifiedUser() && (
+        request.auth.token.email == 'jadovdav@gmail.com' ||
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+      );
+    }
+
+    // Entity validators
+    function isValidSiteSettings(data, settingId) {
+      return data.keys().hasAll([
+        'id', 'brandName', 'logoUrl', 'announcementBadge', 'announcementText',
+        'announcementCta', 'announcementVisible', 'pagesOrder', 'hiddenPages',
+        'pageLabels', 'textOverrides', 'imageOverrides', 'updatedBy', 'updatedAt'
+      ])
+      && data.keys().hasOnly([
+        'id', 'brandName', 'logoUrl', 'announcementBadge', 'announcementText',
+        'announcementCta', 'announcementVisible', 'pagesOrder', 'hiddenPages',
+        'pageLabels', 'textOverrides', 'imageOverrides', 'updatedBy', 'updatedAt'
+      ])
+      && data.id is string && data.id == settingId && data.id.size() <= 64
+      && data.brandName is string && data.brandName.size() >= 1 && data.brandName.size() <= 80
+      && data.logoUrl is string && data.logoUrl.size() <= 1000
+      && data.announcementBadge is string && data.announcementBadge.size() <= 60
+      && data.announcementText is string && data.announcementText.size() <= 240
+      && data.announcementCta is string && data.announcementCta.size() <= 60
+      && data.announcementVisible is bool
+      && data.pagesOrder is list && data.pagesOrder.size() <= 50
+      && (data.pagesOrder.size() == 0 || data.pagesOrder[0] is string)
+      && data.hiddenPages is list && data.hiddenPages.size() <= 50
+      && (data.hiddenPages.size() == 0 || data.hiddenPages[0] is string)
+      && data.pageLabels is map && data.pageLabels.size() <= 50
+      && data.textOverrides is map && data.textOverrides.size() <= 400
+      && data.imageOverrides is map && data.imageOverrides.size() <= 150
+      && data.updatedBy is string && data.updatedBy == request.auth.uid && data.updatedBy.size() <= 128
+      && data.updatedAt is timestamp && data.updatedAt == request.time;
+    }
+
+    function isValidCustomPage(data, pageId) {
+      return data.keys().hasAll([
+        'id', 'slug', 'title', 'templateType', 'published', 'showInNav',
+        'heroEyebrow', 'heroTitle', 'heroSubtitle', 'heroImage', 'ctaLabel',
+        'ctaTarget', 'sectionTitle', 'sectionBody', 'sectionImage', 'cards',
+        'ownerId', 'createdAt', 'updatedAt'
+      ])
+      && data.keys().hasOnly([
+        'id', 'slug', 'title', 'templateType', 'published', 'showInNav',
+        'heroEyebrow', 'heroTitle', 'heroSubtitle', 'heroImage', 'ctaLabel',
+        'ctaTarget', 'sectionTitle', 'sectionBody', 'sectionImage', 'cards',
+        'ownerId', 'createdAt', 'updatedAt'
+      ])
+      && data.id is string && data.id == pageId && data.id.size() <= 80
+      && data.slug is string && data.slug.size() >= 1 && data.slug.size() <= 80 && data.slug.matches('^[a-z0-9\\-]+$')
+      && data.title is string && data.title.size() >= 1 && data.title.size() <= 80
+      && data.templateType is string && data.templateType in ['campaign', 'program', 'spotlight', 'gallery']
+      && data.published is bool
+      && data.showInNav is bool
+      && data.heroEyebrow is string && data.heroEyebrow.size() <= 120
+      && data.heroTitle is string && data.heroTitle.size() <= 180
+      && data.heroSubtitle is string && data.heroSubtitle.size() <= 800
+      && data.heroImage is string && data.heroImage.size() <= 1000
+      && data.ctaLabel is string && data.ctaLabel.size() <= 80
+      && data.ctaTarget is string && data.ctaTarget.size() <= 300
+      && data.sectionTitle is string && data.sectionTitle.size() <= 180
+      && data.sectionBody is string && data.sectionBody.size() <= 4000
+      && data.sectionImage is string && data.sectionImage.size() <= 1000
+      && data.cards is list && data.cards.size() <= 12
+      && (data.cards.size() == 0 || data.cards[0] is map)
+      && data.ownerId is string && data.ownerId.size() >= 1 && data.ownerId.size() <= 128
+      && data.createdAt is timestamp
+      && data.updatedAt is timestamp && data.updatedAt == request.time;
+    }
+
+    function isValidMediaAsset(data, assetId) {
+      return data.keys().hasAll([
+        'id', 'name', 'mimeType', 'dataUrl', 'width', 'height',
+        'sizeBytes', 'isPublic', 'uploadedBy', 'createdAt'
+      ])
+      && data.keys().hasOnly([
+        'id', 'name', 'mimeType', 'dataUrl', 'width', 'height',
+        'sizeBytes', 'isPublic', 'uploadedBy', 'createdAt'
+      ])
+      && data.id is string && data.id == assetId && data.id.size() <= 128
+      && data.name is string && data.name.size() >= 1 && data.name.size() <= 160
+      && data.mimeType is string && data.mimeType.size() >= 1 && data.mimeType.size() <= 80
+      && data.dataUrl is string && data.dataUrl.size() >= 10 && data.dataUrl.size() <= 800000
+      && data.width is number && data.width >= 1 && data.width <= 10000
+      && data.height is number && data.height >= 1 && data.height <= 10000
+      && data.sizeBytes is number && data.sizeBytes >= 1 && data.sizeBytes <= 800000
+      && data.isPublic is bool
+      && data.uploadedBy is string && data.uploadedBy == request.auth.uid && data.uploadedBy.size() <= 128
+      && data.createdAt is timestamp && data.createdAt == request.time;
+    }
+
+    function isValidAdminUser(data, adminUid) {
+      return data.keys().hasAll(['uid', 'email', 'role', 'addedBy', 'createdAt'])
+      && data.keys().hasOnly(['uid', 'email', 'role', 'addedBy', 'createdAt'])
+      && data.uid is string && data.uid == adminUid && data.uid.size() <= 128
+      && data.email is string && data.email.size() >= 3 && data.email.size() <= 160
+      && data.role is string && data.role == 'admin'
+      && data.addedBy is string && data.addedBy == request.auth.uid && data.addedBy.size() <= 128
+      && data.createdAt is timestamp && data.createdAt == request.time;
+    }
+
+    // Connection check document (read-only)
+    match /test/connection {
+      allow get: if true;
+    }
+
+    // Global website settings & overrides
+    match /site_settings/{settingId} {
+      allow get: if isValidId(settingId) && (settingId == 'published' || isAdmin());
+      allow list: if isAdmin();
+      allow create: if isAdmin() && isValidId(settingId) && isValidSiteSettings(incoming(), settingId);
+      allow update: if isAdmin() && isValidId(settingId) && isValidSiteSettings(incoming(), settingId)
+        && incoming().diff(existing()).affectedKeys().hasOnly([
+          'brandName', 'logoUrl', 'announcementBadge', 'announcementText',
+          'announcementCta', 'announcementVisible', 'pagesOrder', 'hiddenPages',
+          'pageLabels', 'textOverrides', 'imageOverrides', 'updatedBy', 'updatedAt'
+        ]);
+      allow delete: if isAdmin() && isValidId(settingId);
+    }
+
+    // Custom template pages created in /console
+    match /custom_pages/{pageId} {
+      allow get: if isValidId(pageId) && (existing().published == true || isAdmin());
+      allow list: if resource.data.published == true || isAdmin();
+      allow create: if isAdmin() && isValidId(pageId) && isValidCustomPage(incoming(), pageId)
+        && incoming().ownerId == request.auth.uid
+        && incoming().createdAt == request.time;
+      allow update: if isAdmin() && isValidId(pageId) && isValidCustomPage(incoming(), pageId)
+        && incoming().ownerId == existing().ownerId
+        && incoming().createdAt == existing().createdAt
+        && incoming().diff(existing()).affectedKeys().hasOnly([
+          'slug', 'title', 'templateType', 'published', 'showInNav',
+          'heroEyebrow', 'heroTitle', 'heroSubtitle', 'heroImage', 'ctaLabel',
+          'ctaTarget', 'sectionTitle', 'sectionBody', 'sectionImage', 'cards', 'updatedAt'
+        ]);
+      allow delete: if isAdmin() && isValidId(pageId);
+    }
+
+    // Uploaded image assets
+    match /media_assets/{assetId} {
+      allow get: if isValidId(assetId) && (existing().isPublic == true || isAdmin());
+      allow list: if resource.data.isPublic == true || isAdmin();
+      allow create: if isAdmin() && isValidId(assetId) && isValidMediaAsset(incoming(), assetId);
+      allow update: if false;
+      allow delete: if isAdmin() && isValidId(assetId);
+    }
+
+    // Authorized console administrators
+    match /admins/{adminUid} {
+      allow get: if isValidId(adminUid) && (isAdmin() || (isVerifiedUser() && request.auth.uid == adminUid));
+      allow list: if isAdmin();
+      allow create: if isAdmin() && isValidId(adminUid) && isValidAdminUser(incoming(), adminUid);
+      allow update: if false;
+      allow delete: if isAdmin() && isValidId(adminUid);
+    }
+  }
+}

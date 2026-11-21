@@ -28,10 +28,11 @@ import {
   Calendar,
   Info
 } from 'lucide-react';
+import { EditableImage, EditableText } from './cms/Editable';
 
 interface ProgramsPageProps {
   onDonate?: () => void;
-  onNavigate?: (page: 'home' | 'about' | 'programs' | 'hire' | 'youth-support' | 'partnerships' | 'sponsors' | 'donate' | 'contact' | 'merch') => void;
+  onNavigate?: (page: string) => void;
 }
 
 export default function ProgramsPage({ onDonate, onNavigate }: ProgramsPageProps) {
@@ -244,16 +245,35 @@ export default function ProgramsPage({ onDonate, onNavigate }: ProgramsPageProps
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,white,transparent)]" />
         </div>
         <div className="container mx-auto px-4 relative z-10 max-w-6xl text-center">
-          <span className="text-brand-light-blue font-bold uppercase tracking-[0.25em] text-xs block mb-3 font-display">
-            The Project 201 Core Framework
-          </span>
+          <EditableText
+            id="programs.hero.eyebrow"
+            as="span"
+            label="Programs Hero Eyebrow"
+            defaultText="The Project 201 Core Framework"
+            className="text-brand-light-blue font-bold uppercase tracking-[0.25em] text-xs block mb-3 font-display"
+          />
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-white uppercase mb-6 leading-tight">
-            Our Core <br />
-            <span className="font-bold text-brand-light-blue">Programs &amp; branches</span>
+            <EditableText
+              id="programs.hero.title1"
+              label="Programs Hero Title 1"
+              defaultText="Our Core"
+            />{' '}
+            <br />
+            <EditableText
+              id="programs.hero.title2"
+              label="Programs Hero Title 2"
+              defaultText="Programs & branches"
+              className="font-bold text-brand-light-blue"
+            />
           </h1>
-          <p className="max-w-2xl mx-auto text-slate-300 font-light text-sm md:text-base leading-relaxed">
-            Project 201 operates as the parent umbrella organization. We provide dynamic, movement-based programming designed to build resilient, empathetic, and fully disciplined leaders.
-          </p>
+          <EditableText
+            id="programs.hero.subtitle"
+            as="p"
+            multiline
+            label="Programs Hero Subtitle"
+            defaultText="Project 201 operates as the parent umbrella organization. We provide dynamic, movement-based programming designed to build resilient, empathetic, and fully disciplined leaders."
+            className="max-w-2xl mx-auto text-slate-300 font-light text-sm md:text-base leading-relaxed"
+          />
         </div>
       </section>
 
@@ -277,17 +297,22 @@ export default function ProgramsPage({ onDonate, onNavigate }: ProgramsPageProps
                 {/* Image panel */}
                 <div className="w-full lg:w-1/2 relative">
                   <div className="aspect-[4/3] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white relative z-10">
-                    <img 
-                      src={prog.image} 
-                      alt={prog.title} 
-                      referrerPolicy="no-referrer"
+                    <EditableImage
+                      id={`programs.item.${idx}.image`}
+                      defaultSrc={prog.image}
+                      alt={prog.title}
+                      label={`${prog.title} Image`}
                       className="w-full h-full object-cover select-none"
                     />
-                    <div className="absolute inset-0 bg-slate-950/25 mix-blend-multiply" />
+                    <div className="pointer-events-none absolute inset-0 bg-slate-950/25 mix-blend-multiply" />
                   </div>
                   {/* Decorative tag */}
                   <div className="absolute -top-4 -right-4 z-20 bg-brand-light-blue text-brand-blue font-display text-[9px] font-bold uppercase tracking-widest px-4 py-2 rounded-xl shadow">
-                    {prog.bannerText}
+                    <EditableText
+                      id={`programs.item.${idx}.bannerText`}
+                      label={`${prog.title} Badge`}
+                      defaultText={prog.bannerText}
+                    />
                   </div>
                   <div className="absolute -bottom-6 -left-6 w-48 h-48 bg-brand-light-blue/5 rounded-full blur-3xl -z-10" />
                 </div>
@@ -298,18 +323,31 @@ export default function ProgramsPage({ onDonate, onNavigate }: ProgramsPageProps
                     <div className="w-10 h-10 rounded-xl bg-brand-blue/5 border border-brand-blue/10 flex items-center justify-center text-brand-blue">
                       <IconComponent className="w-5 h-5 text-brand-light-blue" />
                     </div>
-                    <span className="text-xs font-bold text-brand-light-blue uppercase tracking-widest font-display">
-                      {prog.sub}
-                    </span>
+                    <EditableText
+                      id={`programs.item.${idx}.sub`}
+                      as="span"
+                      label={`${prog.title} Subtitle`}
+                      defaultText={prog.sub}
+                      className="text-xs font-bold text-brand-light-blue uppercase tracking-widest font-display"
+                    />
                   </div>
 
-                  <h2 className="font-display text-3xl md:text-4xl font-bold text-slate-900 uppercase">
-                    {prog.title}
-                  </h2>
+                  <EditableText
+                    id={`programs.item.${idx}.title`}
+                    as="h2"
+                    label={`${prog.title} Title`}
+                    defaultText={prog.title}
+                    className="font-display text-3xl md:text-4xl font-bold text-slate-900 uppercase"
+                  />
 
-                  <p className="text-slate-600 font-light text-sm md:text-base leading-relaxed">
-                    {prog.description}
-                  </p>
+                  <EditableText
+                    id={`programs.item.${idx}.description`}
+                    as="p"
+                    multiline
+                    label={`${prog.title} Description`}
+                    defaultText={prog.description}
+                    className="text-slate-600 font-light text-sm md:text-base leading-relaxed"
+                  />
 
                   <div className="space-y-3.5 pt-2">
                     <h4 className="font-display text-[10px] font-bold text-slate-400 uppercase tracking-widest block">
@@ -616,12 +654,21 @@ export default function ProgramsPage({ onDonate, onNavigate }: ProgramsPageProps
                 <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
                 <span className="text-[10px] uppercase font-bold tracking-widest text-red-400 font-display">New Collaboration Partner</span>
               </div>
-              <h2 className="font-display text-3xl md:text-5xl font-black uppercase tracking-tight text-white leading-tight">
-                Project 201 <span className="text-red-500">X dotFIT</span>
-              </h2>
-              <p className="text-slate-300 font-light text-sm md:text-base leading-relaxed">
-                Project 201 recently partnered with **dotFIT** to eliminate guesswork from your athletic health! This premium clinical nutritional platform creates a personalized supplement and nutrition plan tailored specifically to your active body and peak physical performance goals.
-              </p>
+              <EditableText
+                id="programs.dotfit.title"
+                as="h2"
+                label="dotFIT Section Title"
+                defaultText="Project 201 X dotFIT"
+                className="font-display text-3xl md:text-5xl font-black uppercase tracking-tight text-white leading-tight"
+              />
+              <EditableText
+                id="programs.dotfit.desc"
+                as="p"
+                multiline
+                label="dotFIT Description"
+                defaultText="Project 201 recently partnered with dotFIT to eliminate guesswork from your athletic health! This premium clinical nutritional platform creates a personalized supplement and nutrition plan tailored specifically to your active body and peak physical performance goals."
+                className="text-slate-300 font-light text-sm md:text-base leading-relaxed"
+              />
               <div className="space-y-4 pt-2">
                 <div className="flex gap-3 items-start">
                   <div className="w-8 h-8 rounded-lg bg-red-500/10 flex items-center justify-center text-red-500 shrink-0">
@@ -699,18 +746,31 @@ export default function ProgramsPage({ onDonate, onNavigate }: ProgramsPageProps
       <section className="bg-slate-900 text-white py-16 border-t border-white/5">
         <div className="container mx-auto px-4 max-w-4xl text-center space-y-6">
           <Award className="w-10 h-10 text-brand-light-blue mx-auto animate-pulse" />
-          <h2 className="font-display text-2xl md:text-3xl font-light">
-            WANT TO INTRODUCE THESE PROGRAMS TO YOUR CITY OR SCHOOL?
-          </h2>
-          <p className="text-slate-400 font-light text-xs md:text-sm max-w-xl mx-auto leading-relaxed">
-            Project 201 coordinates statewide collaborations. Apply through our partners intake portal to customize athletic training or life mentorship sequences in your community.
-          </p>
+          <EditableText
+            id="programs.bottomCta.title"
+            as="h2"
+            label="Programs Bottom CTA Heading"
+            defaultText="WANT TO INTRODUCE THESE PROGRAMS TO YOUR CITY OR SCHOOL?"
+            className="font-display text-2xl md:text-3xl font-light"
+          />
+          <EditableText
+            id="programs.bottomCta.desc"
+            as="p"
+            multiline
+            label="Programs Bottom CTA Description"
+            defaultText="Project 201 coordinates statewide collaborations. Apply through our partners intake portal to customize athletic training or life mentorship sequences in your community."
+            className="text-slate-400 font-light text-xs md:text-sm max-w-xl mx-auto leading-relaxed"
+          />
           <div className="pt-2">
             <button 
               onClick={() => onDonate?.()}
-              className="bg-brand-light-blue hover:bg-white text-brand-blue px-8 py-3 rounded-xl font-bold font-display text-xs tracking-wider uppercase transition-all shadow"
+              className="bg-brand-light-blue hover:bg-white text-brand-blue px-8 py-3 rounded-xl font-bold font-display text-xs tracking-wider uppercase transition-all shadow cursor-pointer"
             >
-              Donation options
+              <EditableText
+                id="programs.bottomCta.btn"
+                label="Programs Bottom CTA Button"
+                defaultText="Donation options"
+              />
             </button>
           </div>
         </div>

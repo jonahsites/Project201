@@ -17,6 +17,7 @@ import {
   HelpCircle,
   Mail
 } from 'lucide-react';
+import { EditableText } from './cms/Editable';
 
 export default function SchoolsPartnershipsPage() {
   const [formData, setFormData] = useState({
@@ -79,16 +80,35 @@ export default function SchoolsPartnershipsPage() {
           <div className="absolute top-0 right-0 w-[35rem] h-[35rem] bg-brand-light-blue rounded-full blur-[120px]" />
         </div>
         <div className="container mx-auto px-4 relative z-10 max-w-6xl text-center">
-          <span className="text-brand-light-blue font-bold uppercase tracking-[0.25em] text-xs block mb-3">
-            System Partner referrals &amp; Affiliates
-          </span>
+          <EditableText
+            id="schools.hero.eyebrow"
+            as="span"
+            label="Schools Hero Eyebrow"
+            defaultText="System Partner referrals & Affiliates"
+            className="text-brand-light-blue font-bold uppercase tracking-[0.25em] text-xs block mb-3"
+          />
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-white uppercase mb-6 leading-tight">
-            SCHOOLS &amp; <br />
-            <span className="font-bold text-brand-light-blue">SYSTEM PARTNERSHIPS</span>
+            <EditableText
+              id="schools.hero.title1"
+              label="Schools Hero Title 1"
+              defaultText="SCHOOLS &"
+            />{' '}
+            <br />
+            <EditableText
+              id="schools.hero.title2"
+              label="Schools Hero Title 2"
+              defaultText="SYSTEM PARTNERSHIPS"
+              className="font-bold text-brand-light-blue"
+            />
           </h1>
-          <p className="max-w-2xl mx-auto text-slate-300 font-light text-base md:text-lg leading-relaxed">
-            Collaborating with School Districts, Care Management Organizations (CMOs), performcare associates, and youth caseworkers across New Jersey to cultivate safe, reliable guidance structures.
-          </p>
+          <EditableText
+            id="schools.hero.subtitle"
+            as="p"
+            multiline
+            label="Schools Hero Subtitle"
+            defaultText="Collaborating with School Districts, Care Management Organizations (CMOs), performcare associates, and youth caseworkers across New Jersey to cultivate safe, reliable guidance structures."
+            className="max-w-2xl mx-auto text-slate-300 font-light text-base md:text-lg leading-relaxed"
+          />
         </div>
       </section>
 
@@ -104,13 +124,22 @@ export default function SchoolsPartnershipsPage() {
               <div className="space-y-8">
                 <div className="flex items-center gap-3">
                   <div className="w-1.5 h-8 bg-brand-light-blue rounded-full" />
-                  <h2 className="font-display text-3xl font-bold text-slate-900 uppercase">
-                    School &amp; Team Collaboration Models
-                  </h2>
+                  <EditableText
+                    id="schools.models.title"
+                    as="h2"
+                    label="Collaboration Models Title"
+                    defaultText="School & Team Collaboration Models"
+                    className="font-display text-3xl font-bold text-slate-900 uppercase"
+                  />
                 </div>
-                <p className="text-slate-600 font-light text-sm md:text-base leading-relaxed">
-                  Project 201 operates as an essential complement to existing clinical plans and structural school systems. Our movement-based engagement strategies have proven effective in capturing the focus of youth who may resist traditional desk-based assistance tracks.
-                </p>
+                <EditableText
+                  id="schools.models.desc"
+                  as="p"
+                  multiline
+                  label="Collaboration Models Description"
+                  defaultText="Project 201 operates as an essential complement to existing clinical plans and structural school systems. Our movement-based engagement strategies have proven effective in capturing the focus of youth who may resist traditional desk-based assistance tracks."
+                  className="text-slate-600 font-light text-sm md:text-base leading-relaxed"
+                />
 
                 <div className="grid sm:grid-cols-2 gap-6">
                   {programs.map((prog, idx) => (

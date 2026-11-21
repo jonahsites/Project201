@@ -1,93 +1,190 @@
 import React from 'react';
-import { Facebook, Instagram, Youtube, Mail, Phone, MapPin } from 'lucide-react';
+import { Facebook, Instagram, Mail, Phone, MapPin, SlidersHorizontal } from 'lucide-react';
+import { useSiteContent } from '../context/SiteContentContext';
+import { EditableImage, EditableText } from './cms/Editable';
 
 interface FooterProps {
-  onPageChange?: (page: 'home' | 'about' | 'programs' | 'hire' | 'youth-support' | 'partnerships' | 'sponsors' | 'donate' | 'contact' | 'merch' | 'holiday-drop') => void;
+  onPageChange?: (page: string) => void;
+  embeddedInConsole?: boolean;
 }
 
-export default function Footer({ onPageChange }: FooterProps) {
+export default function Footer({ onPageChange, embeddedInConsole = false }: FooterProps) {
+  const { activeSettings, getOrderedNavPages } = useSiteContent();
+  const visiblePages = getOrderedNavPages().filter((p) => !p.hidden);
+
+  const primaryNavSlugs = ['home', 'holiday-drop', 'about', 'programs', 'merch', 'hire', 'youth-support'];
+  const connectSlugs = ['partnerships', 'sponsors', 'contact'];
+  const customPages = visiblePages.filter((p) => p.isCustom);
+
   return (
     <footer className="bg-slate-950 text-white pt-24 pb-12 border-t border-white/5">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="lg:col-span-1 space-y-6">
             <div className="flex items-center gap-2">
-              <img 
-                src="https://cdn.prod.website-files.com/676454c7900c0070c4219d2a/67a1e7a94e7d4cbcfd580329_uc.png" 
-                alt="Project 201 Logo" 
-                className="h-10 w-auto"
+              <div className="relative">
+                <EditableImage
+                  id="brand.logo"
+                  defaultSrc={activeSettings.logoUrl}
+                  alt="Project 201 Logo"
+                  label="Footer Brand Logo"
+                  className="h-10 w-auto"
+                />
+              </div>
+              <EditableText
+                id="brand.name"
+                defaultText={activeSettings.brandName}
+                label="Brand Name"
+                className="font-display font-bold text-xl tracking-tight"
               />
-              <span className="font-display font-bold text-xl tracking-tight">
-                PROJECT 201
-              </span>
             </div>
-            <p className="text-slate-400 font-light leading-relaxed text-xs">
-              Project 201 is a professional statewide youth organization. We combine structured athletic development and mental health gatekeeper frameworks to guide the next generation of NJ leaders.
-            </p>
+            <EditableText
+              id="footer.description"
+              as="p"
+              multiline
+              label="Footer Mission Summary"
+              defaultText="Project 201 is a professional statewide youth organization. We combine structured athletic development and mental health gatekeeper frameworks to guide the next generation of NJ leaders."
+              className="text-slate-400 font-light leading-relaxed text-xs"
+            />
             <div className="flex space-x-4">
-              <a href="https://www.instagram.com/project201nj?utm_source=qr" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-brand-light-blue transition-colors">
+              <a
+                href="https://www.instagram.com/project201nj?utm_source=qr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-brand-light-blue transition-colors"
+              >
                 <Instagram size={18} />
               </a>
-              <a href="https://www.facebook.com/project201nj" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-brand-light-blue transition-colors">
+              <a
+                href="https://www.facebook.com/project201nj"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-brand-light-blue transition-colors"
+              >
                 <Facebook size={18} />
               </a>
             </div>
           </div>
 
           <div>
-            <h4 className="font-display font-bold text-sm mb-8 uppercase text-brand-light-blue tracking-widest">Navigation</h4>
+            <h4 className="font-display font-bold text-sm mb-8 uppercase text-brand-light-blue tracking-widest">
+              Navigation
+            </h4>
             <div className="flex flex-col space-y-4 text-left items-start">
-              <button onClick={() => onPageChange?.('home')} className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left">Home</button>
-              <button onClick={() => onPageChange?.('holiday-drop')} className="text-amber-400 hover:text-amber-300 transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left flex items-center gap-1.5">
-                <span>201 Holiday Drop</span>
-                <span className="px-1.5 py-0.5 rounded-full bg-amber-400/20 text-amber-300 text-[8px] font-black">1947</span>
-              </button>
-              <button onClick={() => onPageChange?.('about')} className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left">About Us</button>
-              <button onClick={() => onPageChange?.('programs')} className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left">Our Branches</button>
-              <button onClick={() => onPageChange?.('merch')} className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left text-cyan-400 font-semibold">Save Our Youth Merch</button>
-              <button onClick={() => onPageChange?.('hire')} className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left font-semibold text-brand-light-blue">Hire Project 201</button>
-              <button onClick={() => onPageChange?.('youth-support')} className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left">Get Support</button>
+              {visiblePages
+                .filter((p) => primaryNavSlugs.includes(p.slug))
+                .map((p) => (
+                  <button
+                    key={p.slug}
+                    onClick={() => onPageChange?.(p.slug)}
+                    className={`transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left flex items-center gap-1.5 ${
+                      p.slug === 'holiday-drop'
+                        ? 'text-amber-400 hover:text-amber-300'
+                        : p.slug === 'merch'
+                          ? 'text-cyan-400 hover:text-white font-semibold'
+                          : p.slug === 'hire'
+                            ? 'text-brand-light-blue hover:text-white font-semibold'
+                            : 'text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    <span>{p.label}</span>
+                    {p.slug === 'holiday-drop' && (
+                      <span className="px-1.5 py-0.5 rounded-full bg-amber-400/20 text-amber-300 text-[8px] font-black">
+                        1947
+                      </span>
+                    )}
+                  </button>
+                ))}
             </div>
           </div>
 
           <div>
-            <h4 className="font-display font-bold text-sm mb-8 uppercase text-brand-light-blue tracking-widest">Connect</h4>
+            <h4 className="font-display font-bold text-sm mb-8 uppercase text-brand-light-blue tracking-widest">
+              Connect
+            </h4>
             <div className="flex flex-col space-y-4 text-left items-start">
-              <button onClick={() => onPageChange?.('partnerships')} className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left">Schools &amp; CMOs</button>
-              <button onClick={() => onPageChange?.('sponsors')} className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left">Sponsors &amp; Partners</button>
-              <button onClick={() => onPageChange?.('contact')} className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left">Contact Direct</button>
+              {visiblePages
+                .filter((p) => connectSlugs.includes(p.slug))
+                .map((p) => (
+                  <button
+                    key={p.slug}
+                    onClick={() => onPageChange?.(p.slug)}
+                    className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left"
+                  >
+                    {p.label}
+                  </button>
+                ))}
+              {customPages.map((p) => (
+                <button
+                  key={p.slug}
+                  onClick={() => onPageChange?.(p.slug)}
+                  className="text-brand-light-blue hover:text-white transition-colors cursor-pointer text-xs font-bold uppercase tracking-wider bg-transparent border-0 p-0 text-left"
+                >
+                  {p.label}
+                </button>
+              ))}
             </div>
           </div>
 
           <div>
-            <h4 className="font-display font-bold text-sm mb-8 uppercase text-brand-light-blue tracking-widest">Coordinated by</h4>
+            <h4 className="font-display font-bold text-sm mb-8 uppercase text-brand-light-blue tracking-widest">
+              Coordinated by
+            </h4>
             <div className="space-y-6">
               <div className="flex gap-4">
                 <div className="w-10 h-10 shrink-0 bg-brand-light-blue/10 rounded-xl flex items-center justify-center text-brand-light-blue">
-                   <User className="w-5 h-5" />
+                  <User className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="block font-bold text-sm">Shawn Kelly</span>
-                  <span className="text-slate-500 text-[10px] font-bold tracking-wider uppercase">Executive Director</span>
+                  <EditableText
+                    id="footer.directorName"
+                    defaultText="Shawn Kelly"
+                    label="Director Name"
+                    className="block font-bold text-sm"
+                  />
+                  <EditableText
+                    id="footer.directorTitle"
+                    defaultText="Executive Director"
+                    label="Director Title"
+                    className="text-slate-500 text-[10px] font-bold tracking-wider uppercase block"
+                  />
                 </div>
               </div>
-              <a href="mailto:info@project201.org" className="flex items-center gap-4 text-slate-400 hover:text-white transition-colors text-xs">
+              <a
+                href="mailto:info@project201.org"
+                className="flex items-center gap-4 text-slate-400 hover:text-white transition-colors text-xs"
+              >
                 <div className="w-10 h-10 shrink-0 bg-white/5 rounded-xl flex items-center justify-center">
-                   <Mail className="w-4 h-4" />
+                  <Mail className="w-4 h-4" />
                 </div>
-                info@project201.org
+                <EditableText
+                  id="footer.email"
+                  defaultText="info@project201.org"
+                  label="Footer Contact Email"
+                />
               </a>
-              <a href="tel:2017255062" className="flex items-center gap-4 text-slate-400 hover:text-white transition-colors text-xs">
+              <a
+                href="tel:2017255062"
+                className="flex items-center gap-4 text-slate-400 hover:text-white transition-colors text-xs"
+              >
                 <div className="w-10 h-10 shrink-0 bg-white/5 rounded-xl flex items-center justify-center">
-                   <Phone className="w-4 h-4" />
+                  <Phone className="w-4 h-4" />
                 </div>
-                201-725-5062
+                <EditableText
+                  id="footer.phone"
+                  defaultText="201-725-5062"
+                  label="Footer Contact Phone"
+                />
               </a>
               <div className="flex items-center gap-4 text-slate-400 text-xs">
                 <div className="w-10 h-10 shrink-0 bg-white/5 rounded-xl flex items-center justify-center">
-                   <MapPin className="w-4 h-4" />
+                  <MapPin className="w-4 h-4" />
                 </div>
-                <span>576 Avenue A, Bayonne, NJ 07002</span>
+                <EditableText
+                  id="footer.address"
+                  defaultText="576 Avenue A, Bayonne, NJ 07002"
+                  label="Footer Mailing Address"
+                />
               </div>
             </div>
           </div>
@@ -95,25 +192,46 @@ export default function Footer({ onPageChange }: FooterProps) {
 
         {/* Disclaimer Area */}
         <div className="py-8 my-8 border-t border-b border-white/5 text-center">
-          <p className="text-slate-450 text-xs font-light max-w-3xl mx-auto leading-relaxed">
-            Project 201 is a youth mentorship and development organization. We do not provide licensed clinical therapy, psychiatric treatment, or medical services.
-          </p>
+          <EditableText
+            id="footer.disclaimer"
+            as="p"
+            multiline
+            label="Footer Legal Disclaimer"
+            defaultText="Project 201 is a youth mentorship and development organization. We do not provide licensed clinical therapy, psychiatric treatment, or medical services."
+            className="text-slate-450 text-xs font-light max-w-3xl mx-auto leading-relaxed"
+          />
         </div>
 
         <div className="pt-12 flex flex-col md:flex-row justify-between items-center gap-6 border-t border-white/5">
-          <p className="text-slate-500 text-xs font-light">
-            © 2026 Project 201. All Rights Reserved.
-          </p>
-          <div className="flex items-center gap-3">
-            <span className="text-slate-650 text-[10px] font-bold uppercase tracking-widest">Apparel Powered by</span>
-            <a 
-              href="https://www.instagram.com/201customsllc?utm_source=qr" 
-              target="_blank" 
-              rel="noopener noreferrer" 
+          <EditableText
+            id="footer.copyright"
+            as="p"
+            label="Copyright Text"
+            defaultText="© 2026 Project 201. All Rights Reserved."
+            className="text-slate-500 text-xs font-light"
+          />
+          <div className="flex items-center gap-3 flex-wrap justify-center">
+            <span className="text-slate-650 text-[10px] font-bold uppercase tracking-widest">
+              Apparel Powered by
+            </span>
+            <a
+              href="https://www.instagram.com/201customsllc?utm_source=qr"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-brand-light-blue hover:text-white transition-colors font-bold tracking-tight text-xs uppercase border border-brand-light-blue/20 bg-brand-light-blue/5 px-2.5 py-1 rounded-lg"
             >
               201 Customs LLC
             </a>
+            {!embeddedInConsole && (
+              <button
+                type="button"
+                onClick={() => onPageChange?.('console')}
+                className="inline-flex items-center gap-1.5 text-slate-400 hover:text-white transition-colors text-[11px] font-medium border border-white/10 bg-white/5 px-2.5 py-1 rounded-lg cursor-pointer"
+              >
+                <SlidersHorizontal className="w-3 h-3" />
+                <span>Console</span>
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -123,16 +241,16 @@ export default function Footer({ onPageChange }: FooterProps) {
 
 function User({ className }: { className?: string }) {
   return (
-    <svg 
-      xmlns="http://www.w3.org/2000/svg" 
-      width="24" 
-      height="24" 
-      viewBox="0 0 24 24" 
-      fill="none" 
-      stroke="currentColor" 
-      strokeWidth="2" 
-      strokeLinecap="round" 
-      strokeLinejoin="round" 
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className={className}
     >
       <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />

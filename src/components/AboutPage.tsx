@@ -14,6 +14,7 @@ import {
   Sparkles,
   Play
 } from 'lucide-react';
+import { EditableImage, EditableText } from './cms/Editable';
 
 export default function AboutPage() {
   const storyPoints = [
@@ -75,16 +76,35 @@ export default function AboutPage() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,white,transparent)]" />
         </div>
         <div className="container mx-auto px-4 relative z-10 max-w-6xl text-center">
-          <span className="text-brand-light-blue font-bold uppercase tracking-[0.25em] text-[10px] block mb-3 font-display">
-            A statewide youth umbrella organization
-          </span>
+          <EditableText
+            id="about.hero.eyebrow"
+            as="span"
+            label="About Hero Eyebrow"
+            defaultText="A statewide youth umbrella organization"
+            className="text-brand-light-blue font-bold uppercase tracking-[0.25em] text-[10px] block mb-3 font-display"
+          />
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-white uppercase mb-6 leading-tight">
-            WHO WE ARE &amp; <br />
-            <span className="font-bold text-brand-light-blue">OUR MOVEMENT</span>
+            <EditableText
+              id="about.hero.title1"
+              label="About Hero Title Line 1"
+              defaultText="WHO WE ARE &"
+            />{' '}
+            <br />
+            <EditableText
+              id="about.hero.title2"
+              label="About Hero Title Line 2"
+              defaultText="OUR MOVEMENT"
+              className="font-bold text-brand-light-blue"
+            />
           </h1>
-          <p className="max-w-2xl mx-auto text-slate-300 font-light text-sm md:text-base leading-relaxed">
-            Project 201 is a professional statewide youth organization, working tirelessly across New Jersey to combine elite athletic conditioning with persistent character and behavior development.
-          </p>
+          <EditableText
+            id="about.hero.subtitle"
+            as="p"
+            multiline
+            label="About Hero Subtitle"
+            defaultText="Project 201 is a professional statewide youth organization, working tirelessly across New Jersey to combine elite athletic conditioning with persistent character and behavior development."
+            className="max-w-2xl mx-auto text-slate-300 font-light text-sm md:text-base leading-relaxed"
+          />
         </div>
       </section>
 
@@ -96,52 +116,98 @@ export default function AboutPage() {
             {/* Visual Panel */}
             <div className="relative">
               <div className="aspect-[4/5] rounded-[3.5rem] overflow-hidden shadow-2xl relative z-10 border-4 border-white">
-                <img 
-                  src="https://lh3.googleusercontent.com/d/10NdIV7FeIt5tIMhFOWKsiMuM-uyhI_Db" 
-                  alt="Authentic training environment portrait" 
+                <EditableImage
+                  id="about.portrait"
+                  defaultSrc="https://lh3.googleusercontent.com/d/10NdIV7FeIt5tIMhFOWKsiMuM-uyhI_Db"
+                  alt="Authentic training environment portrait"
+                  label="About Page Feature Portrait"
                   className="w-full h-full object-cover select-none"
-                  referrerPolicy="no-referrer"
                 />
               </div>
               <div className="absolute -top-6 -left-6 w-full h-full border-4 border-brand-light-blue/20 rounded-[3.5rem] -z-10" />
               
               <div className="absolute -bottom-6 -right-6 p-8 bg-brand-blue text-white rounded-3xl z-20 shadow-2xl max-w-xs hidden md:block">
-                <p className="text-sm font-light italic leading-relaxed text-slate-100">
-                  "Stay away from those people who try to disparage your ambitions. Great minds will give you a feeling that you can become great too."
-                </p>
-                <footer className="mt-4 font-bold text-[10px] uppercase tracking-widest text-brand-light-blue font-display">— Mark Twain</footer>
+                <EditableText
+                  id="about.quote.text"
+                  as="p"
+                  multiline
+                  label="About Quote"
+                  defaultText='"Stay away from those people who try to disparage your ambitions. Great minds will give you a feeling that you can become great too."'
+                  className="text-sm font-light italic leading-relaxed text-slate-100"
+                />
+                <footer className="mt-4 font-bold text-[10px] uppercase tracking-widest text-brand-light-blue font-display">
+                  <EditableText
+                    id="about.quote.author"
+                    label="About Quote Attribution"
+                    defaultText="— Mark Twain"
+                  />
+                </footer>
               </div>
             </div>
 
             {/* Narrative Stories Column */}
             <div>
-              <span className="inline-block px-4 py-1.5 mb-6 text-xs font-bold tracking-[0.25em] text-brand-blue uppercase bg-brand-blue/5 rounded-full font-display">
-                Our Genesis
-              </span>
+              <EditableText
+                id="about.genesis.badge"
+                as="span"
+                label="About Genesis Badge"
+                defaultText="Our Genesis"
+                className="inline-block px-4 py-1.5 mb-6 text-xs font-bold tracking-[0.25em] text-brand-blue uppercase bg-brand-blue/5 rounded-full font-display"
+              />
               <h2 className="font-display text-3xl md:text-4xl font-bold text-slate-900 mb-8 uppercase leading-tight">
-                Why We Do <br />
-                <span className="text-brand-light-blue font-light">What We Do</span>
+                <EditableText
+                  id="about.genesis.title1"
+                  label="About Genesis Heading 1"
+                  defaultText="Why We Do"
+                />{' '}
+                <br />
+                <EditableText
+                  id="about.genesis.title2"
+                  label="About Genesis Heading 2"
+                  defaultText="What We Do"
+                  className="text-brand-light-blue font-light"
+                />
               </h2>
 
               <div className="space-y-10">
                 {storyPoints.map((point, idx) => (
                   <div key={idx} className="relative pl-8 border-l border-slate-200 hover:border-brand-light-blue transition-all duration-300">
                     <div className="absolute -left-[5px] top-1.5 w-2 h-2 bg-brand-light-blue rounded-full" />
-                    <h3 className="text-lg font-bold text-slate-800 mb-1.5 uppercase font-display select-none tracking-tight">
-                      {point.title}
-                    </h3>
-                    <p className="text-slate-600 font-light text-sm leading-relaxed">
-                      {point.content}
-                    </p>
+                    <EditableText
+                      id={`about.story.${idx}.title`}
+                      as="h3"
+                      label={`Story Point ${idx + 1} Title`}
+                      defaultText={point.title}
+                      className="text-lg font-bold text-slate-800 mb-1.5 uppercase font-display select-none tracking-tight"
+                    />
+                    <EditableText
+                      id={`about.story.${idx}.content`}
+                      as="p"
+                      multiline
+                      label={`Story Point ${idx + 1} Body`}
+                      defaultText={point.content}
+                      className="text-slate-600 font-light text-sm leading-relaxed"
+                    />
                   </div>
                 ))}
               </div>
 
               <div className="mt-12 p-8 bg-slate-950 rounded-[2.5rem] text-white relative overflow-hidden shadow-lg border border-white/5">
-                <h4 className="text-lg font-bold font-display uppercase text-brand-light-blue mb-3">Our Core Vision</h4>
-                <p className="text-slate-400 font-light text-xs md:text-sm leading-relaxed">
-                  If one mentor can alter the destination of a single life, imagine what a unified state-registered community organization can achieve. We are creating reliable safety lines using movement, athletics, and mutual accountability.
-                </p>
+                <EditableText
+                  id="about.vision.title"
+                  as="h4"
+                  label="Core Vision Title"
+                  defaultText="Our Core Vision"
+                  className="text-lg font-bold font-display uppercase text-brand-light-blue mb-3"
+                />
+                <EditableText
+                  id="about.vision.desc"
+                  as="p"
+                  multiline
+                  label="Core Vision Description"
+                  defaultText="If one mentor can alter the destination of a single life, imagine what a unified state-registered community organization can achieve. We are creating reliable safety lines using movement, athletics, and mutual accountability."
+                  className="text-slate-400 font-light text-xs md:text-sm leading-relaxed"
+                />
               </div>
             </div>
 
@@ -157,15 +223,28 @@ export default function AboutPage() {
 
         <div className="container mx-auto px-4 max-w-6xl relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-            <span className="text-brand-light-blue font-bold uppercase tracking-[0.25em] text-[10px] block font-display">
-              Credibility &amp; Compliance Standards
-            </span>
-            <h2 className="font-display text-3xl md:text-4xl font-bold uppercase text-white leading-tight">
-              STATEWIDE PROFESSIONAL <span className="text-brand-light-blue">CERTIFICATIONS</span>
-            </h2>
-            <p className="text-slate-400 font-light text-xs md:text-sm leading-relaxed">
-              Every trainer, counselor, and leader within Project 201 is fully vetted, licensed, and checked. We maintain active compliance with national athletic circles and state youth safety councils.
-            </p>
+            <EditableText
+              id="about.certs.eyebrow"
+              as="span"
+              label="About Certifications Eyebrow"
+              defaultText="Credibility & Compliance Standards"
+              className="text-brand-light-blue font-bold uppercase tracking-[0.25em] text-[10px] block font-display"
+            />
+            <EditableText
+              id="about.certs.title"
+              as="h2"
+              label="About Certifications Heading"
+              defaultText="STATEWIDE PROFESSIONAL CERTIFICATIONS"
+              className="font-display text-3xl md:text-4xl font-bold uppercase text-white leading-tight"
+            />
+            <EditableText
+              id="about.certs.subtitle"
+              as="p"
+              multiline
+              label="About Certifications Subtitle"
+              defaultText="Every trainer, counselor, and leader within Project 201 is fully vetted, licensed, and checked. We maintain active compliance with national athletic circles and state youth safety councils."
+              className="text-slate-400 font-light text-xs md:text-sm leading-relaxed"
+            />
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -178,12 +257,21 @@ export default function AboutPage() {
                   <div className="w-10 h-10 rounded-xl bg-brand-light-blue/10 flex items-center justify-center text-brand-light-blue mb-4">
                     <ShieldCheck className="w-5 h-5" />
                   </div>
-                  <h3 className="font-display font-bold text-sm tracking-wide uppercase text-white mb-2">
-                    {cert.title}
-                  </h3>
-                  <p className="text-slate-400 font-light text-[11px] leading-relaxed">
-                    {cert.desc}
-                  </p>
+                  <EditableText
+                    id={`about.cert.${idx}.title`}
+                    as="h3"
+                    label={`Certification ${idx + 1} Title`}
+                    defaultText={cert.title}
+                    className="font-display font-bold text-sm tracking-wide uppercase text-white mb-2"
+                  />
+                  <EditableText
+                    id={`about.cert.${idx}.desc`}
+                    as="p"
+                    multiline
+                    label={`Certification ${idx + 1} Description`}
+                    defaultText={cert.desc}
+                    className="text-slate-400 font-light text-[11px] leading-relaxed"
+                  />
                 </div>
                 
                 <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-brand-light-blue text-[9px] font-bold uppercase tracking-widest">
@@ -200,15 +288,28 @@ export default function AboutPage() {
       <section className="py-24">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-brand-light-blue font-bold uppercase tracking-[0.2em] text-[9px] block font-display">
-              Legitimacy, Compliance & Guidance
-            </span>
-            <h2 className="font-display text-3xl font-bold text-slate-900 uppercase">
-              LEADERSHIP &amp; BOARD OF DIRECTORS
-            </h2>
-            <p className="text-slate-500 font-light text-xs mt-2">
-              Our leadership, trustees, and advisors coordinate closely with New Jersey schools, CMO coordinators, and safety commissions.
-            </p>
+            <EditableText
+              id="about.leadership.eyebrow"
+              as="span"
+              label="Leadership Eyebrow"
+              defaultText="Legitimacy, Compliance & Guidance"
+              className="text-brand-light-blue font-bold uppercase tracking-[0.2em] text-[9px] block font-display"
+            />
+            <EditableText
+              id="about.leadership.title"
+              as="h2"
+              label="Leadership Heading"
+              defaultText="LEADERSHIP & BOARD OF DIRECTORS"
+              className="font-display text-3xl font-bold text-slate-900 uppercase"
+            />
+            <EditableText
+              id="about.leadership.subtitle"
+              as="p"
+              multiline
+              label="Leadership Subtitle"
+              defaultText="Our leadership, trustees, and advisors coordinate closely with New Jersey schools, CMO coordinators, and safety commissions."
+              className="text-slate-500 font-light text-xs mt-2"
+            />
           </div>
 
           {/* Founder Feature Segment */}
@@ -234,24 +335,44 @@ export default function AboutPage() {
               {/* Leader Bio Detail Info */}
               <div className="space-y-6 flex-1 text-center md:text-left">
                 <div>
-                  <span className="px-3 py-1 bg-brand-blue/5 text-brand-blue text-[9px] font-bold tracking-widest uppercase rounded-full inline-block mb-3 font-display">
-                    Youth Dev Specialist
-                  </span>
-                  <h3 className="font-display text-3xl font-bold text-slate-900 mb-1">
-                    SHAWN KELLY
-                  </h3>
-                  <p className="text-brand-light-blue font-bold text-xs uppercase tracking-[0.15em] font-display">
-                    Founder &amp; Executive Director
-                  </p>
+                  <EditableText
+                    id="about.founder.badge"
+                    as="span"
+                    label="Founder Role Badge"
+                    defaultText="Youth Dev Specialist"
+                    className="px-3 py-1 bg-brand-blue/5 text-brand-blue text-[9px] font-bold tracking-widest uppercase rounded-full inline-block mb-3 font-display"
+                  />
+                  <EditableText
+                    id="about.founder.name"
+                    as="h3"
+                    label="Founder Name"
+                    defaultText="SHAWN KELLY"
+                    className="font-display text-3xl font-bold text-slate-900 mb-1"
+                  />
+                  <EditableText
+                    id="about.founder.title"
+                    as="p"
+                    label="Founder Title"
+                    defaultText="Founder & Executive Director"
+                    className="text-brand-light-blue font-bold text-xs uppercase tracking-[0.15em] font-display"
+                  />
                 </div>
 
                 <div className="space-y-4 text-slate-600 font-light text-sm leading-relaxed text-left">
-                  <p>
-                    Shawn's lifelong relationship with sports and performance athletics includes competing in high-profile NFL-caliber combines, playing professional rugby, and logging years of elite athletic training design. But his fundamental shift in purpose emerged during his career as a state correctional officer. Working on the frontlines, he saw firsthand how a lack of structure, support systems, and proactive mentorship early in life too often funneled promising young people into the justice system.
-                  </p>
-                  <p>
-                    Project 201 was founded directly as an antidote to that cycle. Combining his coaching pedigree with a realistic, high-accountability philosophy, Shawn designed a youth development system where athletic discipline serves as the ultimate gateway. Through sports conditioning and boxing mentorship, youth build the structure, emotional resilience, and communication skills necessary to succeed as leaders in their own communities.
-                  </p>
+                  <EditableText
+                    id="about.founder.bio1"
+                    as="p"
+                    multiline
+                    label="Founder Bio Paragraph 1"
+                    defaultText="Shawn's lifelong relationship with sports and performance athletics includes competing in high-profile NFL-caliber combines, playing professional rugby, and logging years of elite athletic training design. But his fundamental shift in purpose emerged during his career as a state correctional officer. Working on the frontlines, he saw firsthand how a lack of structure, support systems, and proactive mentorship early in life too often funneled promising young people into the justice system."
+                  />
+                  <EditableText
+                    id="about.founder.bio2"
+                    as="p"
+                    multiline
+                    label="Founder Bio Paragraph 2"
+                    defaultText="Project 201 was founded directly as an antidote to that cycle. Combining his coaching pedigree with a realistic, high-accountability philosophy, Shawn designed a youth development system where athletic discipline serves as the ultimate gateway. Through sports conditioning and boxing mentorship, youth build the structure, emotional resilience, and communication skills necessary to succeed as leaders in their own communities."
+                  />
                 </div>
 
                 <div>
